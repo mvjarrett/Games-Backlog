@@ -2,21 +2,26 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BacklogFormComponent } from './backlog-form/backlog-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import axios, { Axios } from 'axios';
+import { HttpClientModule } from '@angular/common/http';
+import { GamesListComponent } from './games-list/games-list.component';
+import { RouterModule } from '@angular/router';
+import {MatTableModule} from '@angular/material/table';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    BacklogFormComponent
+    GamesListComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    Axios
+    RouterModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

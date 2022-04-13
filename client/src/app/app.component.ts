@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+// import { BacklogService } from './shared/status.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Client';
-}
+  title = 'Games in Backlog';
+
+  constructor() { }
+
+  ngOnInit() { }
+};
+
