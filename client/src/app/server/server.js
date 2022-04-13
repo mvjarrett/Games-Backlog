@@ -2,6 +2,8 @@ const pool = require("./pool");
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require('cors');
+const dotenv = require('dotenv');
+dotenv.config({ path: './.env' });
 
 const app = express();
 
@@ -19,7 +21,7 @@ const distDir = __dirname + "/dist/";
 app.use(express.static(distDir));
 
 // server init
-const server = app.listen(process.env.PORT || 8080, function () {
+const server = app.listen(8080, function () {
     var port = server.address().port;
     console.log("App now running on port", port);
 });
