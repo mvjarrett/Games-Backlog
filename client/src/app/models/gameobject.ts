@@ -1,6 +1,6 @@
 export interface gameObject {
-    game_id: number,
-    user_id: number,
+    game_id?: number,
+    user_id?: number,
     title_name: string,
     sys: string,
     genre: string,

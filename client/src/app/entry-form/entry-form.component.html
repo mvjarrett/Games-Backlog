@@ -1,0 +1,31 @@
+<form [formGroup]="backlogForm" (ngSubmit)="onFormSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Title</mat-label>
+    <input formControlName="title" matInput />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Platform</mat-label>
+    <input matInput formControlName="platform" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Genre</mat-label>
+    <mat-select placeholder="walking sim" formControlName="genre" type="radio">
+      <mat-option value="RPG">RPG</mat-option>
+      <mat-option value="Adventure">Adventure</mat-option>
+      <mat-option value="Shooter">Shooter</mat-option>
+      <mat-option value="Sim">Sim</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="radioContainer">
+        <label>Log Status: </label>
+        <mat-radio-group formControlName="status">
+            <mat-radio-button value="Wishlist">Wishlist</mat-radio-button>
+            <mat-radio-button value="Playing">Playing</mat-radio-button>
+            <mat-radio-button value="Played">Played</mat-radio-button>
+        </mat-radio-group>
+    </div>
+  <br />
+  <button mat-raised-button color="primary" type="submit">
+    Submit Log Entry
+  </button>
+</form>
