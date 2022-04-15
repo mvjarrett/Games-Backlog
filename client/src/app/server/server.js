@@ -52,6 +52,7 @@ app.get("/backlog/:game_id", async (req, res) => {
 });
 
 //post new item
+
 app.post("/backlog", async (req, res) => {
   try {
     const { title_name } = req.body;
@@ -62,11 +63,12 @@ app.post("/backlog", async (req, res) => {
     const { playing } = req.body;
     const { wishlist } = req.body;
     const newGame = await pool.query(
-      "INSERT INTO backlog (title_name, user_id, sys, genre, played, playing, wishlist) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+      "INSERT INTO backlog (title_name, user_id, sys, genre, played, playing, wishlist) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
       [title_name, user_id, sys, genre, played, playing, wishlist]
     );
-
-    res.json(newGame);
+    
+    res.json(newGame.rows[0]);
+   
   } catch (err) {
     console.error(err.message);
   }

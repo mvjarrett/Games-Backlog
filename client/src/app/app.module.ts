@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { EntryFormComponent } from './entry-form/entry-form.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -38,6 +39,7 @@ import { MatButtonModule } from '@angular/material/button';
     BrowserAnimationsModule,
     MatRadioModule,
     MatButtonModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

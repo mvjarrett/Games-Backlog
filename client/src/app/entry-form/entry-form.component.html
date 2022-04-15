@@ -1,4 +1,4 @@
-<form [formGroup]="backlogForm" (ngSubmit)="onFormSubmit()">
+<form [formGroup]="backlogForm">
   <mat-form-field appearance="fill">
     <mat-label>Title</mat-label>
     <input formControlName="title" matInput />
@@ -17,15 +17,22 @@
     </mat-select>
   </mat-form-field>
   <div class="radioContainer">
-        <label>Log Status: </label>
-        <mat-radio-group formControlName="status">
-            <mat-radio-button value="Wishlist">Wishlist</mat-radio-button>
-            <mat-radio-button value="Playing">Playing</mat-radio-button>
-            <mat-radio-button value="Played">Played</mat-radio-button>
-        </mat-radio-group>
-    </div>
+    <label>Log Status: </label>
+    <mat-radio-group formControlName="status">
+      <mat-radio-button value="Wishlist">Wishlist</mat-radio-button>
+      <mat-radio-button value="Playing">Playing</mat-radio-button>
+      <mat-radio-button value="Played">Played</mat-radio-button>
+    </mat-radio-group>
+  </div>
   <br />
-  <button mat-raised-button color="primary" type="submit">
+  <button mat-raised-button color="primary" (click)="onFormSubmit()" type="submit" >
     Submit Log Entry
   </button>
+  <button mat-button (click)="onCancel()">Cancel</button>
 </form>
+
+<!-- 
+notes:
+find a way to clear the form after submission, and then also 
+update the games-list component view. likely has something to do with
+rxjs, not sure. the form needs to tell the list to update -per tyler. -->
