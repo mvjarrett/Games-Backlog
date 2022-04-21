@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { GameService } from '../games.service';
 import { gameObject } from '../models/gameobject';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { EntryFormComponent } from '../entry-form/entry-form.component';
 
 @Component({
@@ -39,8 +35,7 @@ export class GamesListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-
-      if(result) {
+      if (result) {
         console.log(result);
         const existingData = this.dataSource.data;
         existingData.push(result);
