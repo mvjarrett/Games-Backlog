@@ -14,16 +14,19 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { EntryFormComponent } from './entry-form/entry-form.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
-import {MatDialogModule} from '@angular/material/dialog';
-
-
+import { MatDialogModule } from '@angular/material/dialog';
+// import { IgdbGameComponent } from './igdb-game/igdb-game.component';
+import { MatCardModule } from '@angular/material/card';
+import { TenGamesComponent } from './ten-games/ten-games.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     GamesListComponent,
-    EntryFormComponent
+    EntryFormComponent,
+    TenGamesComponent,
+    // IgdbGameComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,8 +43,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatRadioModule,
     MatButtonModule,
     MatDialogModule,
+    MatCardModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

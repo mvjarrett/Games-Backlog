@@ -1,9 +1,10 @@
 const pool = require("./pool");
 const express = require("express");
 const bodyParser = require("body-parser");
+// const unirest = require("unirest");
 const cors = require("cors");
 const dotenv = require("dotenv");
-dotenv.config({ path: "./.env" });
+dotenv.config({ path: ".env" });
 
 const app = express();
 
@@ -26,7 +27,32 @@ const server = app.listen(8080, function () {
   console.log("App now running on port", port);
 });
 
-//get all items
+app.use(function(req,qres, next) {
+  req.setHeader('Access-Control-Allow-Origin', '*');
+  req.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST');
+  req.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  req.setHeader('client_id', process.env.AUTH_ID);
+  req.setHeader('Authorization', process.env.AUTH_TOKEN);
+  next();
+});
+
+
+app.get('https://api.igdb.com/v4/games', function(req, res) {
+  console.log(res.json)
+});
+
+
+
+
+
+
+
+
+
+//IGDB API ROUTES ABOVE
+//POSTGRES ROUTES BELOW
+
+//get all backlog items
 app.get("/backlog", async (req, res) => {
   try {
     const allTitles = await pool.query("SELECT * FROM backlog");
@@ -51,7 +77,7 @@ app.get("/backlog/:game_id", async (req, res) => {
   }
 });
 
-//post new item
+//post new backlog item
 
 app.post("/backlog", async (req, res) => {
   try {
@@ -66,9 +92,8 @@ app.post("/backlog", async (req, res) => {
       "INSERT INTO backlog (title_name, user_id, sys, genre, played, playing, wishlist) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
       [title_name, user_id, sys, genre, played, playing, wishlist]
     );
-    
+
     res.json(newGame.rows[0]);
-   
   } catch (err) {
     console.error(err.message);
   }
@@ -102,3 +127,6 @@ app.delete("/backlog/:game_id", async (req, res) => {
     console.error(err.message);
   }
 });
+
+
+app.post
