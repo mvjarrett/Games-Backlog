@@ -1,0 +1,9 @@
+mat-card {
+    padding-bottom: 0px;
+    margin: 10%;
+    border-radius: 10px;
+}
+
+mat-card img {
+    border-radius: 10px;
+}

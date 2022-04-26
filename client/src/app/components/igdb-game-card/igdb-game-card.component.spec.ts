@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IgdbGameComponent } from './igdb-game.component';
+import { IgdbGameCardComponent } from './igdb-game-card.component';
 
-describe('IgdbGameComponent', () => {
-  let component: IgdbGameComponent;
-  let fixture: ComponentFixture<IgdbGameComponent>;
+describe('IgdbGameCardComponent', () => {
+  let component: IgdbGameCardComponent;
+  let fixture: ComponentFixture<IgdbGameCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IgdbGameComponent ]
+      declarations: [ IgdbGameCardComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IgdbGameComponent);
+    fixture = TestBed.createComponent(IgdbGameCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

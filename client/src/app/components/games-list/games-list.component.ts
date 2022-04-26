@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { GameService } from '../games.service';
-import { gameObject } from '../models/gameobject';
+import { GameService } from '../../services/games.service';
+import { gameObject } from '../../models/gameobject';
 import { MatDialog } from '@angular/material/dialog';
 import { EntryFormComponent } from '../entry-form/entry-form.component';
 

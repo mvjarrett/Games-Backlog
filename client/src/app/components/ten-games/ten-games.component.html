@@ -1,0 +1,7 @@
+<div class="content">
+  <div fxLayout="row wrap">
+    <div fxFlex="20%" fxFlex.xs="33%" fxFlex.sm="33%" *ngFor="let game of igGames">
+      <app-igdb-game-card [game]="game"></app-igdb-game-card>
+    </div>
+  </div>
+</div>

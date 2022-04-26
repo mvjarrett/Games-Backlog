@@ -9,3 +9,4 @@ export interface gameObject {
     wishlist: boolean
 
 }
+

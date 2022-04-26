@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
-import { gameObject } from '../models/gameobject';
+import { gameObject } from '../../models/gameobject';
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter } from '@angular/core';
 import { Output } from '@angular/core';
@@ -62,36 +62,3 @@ export class EntryFormComponent implements OnInit {
     this.dialogRef.close();
   }
 }
-
-// ______________________________________________________________________
-
-// console.log('Name: ' + this.backlogForm.controls['title'].value);
-// console.log('Platform: ' + this.backlogForm.controls['platform'].value);
-// console.log('Genre: ' + this.backlogForm.controls['genre'].value);
-
-// let logType : string = this.backlogForm.controls['status'].value
-
-// switch (logType) {
-//   case 'Wishlist':
-//     console.log('wishlist was selected')
-//     break;
-//   case 'Playing':
-//     console.log('playing was selected')
-//     break;
-//   case 'Played':
-//     console.log('played was selected')
-//     break;
-// }
-
-// console.log('Log Status: ' + this.backlogForm.controls['status'].value )
-
-//   console.log('Name: ' + this.backlogForm.controls['title'].value);
-//   console.log('Platform: ' + this.backlogForm.controls['platform'].value);
-//   console.log('Genre: ' + this.backlogForm.controls['genre'].value);
-
-
-  // @Output() open = new EventEmitter<any>();
-
-  // sendNew() {
-  //   this.open.emit(Output);
-  // }
