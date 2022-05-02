@@ -1,0 +1,25 @@
+
+
+.detailPage {
+    display: flex;
+}
+
+.cover{
+  max-height: 300px; 
+  border-radius: 10px;
+  margin-left: 7%;
+}
+
+
+.content{
+    text-align: center;
+    margin-top: 3%;
+    margin-left: 5%;
+    margin-right: 10%;
+}
+
+.screens img{
+margin-left: 20px;
+
+}
+

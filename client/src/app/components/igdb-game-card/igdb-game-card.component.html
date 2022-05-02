@@ -1,8 +1,15 @@
-<div>
+<div (mouseover)="showName = true" (mouseout)="showName = false">
   <mat-card class="mat-elevation-z4">
-    <!-- <mat-card-header> -->
-    <!-- <mat-card-title>{{ game.name }}</mat-card-title> -->
-    <!-- </mat-card-header> -->
-    <img mat-card-image src="{{ getGameCover(game) }}" />
+    <div class="description">
+      <a routerLink="/games/{{game.id}}"><img
+        mat-card-image
+        src="{{ getGameCover(game) }}"
+
+      /> </a>
+      <span class="name" *ngIf="showName">{{ game.name }}</span>
+    </div>
   </mat-card>
+ 
 </div>
+
+<!-- -->

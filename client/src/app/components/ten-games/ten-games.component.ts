@@ -18,11 +18,11 @@ export class TenGamesComponent implements OnInit {
     });
   }
 
-  getGameCover(game: igGame): string {
-    if (game.cover != null) {
-      return game.cover.url.replace('t_thumb', 't_cover_big');
-    } else {
-      return '';
-    }
-  }
+  // getGameCover(game: igGame): string {
+  //   if (game.cover != null) {
+  //     return game.cover.url.replace('t_thumb', 't_cover_big');
+  //   } else {
+  //     return '';
+  //   }
+  // }
 }

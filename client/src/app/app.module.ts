@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { GamesListComponent } from './components/games-list/games-list.component';
-import { RouterModule } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
@@ -21,6 +21,17 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { IgdbGameCardComponent } from './components/igdb-game-card/igdb-game-card.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { GameDetailsComponent } from './components/game-details/game-details.component';
+import { ScreenshotModalComponent } from './components/screenshot-modal/screenshot-modal.component';
+
+const appRoutes: Routes = [
+    {path: '', component: TenGamesComponent},
+    {path: 'games', component: TenGamesComponent},
+    {path: 'backlog', component: GamesListComponent},
+    {path: 'games/:gameid', component: GameDetailsComponent}
+  
+  ];
 
 @NgModule({
   declarations: [
@@ -29,6 +40,9 @@ import { IgdbGameCardComponent } from './components/igdb-game-card/igdb-game-car
     EntryFormComponent,
     TenGamesComponent,
     IgdbGameCardComponent,
+    ToolbarComponent,
+    GameDetailsComponent,
+    ScreenshotModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +50,7 @@ import { IgdbGameCardComponent } from './components/igdb-game-card/igdb-game-car
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule,
+    RouterModule.forRoot(appRoutes),
     MatTableModule,
     MatFormFieldModule,
     MatSelectModule,

@@ -27,12 +27,12 @@ const server = app.listen(8080, function () {
   console.log("App now running on port", port);
 });
 
-app.use(function(req,qres, next) {
-  req.setHeader('Access-Control-Allow-Origin', '*');
-  req.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST');
-  req.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  req.setHeader('client_id', process.env.AUTH_ID);
-  req.setHeader('Authorization', process.env.AUTH_TOKEN);
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.setHeader('client_id', process.env.AUTH_ID);
+  res.setHeader('Authorization', process.env.AUTH_TOKEN);
   next();
 });
 

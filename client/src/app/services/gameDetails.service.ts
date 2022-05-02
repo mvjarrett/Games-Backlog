@@ -6,7 +6,7 @@ import { igGame } from '../models/igGame';
 @Injectable({
   providedIn: 'root',
 })
-export class TenGamesService {
+export class GameDetailsService {
   headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
@@ -15,15 +15,19 @@ export class TenGamesService {
     'Client-id': '7v9kmaf3qgxdnfne5cdxb6ah64fbco',
     Authorization: 'Bearer lwvrxsjfyx0auv0yvs9hgm81hbkvxl',
   };
-  body =
-    'fields name, summary, cover.url; where rating >90; where total_rating_count >900; limit 50;';
+  
+ 
 
   constructor(private http: HttpClient) {}
 
-  gamesRng(): Observable<igGame[]> {
-    return this.http.post<igGame[]>('externalgames/games', this.body, {
+  getDetails(id: string): Observable<igGame[]> {
+    let body =
+    `fields id, name, cover.url, first_release_date, summary, genres.name, platforms.name, rating, screenshots.url, url; where id = ${id};`
+    return this.http.post<igGame[]>('externalgames/games', body, {
       headers: this.headers,
     });
   }
+
+  
 }
 
