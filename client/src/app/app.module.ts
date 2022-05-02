@@ -24,6 +24,7 @@ import { IgdbGameCardComponent } from './components/igdb-game-card/igdb-game-car
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { GameDetailsComponent } from './components/game-details/game-details.component';
 import { ScreenshotModalComponent } from './components/screenshot-modal/screenshot-modal.component';
+import { CoverComponent } from './components/cover/cover.component';
 
 const appRoutes: Routes = [
     {path: '', component: TenGamesComponent},
@@ -43,6 +44,7 @@ const appRoutes: Routes = [
     ToolbarComponent,
     GameDetailsComponent,
     ScreenshotModalComponent,
+    CoverComponent,
   ],
   imports: [
     BrowserModule,
