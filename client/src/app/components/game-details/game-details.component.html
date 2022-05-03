@@ -1,25 +1,26 @@
-
-
 <div class="detailPage" *ngIf="igGames">
   <div class="cover">
     <img class="cover" src="{{ getGameCover(igGames) }}" />
+    <a href="">test link?</a>
   </div>
   <div class="content">
     <div class="jumbotron">
       <h1 class="display-4">{{ igGames.name }}</h1>
-      <hr class="my-4">
+      <hr class="my-4" />
     </div>
-    <h4>Release date: {{getTimeStamp(igGames)}}</h4>
+    <h4>Release date: {{ getTimeStamp(igGames) }}</h4>
     <p class="summary">{{ igGames.summary }}</p>
     <a href="{{ igGames.url }}">{{ igGames.url }}</a>
     <p>Rating: {{ igGames.rating }}</p>
     <h4>Platforms:</h4>
     <p *ngFor="let platform of igGames.platforms">{{ platform.name }}</p>
     <div class="screens">
-      <a *ngFor="let screenshot of igGames.screenshots" (click)="openDialog(screenshot)">
-        <img src="{{ screenshot.url }}"/>
+      <a
+        *ngFor="let screenshot of igGames.screenshots"
+        (click)="openDialog(screenshot)"
+      >
+        <img src="{{ screenshot.url }}" />
       </a>
     </div>
   </div>
 </div>
-

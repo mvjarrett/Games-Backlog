@@ -16,19 +16,19 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
-import { TenGamesComponent } from './components/ten-games/ten-games.component';
+import { IgdbResultsComponent } from './components/igdb-results/igdb-results.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { IgdbGameCardComponent } from './components/igdb-game-card/igdb-game-card.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { GameDetailsComponent } from './components/game-details/game-details.component';
 import { ScreenshotModalComponent } from './components/screenshot-modal/screenshot-modal.component';
 import { CoverComponent } from './components/cover/cover.component';
 
 const appRoutes: Routes = [
-    {path: '', component: TenGamesComponent},
-    {path: 'games', component: TenGamesComponent},
+    {path: '', component: IgdbResultsComponent},
+    {path: 'games', component: IgdbResultsComponent},
     {path: 'backlog', component: GamesListComponent},
     {path: 'games/:gameid', component: GameDetailsComponent}
   
@@ -39,9 +39,9 @@ const appRoutes: Routes = [
     AppComponent,
     GamesListComponent,
     EntryFormComponent,
-    TenGamesComponent,
+    IgdbResultsComponent,
     IgdbGameCardComponent,
-    ToolbarComponent,
+    NavbarComponent,
     GameDetailsComponent,
     ScreenshotModalComponent,
     CoverComponent,

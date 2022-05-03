@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TenGamesService } from '../../services/tenGamesTest.service';
+import { IgdbResultsService } from '../../services/igdbResults.service';
 import { igGame } from '../../models/igGame';
 import { RouterLink } from '@angular/router';
 
@@ -12,7 +12,7 @@ export class IgdbGameCardComponent implements OnInit {
 
   @Input() game: igGame;
   showName: boolean;
-  constructor(private tenGames: TenGamesService) {
+  constructor(private igdbResults: IgdbResultsService) {
     this.showName = false;
   }
 

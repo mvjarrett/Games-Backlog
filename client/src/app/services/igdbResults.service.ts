@@ -6,7 +6,7 @@ import { igGame } from '../models/igGame';
 @Injectable({
   providedIn: 'root',
 })
-export class TenGamesService {
+export class IgdbResultsService {
   headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
