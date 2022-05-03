@@ -1,25 +1,34 @@
-
-
 .detailPage {
-    display: flex;
+  display: flex;
 }
 
-.cover{
-  max-height: 300px; 
+.cover {
+  max-height: 300px;
   border-radius: 10px;
-  margin-left: 7%;
+  width: auto;
+  @media (min-width: 767px){width: 100%}
+  
 }
 
-
-.content{
-    text-align: center;
-    margin-top: 3%;
-    margin-left: 5%;
-    margin-right: 10%;
-}
-
-.screens img{
-margin-left: 20px;
+.content {
+  text-align: center;
+  margin-top: 10%;
+  margin-left: 5%;
+  margin-right: 10%;
+  @media (min-width: 576px) { margin-top: 20%; }
 
 }
 
+.screens img {
+  margin-left: 20px;
+}
+
+.logButtons {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 5px;
+  padding-bottom: 100px;
+
+
+
+}

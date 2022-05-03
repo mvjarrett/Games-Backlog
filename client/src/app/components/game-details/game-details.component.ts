@@ -53,9 +53,19 @@ export class GameDetailsComponent implements OnInit {
     return releaseDate}
   }
  
+ wish(){
+   console.log('wishlist button')
+ }
  
+  
+ played(){
+  console.log('played button')
+}
  
- 
+playing(){
+  console.log('playing button')
+}
+
  
  
  

@@ -81,16 +81,14 @@ app.get("/backlog/:game_id", async (req, res) => {
 
 app.post("/backlog", async (req, res) => {
   try {
-    const { title_name } = req.body;
     const { user_id } = req.headers;
-    const { sys } = req.body;
-    const { genre } = req.body;
+    const { game_id } = req.body;
     const { played } = req.body;
     const { playing } = req.body;
     const { wishlist } = req.body;
     const newGame = await pool.query(
-      "INSERT INTO backlog (title_name, user_id, sys, genre, played, playing, wishlist) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-      [title_name, user_id, sys, genre, played, playing, wishlist]
+      "INSERT INTO backlog ( user_id, game_id, played, playing, wishlist) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      [user_id, game_id, played, playing, wishlist]
     );
 
     res.json(newGame.rows[0]);
@@ -115,12 +113,12 @@ app.put("/backlog/:game_id", async (req, res) => {
 });
 
 //delete a backlog item
-app.delete("/backlog/:game_id", async (req, res) => {
+app.delete("/backlog/:log_id", async (req, res) => {
   try {
-    const { game_id } = req.params;
+    const { log_id } = req.params;
     const deleteGame = await pool.query(
-      "DELETE FROM backlog WHERE game_id = $1",
-      [game_id]
+      "DELETE FROM backlog WHERE log_id = $1",
+      [log_id]
     );
     res.json("game was deleted!");
   } catch (err) {
