@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, Input, OnInit } from '@angular/core';
 import { GameService } from '../../services/games.service';
-import { gameObject } from '../../models/gameobject';
 import { MatDialog } from '@angular/material/dialog';
-import { EntryFormComponent } from '../entry-form/entry-form.component';
+import { igGame } from 'src/app/models/igGame';
+import { gameObject } from 'src/app/models/gameobject';
 
 @Component({
   selector: 'app-games-list',
@@ -11,36 +10,25 @@ import { EntryFormComponent } from '../entry-form/entry-form.component';
   styleUrls: ['./games-list.component.css'],
 })
 export class GamesListComponent implements OnInit {
-  dataSource = new MatTableDataSource<gameObject>();
-  columnsToDisplay: string[] = ['title_name', 'sys', 'genre'];
+  logItems: igGame[];
+  logdata: []
 
-  updateLog(gameData: any) {
-    this.dataSource = gameData;
-  }
+  // updateLog(gameData: any) {
+  //   this.logItems = gameData;
+  // }
 
   constructor(private gameService: GameService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.gameService.GetGames().subscribe((data) => {
       if (data) {
-        this.dataSource = new MatTableDataSource<gameObject>(data);
-        console.log(this.dataSource);
+        this.logItems = data;
       }
     });
-  }
-  openDialog(): void {
-    let dialogRef = this.dialog.open(EntryFormComponent, {
-      height: '300px',
-      width: '600px',
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        console.log(result);
-        const existingData = this.dataSource.data;
-        existingData.push(result);
-        this.dataSource.data = existingData;
+    this.gameService.backlogInfo().subscribe((info) =>{
+      if(info) {
+        this.logdata = info
       }
-    });
+    })
   }
 }

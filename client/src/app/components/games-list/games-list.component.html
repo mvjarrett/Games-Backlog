@@ -1,4 +1,15 @@
-<div class="listComponent">
+
+
+<div class="content">
+  <div fxLayout="row wrap">
+    <div fxFlex="20%" fxFlex.xs="33%" fxFlex.sm="33%" *ngFor="let logItem of logItems">
+      <app-igdb-game-card [game]="logItem"></app-igdb-game-card>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="listComponent">
   <div id="listTable" class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="title_name">
@@ -26,4 +37,5 @@
       New Log Entry
     </button>
   </div>
-</div>
+</div> -->
+

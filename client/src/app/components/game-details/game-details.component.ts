@@ -5,10 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ScreenshotModalComponent } from '../screenshot-modal/screenshot-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import screenshot from 'src/app/models/screenshot';
-import { FirstValueFromConfig } from 'rxjs/internal/firstValueFrom';
-
-// import screenshot from 'src/app/models/screenshot';
-// import platform from 'src/app/models/platform';
+import { HttpClient, HttpHeaders, } from '@angular/common/http';
+import { gameObject } from 'src/app/models/gameobject';
 
 @Component({
   selector: 'app-game-details',
@@ -18,6 +16,7 @@ import { FirstValueFromConfig } from 'rxjs/internal/firstValueFrom';
 export class GameDetailsComponent implements OnInit {
   @Input() game: igGame;
   constructor(
+    private http: HttpClient,
     private details: GameDetailsService,
     private route: ActivatedRoute,
     public dialog: MatDialog
@@ -48,60 +47,40 @@ export class GameDetailsComponent implements OnInit {
 
   getTimeStamp(game: igGame): any {
     let unix_timestamp = game.first_release_date;
-    if (unix_timestamp !=null ){
-    let releaseDate = new Date(unix_timestamp * 1000).toLocaleDateString("en-US")
-    return releaseDate}
+    if (unix_timestamp != null) {
+      let releaseDate = new Date(unix_timestamp * 1000).toLocaleDateString(
+        'en-US'
+      );
+      return releaseDate;
+    }
   }
- 
- wish(){
-   console.log('wishlist button')
- }
- 
-  
- played(){
-  console.log('played button')
-}
- 
-playing(){
-  console.log('playing button')
-}
 
- 
- 
- 
- 
- 
-  //     let unix_timestamp = game.first_release_date;
-  //   // Create a new JavaScript Date object based on the timestamp
-  //   // multiplied by 1000 so that the argument is in milliseconds, not seconds.
-  //   if (unix_timestamp !=null ){
-  //   var date = new Date(unix_timestamp * 1000);
-  //   // Hours part from the timestamp
-  //   var hours = date.getHours();
-  //   // Minutes part from the timestamp
-  //   var minutes = '0' + date.getMinutes();
-  //   // Seconds part from the timestamp
-  //   var seconds = '0' + date.getSeconds();
+  wish() {
+    let logData: gameObject = {
+      id: this.igGames.id,
+      wishlist: true,
+      played: false,
+      playing: false,
+    };
+    let options ={
+      headers: new HttpHeaders().append('user_id', '1337')
+    }
 
-  //   // Will display time in 10:30:23 format
-  //   var formattedTime =
-  //     hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-  //   } else {
-  //     return ''
-  //   }
-  //   console.log(formattedTime);
-  //   return formattedTime;
-  // }
+    this.http.post('http://localhost:8080/backlog', logData, options).subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 
-  // getScreenshots(game: igGame): string {
-  //   if (game.screenshots != null) {
-  //     return game.screenshots.url
-  //   } else {
-  //     return '';
-  //   }
-  // }
+  played() {
+    console.log('played button');
+  }
+
+  playing() {
+    console.log('playing button');
+  }
 }
-//     this.game = {
-//   id: this.route.snapshot.params['game.id'],
-//   name: this.route.snapshot.params['game.name'],
-// };

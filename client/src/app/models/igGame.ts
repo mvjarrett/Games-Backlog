@@ -11,7 +11,7 @@ export interface igGame {
   cover?: cover;
   first_release_date?: number;
   genres?: genre;
-  platforms: platform[];
+  platforms?: platform[];
   rating?: number;
   screenshots?: screenshot[];
   url?: string;

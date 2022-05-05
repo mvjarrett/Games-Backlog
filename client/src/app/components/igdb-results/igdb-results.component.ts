@@ -11,7 +11,7 @@ export class IgdbResultsComponent implements OnInit {
   constructor(private igdbResults: IgdbResultsService) {}
   igGames: igGame[] = [];
   ngOnInit(): void {
-    this.igdbResults.gamesRng().subscribe((data) => {
+    this.igdbResults.topGames().subscribe((data) => {
       if (data) {
         this.igGames = data;
       }

@@ -20,7 +20,7 @@ export class IgdbResultsService {
 
   constructor(private http: HttpClient) {}
 
-  gamesRng(): Observable<igGame[]> {
+  topGames(): Observable<igGame[]> {
     return this.http.post<igGame[]>('externalgames/games', this.body, {
       headers: this.headers,
     });

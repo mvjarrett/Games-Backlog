@@ -21,22 +21,22 @@ export class EntryFormComponent implements OnInit {
   });
 
 
-  onFormSubmit(): void {
-    const logStatus = this.checkGameStatus();
-    const gameData: gameObject = {
-      user_id: 1337,
-      title_name: this.backlogForm.controls['title'].value,
-      sys: this.backlogForm.controls['platform'].value,
-      genre: this.backlogForm.controls['genre'].value,
-      played: logStatus.played,
-      playing: logStatus.playing,
-      wishlist: logStatus.wishlist,
-    };
-    this.http.post('http://localhost:8080/backlog', gameData).subscribe((newGame) => {
-      // console.log(newGame)
-      this.dialogRef.close(newGame);
-    });
-  }
+  // onFormSubmit(): void {
+  //   const logStatus = this.checkGameStatus();
+  //   const gameData: gameObject = {
+  //     user_id: 1337,
+  //     title_name: this.backlogForm.controls['title'].value,
+  //     sys: this.backlogForm.controls['platform'].value,
+  //     genre: this.backlogForm.controls['genre'].value,
+  //     played: logStatus.played,
+  //     playing: logStatus.playing,
+  //     wishlist: logStatus.wishlist,
+  //   };
+  //   this.http.post('http://localhost:8080/backlog', gameData).subscribe((newGame) => {
+  //     // console.log(newGame)
+  //     this.dialogRef.close(newGame);
+  //   });
+  // }
   constructor(private http: HttpClient, public dialogRef: MatDialogRef<EntryFormComponent>) {}
 
   ngOnInit(): void {}

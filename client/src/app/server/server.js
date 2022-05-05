@@ -63,12 +63,12 @@ app.get("/backlog", async (req, res) => {
 });
 
 //get a specific backlogged title
-app.get("/backlog/:game_id", async (req, res) => {
+app.get("/backlog/:id", async (req, res) => {
   try {
-    const { game_id } = req.params;
+    const { id } = req.params;
     const allTitles = await pool.query(
-      "SELECT * FROM backlog WHERE game_id = $1",
-      [game_id]
+      "SELECT * FROM backlog WHERE id = $1",
+      [id]
     );
 
     res.json(allTitles.rows);
@@ -82,13 +82,13 @@ app.get("/backlog/:game_id", async (req, res) => {
 app.post("/backlog", async (req, res) => {
   try {
     const { user_id } = req.headers;
-    const { game_id } = req.body;
+    const { id } = req.body;
     const { played } = req.body;
     const { playing } = req.body;
     const { wishlist } = req.body;
     const newGame = await pool.query(
-      "INSERT INTO backlog ( user_id, game_id, played, playing, wishlist) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-      [user_id, game_id, played, playing, wishlist]
+      "INSERT INTO backlog ( user_id, id, played, playing, wishlist) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      [user_id, id, played, playing, wishlist]
     );
 
     res.json(newGame.rows[0]);
@@ -98,13 +98,13 @@ app.post("/backlog", async (req, res) => {
 });
 
 //update a backlogged title
-app.put("/backlog/:game_id", async (req, res) => {
+app.put("/backlog/:id", async (req, res) => {
   try {
-    const { game_id } = req.params;
+    const { id } = req.params;
     const { title_name } = req.body;
     const updateTitle = await pool.query(
-      "UPDATE backlog SET title_name = $1 WHERE game_id = $2",
-      [title_name, game_id]
+      "UPDATE backlog SET title_name = $1 WHERE id = $2",
+      [title_name, id]
     );
     res.json("backlog was updated");
   } catch (err) {
