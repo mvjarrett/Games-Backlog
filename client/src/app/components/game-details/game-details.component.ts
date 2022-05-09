@@ -66,6 +66,12 @@ export class GameDetailsComponent implements OnInit {
       headers: new HttpHeaders().append('user_id', '1337')
     }
 
+
+    // this.http.get('http://localhost:8080/backlog')
+    // if {
+   
+    // }
+
     this.http.post('http://localhost:8080/backlog', logData, options).subscribe(
       (data) => {
         console.log(data);
@@ -77,10 +83,44 @@ export class GameDetailsComponent implements OnInit {
   }
 
   played() {
-    console.log('played button');
+    let logData: gameObject = {
+      id: this.igGames.id,
+      wishlist: false,
+      played: true,
+      playing: false,
+    };
+    let options ={
+      headers: new HttpHeaders().append('user_id', '1337')
+    }
+
+    this.http.post('http://localhost:8080/backlog', logData, options).subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   playing() {
-    console.log('playing button');
+    let logData: gameObject = {
+      id: this.igGames.id,
+      wishlist: false,
+      played: false,
+      playing: true,
+    };
+    let options ={
+      headers: new HttpHeaders().append('user_id', '1337')
+    }
+
+    this.http.post('http://localhost:8080/backlog', logData, options).subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

@@ -10,8 +10,7 @@ import { gameObject } from 'src/app/models/gameobject';
   styleUrls: ['./games-list.component.css'],
 })
 export class GamesListComponent implements OnInit {
-  logItems: igGame[];
-  logdata: []
+  logItems: igGame[] = [];
 
   // updateLog(gameData: any) {
   //   this.logItems = gameData;
@@ -22,13 +21,13 @@ export class GamesListComponent implements OnInit {
   ngOnInit(): void {
     this.gameService.GetGames().subscribe((data) => {
       if (data) {
-        this.logItems = data;
+        const backlogIds = data.map(x => x.id);
+        this.gameService.backlogInfo(backlogIds).subscribe((info: any) => {
+          if (info) {
+            this.logItems = info;
+          }
+        });
       }
     });
-    this.gameService.backlogInfo().subscribe((info) =>{
-      if(info) {
-        this.logdata = info
-      }
-    })
   }
 }

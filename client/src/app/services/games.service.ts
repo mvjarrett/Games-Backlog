@@ -11,16 +11,27 @@ import { igGame } from '../models/igGame';
   export class GameService {
       logUrl = "http://localhost:8080/backlog"
       apiUrl = "externalgames/games"
-    //   id = igGame.id
-      logBody = 'fields id, cover.url;'
+      headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
+        'Access-Control-Allow-Headers':
+          'Origin, X-Requested-With, Content-Type, Accept',
+        'Client-id': '7v9kmaf3qgxdnfne5cdxb6ah64fbco',
+        Authorization: 'Bearer lwvrxsjfyx0auv0yvs9hgm81hbkvxl',
+      };
+      id = this.GetGames(); logItems: any
+     
     
       constructor(private http: HttpClient) { }
 
       GetGames(): Observable<gameObject[]> {
           return this.http.get<gameObject[]>(this.logUrl)
+     
       }
-      backlogInfo(): Observable<[]>{
-          return this.http.post<[]>(this.apiUrl, this.logBody)
+      backlogInfo(backlogIds: number[]): Observable<igGame>{
+        let logBody = 'fields id, name, cover.url; where id = (' + backlogIds.join() + ');'
+          return this.http.post<igGame>(this.apiUrl, logBody, {
+            headers: this.headers})
       }
 
   }
