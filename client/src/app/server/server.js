@@ -27,27 +27,21 @@ const server = app.listen(8080, function () {
   console.log("App now running on port", port);
 });
 
-app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.setHeader('client_id', process.env.AUTH_ID);
-  res.setHeader('Authorization', process.env.AUTH_TOKEN);
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "OPTIONS, GET, POST");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.setHeader("client_id", process.env.AUTH_ID);
+  res.setHeader("Authorization", process.env.AUTH_TOKEN);
   next();
 });
 
-
-app.get('https://api.igdb.com/v4/games', function(req, res) {
-  console.log(res.json)
+app.get("https://api.igdb.com/v4/games", function (req, res) {
+  console.log(res.json);
 });
-
-
-
-
-
-
-
-
 
 //IGDB API ROUTES ABOVE
 //POSTGRES ROUTES BELOW
@@ -63,13 +57,12 @@ app.get("/backlog", async (req, res) => {
 });
 
 //get a specific backlogged title
-app.get("/backlog/:id", async (req, res) => {
+app.get("/backlog/game/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const allTitles = await pool.query(
-      "SELECT * FROM backlog WHERE id = $1",
-      [id]
-    );
+    const allTitles = await pool.query("SELECT * FROM backlog WHERE id = $1", [
+      id,
+    ]);
 
     res.json(allTitles.rows);
   } catch (err) {
@@ -97,14 +90,32 @@ app.post("/backlog", async (req, res) => {
   }
 });
 
-//update a backlogged title
-app.put("/backlog/:id", async (req, res) => {
+//update game status
+app.put("/backlog/game/:id", async (req, res) => {
+  const { id } = req.params;
+  const { user_id } = req.body;
+  const { played } = req.body;
+  const { playing } = req.body;
+  const { wishlist } = req.body;
   try {
-    const { id } = req.params;
+    const { updateStatus } = await pool.query(
+      "UPDATE backlog SET played = $1, playing = $2, wishlist = $3 WHERE user_id = $4",
+      [played, playing, wishlist, user_id]
+    );
+    res.json(updateStatus);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+//update a backlogged title
+app.put("/backlog/:log_id", async (req, res) => {
+  try {
+    const { log_id } = req.params;
     const { title_name } = req.body;
     const updateTitle = await pool.query(
       "UPDATE backlog SET title_name = $1 WHERE id = $2",
-      [title_name, id]
+      [title_name, log_id]
     );
     res.json("backlog was updated");
   } catch (err) {
@@ -126,5 +137,15 @@ app.delete("/backlog/:log_id", async (req, res) => {
   }
 });
 
-
-app.post
+//delete a backlog item by gameId
+app.delete("/backlog/game/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deleteGame = await pool.query("DELETE FROM backlog WHERE id = $1", [
+      id,
+    ]);
+    res.json("game was deleted!");
+  } catch (err) {
+    console.error(err.message);
+  }
+});

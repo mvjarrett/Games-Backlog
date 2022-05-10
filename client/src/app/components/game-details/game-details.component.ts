@@ -22,6 +22,10 @@ export class GameDetailsComponent implements OnInit {
     public dialog: MatDialog
   ) {}
   igGames: igGame;
+  wishlist = this.details.getBacklog
+  wishStatus: boolean;
+  playedStatus: boolean;
+  playingStatus: boolean;
 
   openDialog(screenshot: screenshot): void {
     let dialogRef = this.dialog.open(ScreenshotModalComponent, {
@@ -36,6 +40,13 @@ export class GameDetailsComponent implements OnInit {
         this.igGames = data[0];
       }
     });
+    this.details.getBacklog(id, this.wishlist).subscribe((status) => {
+      if (status) {
+        console.log('id is currently: ', id)
+        let wishStatus = this.wishStatus
+        console.log("wish is ", wishStatus)
+      }
+    })
   }
   getGameCover(game: igGame): string {
     if (game.cover != null) {
@@ -54,6 +65,8 @@ export class GameDetailsComponent implements OnInit {
       return releaseDate;
     }
   }
+
+  
 
   wish() {
     let logData: gameObject = {

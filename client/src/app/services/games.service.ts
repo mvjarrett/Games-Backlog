@@ -10,6 +10,7 @@ import { igGame } from '../models/igGame';
 
   export class GameService {
       logUrl = "http://localhost:8080/backlog"
+      
       apiUrl = "externalgames/games"
       headers = {
         'Access-Control-Allow-Origin': '*',
@@ -19,7 +20,7 @@ import { igGame } from '../models/igGame';
         'Client-id': '7v9kmaf3qgxdnfne5cdxb6ah64fbco',
         Authorization: 'Bearer lwvrxsjfyx0auv0yvs9hgm81hbkvxl',
       };
-      id = this.GetGames(); logItems: any
+
      
     
       constructor(private http: HttpClient) { }
@@ -36,3 +37,15 @@ import { igGame } from '../models/igGame';
 
   }
 
+// 
+// 
+// 
+// 
+// make database call on games-details-component load, check against user id and igdb id
+// if entry exists, check boolean status and display appropriate data, also off of the same checks, 
+// write code to select if adding to what status or toggling it.
+// 
+// 
+// 
+// 
+// 

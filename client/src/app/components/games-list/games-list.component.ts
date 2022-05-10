@@ -12,16 +12,12 @@ import { gameObject } from 'src/app/models/gameobject';
 export class GamesListComponent implements OnInit {
   logItems: igGame[] = [];
 
-  // updateLog(gameData: any) {
-  //   this.logItems = gameData;
-  // }
-
   constructor(private gameService: GameService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.gameService.GetGames().subscribe((data) => {
       if (data) {
-        const backlogIds = data.map(x => x.id);
+        const backlogIds = data.map((x) => x.id);
         this.gameService.backlogInfo(backlogIds).subscribe((info: any) => {
           if (info) {
             this.logItems = info;

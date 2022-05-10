@@ -35,6 +35,7 @@
       <p class="summary">{{ igGames.summary }}</p>
       <a href="{{ igGames.url }}">{{ igGames.url }}</a>
       <p>Rating: {{ igGames.rating }}</p>
+      <div *ngIf="wishStatus">This game is on the wishlist</div>
       <h4>Platforms:</h4>
       <p *ngFor="let platform of igGames.platforms">{{ platform.name }}</p>
       <div class="screens">
