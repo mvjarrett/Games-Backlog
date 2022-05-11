@@ -18,7 +18,7 @@ export class GamesListComponent implements OnInit {
     this.gameService.GetGames().subscribe((data) => {
       if (data) {
         const backlogIds = data.map((x) => x.id);
-        this.gameService.backlogInfo(backlogIds).subscribe((info: any) => {
+        this.gameService.backlogInfo(backlogIds).subscribe((info) => {
           if (info) {
             this.logItems = info;
           }

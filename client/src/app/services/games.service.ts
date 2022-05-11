@@ -29,9 +29,9 @@ import { igGame } from '../models/igGame';
           return this.http.get<gameObject[]>(this.logUrl)
      
       }
-      backlogInfo(backlogIds: number[]): Observable<igGame>{
+      backlogInfo(backlogIds: number[]): Observable<igGame[]>{
         let logBody = 'fields id, name, cover.url; where id = (' + backlogIds.join() + ');'
-          return this.http.post<igGame>(this.apiUrl, logBody, {
+          return this.http.post<igGame[]>(this.apiUrl, logBody, {
             headers: this.headers})
       }
 

@@ -3,24 +3,24 @@
     <div class="cover col-sm-12">
       <img class="cover" src="{{ getGameCover(igGames) }}" />
       <div class="logButtons">
-        <button
+        <button [ngClass]="(wishStatus)?'btn-info' : 'btn-outline-primary'"
           (click)="wish()"
           type="button"
-          class="btn btn-outline-info btn-sm"
+          class="btn btn-sm"
         >
           Wishlist
         </button>
-        <button
+        <button [ngClass]="(playingStatus)?'btn-info' : 'btn-outline-primary'"
           (click)="playing()"
           type="button"
-          class="btn btn-outline-info btn-sm"
+          class="btn btn-sm"
         >
           Playing
         </button>
-        <button
+        <button [ngClass]="(playedStatus)?'btn-info' : 'btn-outline-primary'"
           (click)="played()"
           type="button"
-          class="btn btn-outline-info btn-sm"
+          class="btn btn-sm"
         >
           Played
         </button>
@@ -35,7 +35,9 @@
       <p class="summary">{{ igGames.summary }}</p>
       <a href="{{ igGames.url }}">{{ igGames.url }}</a>
       <p>Rating: {{ igGames.rating }}</p>
-      <div *ngIf="wishStatus">This game is on the wishlist</div>
+      <div *ngIf="wishStatus">This game is on the wishlist!</div>
+      <div *ngIf="playedStatus">You have played this game.</div>
+      <div *ngIf="playingStatus">You're currently playing this game.</div>
       <h4>Platforms:</h4>
       <p *ngFor="let platform of igGames.platforms">{{ platform.name }}</p>
       <div class="screens">

@@ -33,10 +33,8 @@ export class GameDetailsService {
    
   }
 
-  getBacklog(id: string, wishlist: boolean): Observable<gameObject> {
-    console.log("the backlogged game id is: ", id)
-    console.log('the wishlist status is : ', wishlist)
-    return this.http.get<gameObject>('http://localhost:8080/backlog/game/' + id)
+  getBacklog(id: string): Observable<gameObject[]> {
+    return this.http.get<gameObject[]>('http://localhost:8080/backlog/game/' + id)
   }
   
 }

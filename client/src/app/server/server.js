@@ -140,10 +140,11 @@ app.delete("/backlog/:log_id", async (req, res) => {
 //delete a backlog item by gameId
 app.delete("/backlog/game/:id", async (req, res) => {
   const { id } = req.params;
+  const {user_id} = req.headers;
   try {
-    const deleteGame = await pool.query("DELETE FROM backlog WHERE id = $1", [
-      id,
-    ]);
+    const deleteGame = await pool.query(
+      "DELETE FROM backlog WHERE id = $1 AND user_id = $2", 
+    [id, user_id]);
     res.json("game was deleted!");
   } catch (err) {
     console.error(err.message);
