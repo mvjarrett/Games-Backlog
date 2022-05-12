@@ -38,7 +38,7 @@ app.use(function (req, res, next) {
   res.setHeader("Authorization", process.env.AUTH_TOKEN);
   next();
 });
-
+ 
 app.get("https://api.igdb.com/v4/games", function (req, res) {
   console.log(res.json);
 });
@@ -93,16 +93,17 @@ app.post("/backlog", async (req, res) => {
 //update game status
 app.put("/backlog/game/:id", async (req, res) => {
   const { id } = req.params;
-  const { user_id } = req.body;
+  const { user_id } = req.headers;
   const { played } = req.body;
   const { playing } = req.body;
   const { wishlist } = req.body;
   try {
     const { updateStatus } = await pool.query(
-      "UPDATE backlog SET played = $1, playing = $2, wishlist = $3 WHERE user_id = $4",
-      [played, playing, wishlist, user_id]
+      "UPDATE backlog SET played = $1, playing = $2, wishlist = $3 WHERE user_id = $4 AND id = $5",
+      [played, playing, wishlist, user_id, id]
     );
-    res.json(updateStatus);
+    res.json(updateStatus)
+    console.log('the put route has run');
   } catch (err) {
     console.error(err.message);
   }
