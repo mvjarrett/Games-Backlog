@@ -103,7 +103,6 @@ app.put("/backlog/game/:id", async (req, res) => {
       [played, playing, wishlist, user_id, id]
     );
     res.json(updateStatus)
-    console.log('the put route has run');
   } catch (err) {
     console.error(err.message);
   }

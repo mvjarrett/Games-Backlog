@@ -16,8 +16,10 @@ export class IgdbResultsService {
     Authorization: 'Bearer lwvrxsjfyx0auv0yvs9hgm81hbkvxl',
   };
   body =
-    'fields name, summary, cover.url; where rating >90; where total_rating_count >900; limit 50;';
+    'fields name, cover.url; where rating >90; where total_rating_count >900; limit 50;';
 
+  infiniteBody =
+    'fields name, cover.url; where rating >90; where total_rating_count >900; limit 100;';
   constructor(private http: HttpClient) {}
 
   topGames(): Observable<igGame[]> {
@@ -25,5 +27,9 @@ export class IgdbResultsService {
       headers: this.headers,
     });
   }
+  infiniteGames(): Observable<igGame[]> {
+    return this.http.post<igGame[]>('externalgames/games', this.infiniteBody, {
+      headers: this.headers,
+    });
+  }
 }
-

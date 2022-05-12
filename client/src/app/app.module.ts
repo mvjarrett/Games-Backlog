@@ -25,6 +25,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { GameDetailsComponent } from './components/game-details/game-details.component';
 import { ScreenshotModalComponent } from './components/screenshot-modal/screenshot-modal.component';
 import { CoverComponent } from './components/cover/cover.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
 
 const appRoutes: Routes = [
     {path: '', component: IgdbResultsComponent},
@@ -65,6 +67,7 @@ const appRoutes: Routes = [
     MatToolbarModule,
     FlexLayoutModule,
     MatGridListModule,
+    InfiniteScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent],
