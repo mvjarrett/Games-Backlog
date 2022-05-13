@@ -37,6 +37,3 @@ export class IgdbResultsComponent implements OnInit {
   }
 }
 
-// this.igdbResults.topGames().subscribe((data) => {
-//   if (data) {
-//     this.igGames = data;
