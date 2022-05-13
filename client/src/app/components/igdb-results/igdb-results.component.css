@@ -2,4 +2,6 @@
 .content {
     padding: 12%;
     padding-top: 5%;
+    flex: none;
+    height: 100%;
 }
