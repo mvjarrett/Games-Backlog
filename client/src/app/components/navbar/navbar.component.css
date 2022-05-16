@@ -1,23 +1,8 @@
-/* .toolbar {
-    display:flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 85%;
-    margin-left: 7%;
-    margin-bottom: 15px;
+.navbar {
+  position: fixed;
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
 }
-
-.barSpacing {
-    display: flex;
-    margin-right: auto;
-}
-
-a {
-    text-decoration: none;
-    color: aliceblue;
+/* #topLevel {
 } */
-/* #backlog {
-    margin-left: 60%;
-} */
-
-

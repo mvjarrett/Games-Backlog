@@ -28,18 +28,15 @@ export class IgdbResultsService {
     });
   }
   infiniteGames(): Observable<igGame[]> {
-    let infiniteBody = 'fields name, cover.url; sort rating desc; where rating >80; limit 50; offset ' + this.offset + ';';
-
-
+    let infiniteBody =
+      'fields name, cover.url; sort rating desc; where rating >80; limit 50; offset ' +
+      this.offset +
+      ';';
     this.offset += 50;
     console.log('offset is: ', this.offset);
     console.log(infiniteBody);
-    return this.http.post<igGame[]>(
-      'externalgames/games',
-      infiniteBody,
-      {
-        headers: this.headers,
-      }
-    );
+    return this.http.post<igGame[]>('externalgames/games', infiniteBody, {
+      headers: this.headers,
+    });
   }
 }
