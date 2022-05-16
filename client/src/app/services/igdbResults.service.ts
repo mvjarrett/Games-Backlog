@@ -4,12 +4,10 @@ import { map, Observable, throwError } from 'rxjs';
 import { igGame } from '../models/igGame';
 import { IgdbResultsComponent } from '../components/igdb-results/igdb-results.component';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class IgdbResultsService {
-  offset = 50;
   headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
@@ -18,11 +16,10 @@ export class IgdbResultsService {
     'Client-id': '7v9kmaf3qgxdnfne5cdxb6ah64fbco',
     Authorization: 'Bearer lwvrxsjfyx0auv0yvs9hgm81hbkvxl',
   };
+  offset = 50;
   body =
     'fields name, cover.url; where rating >90; where total_rating_count >900; limit 50;';
 
-  infiniteBody =
-    `fields name, cover.url; where rating >90; where total_rating_count >350; limit 50; offset ${this.offset};`;
   constructor(private http: HttpClient) {}
 
   topGames(): Observable<igGame[]> {
@@ -31,10 +28,18 @@ export class IgdbResultsService {
     });
   }
   infiniteGames(): Observable<igGame[]> {
-        this.offset+50;
-    return this.http.post<igGame[]>('externalgames/games', this.infiniteBody, {
-      headers: this.headers,
-    });
+    let infiniteBody = 'fields name, cover.url; sort rating desc; where rating >80; limit 50; offset ' + this.offset + ';';
 
+
+    this.offset += 50;
+    console.log('offset is: ', this.offset);
+    console.log(infiniteBody);
+    return this.http.post<igGame[]>(
+      'externalgames/games',
+      infiniteBody,
+      {
+        headers: this.headers,
+      }
+    );
   }
 }

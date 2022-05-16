@@ -12,28 +12,33 @@ export class IgdbResultsComponent implements OnInit {
   infiniteScroll: InfiniteScrollDirective;
   constructor(private igdbResults: IgdbResultsService) {}
   igGames: igGame[] = [];
-  throttle = 1;
-  distance = 1;
+  throttle = 500;
+  distance = 0.5;
+  offset = 50;
   @ViewChild(InfiniteScrollDirective)
   set appScroll(directive: InfiniteScrollDirective) {
     this.infiniteScroll = directive;
   }
   ngOnInit(): void {
-    this.igdbResults.infiniteGames().subscribe((data) => {
+    this.igdbResults.topGames().subscribe((data) => {
       if (data) {
         this.igGames = data;
       }
+      this.infiniteScroll.setup();
+      this.infiniteScroll.ngOnDestroy();
     });
   }
   onScroll(): void {
     this.igdbResults.infiniteGames().subscribe((data) => {
       if (data) {
-        this.igGames = data;
-        this.igGames.push(...this.igGames);
+        this.igGames.push(...data);
+        console.log(this.igGames.length)
+        this.infiniteScroll.setup();
         this.infiniteScroll.ngOnDestroy();
-
-      }        this.infiniteScroll.setup();
+      }
+      (error: any) => {
+        console.log(error);
+      }
     });
   }
 }
-

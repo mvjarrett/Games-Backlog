@@ -26,6 +26,7 @@ import { GameDetailsComponent } from './components/game-details/game-details.com
 import { ScreenshotModalComponent } from './components/screenshot-modal/screenshot-modal.component';
 import { CoverComponent } from './components/cover/cover.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { InfiniteScrollComponent } from './components/infinite-scroll/infinite-scroll.component';
 
 
 const appRoutes: Routes = [
@@ -47,6 +48,7 @@ const appRoutes: Routes = [
     GameDetailsComponent,
     ScreenshotModalComponent,
     CoverComponent,
+    InfiniteScrollComponent,
   ],
   imports: [
     BrowserModule,

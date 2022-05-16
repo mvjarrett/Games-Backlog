@@ -1,16 +1,19 @@
-<div class="content"
-infinite-scroll
-[infiniteScrollDistance]="distance"
-[infiniteScrollThrottle]="throttle"
-(scrolled)="onScroll()"
-[scrollWindow]="true">
-  
-  <div fxLayout="row wrap">
-    <div fxFlex="20%" fxFlex.xs="33%" fxFlex.sm="33%" *ngFor="let game of igGames">
+<div class="content">
+  <div
+    fxLayout="row wrap"
+    infinite-scroll
+    [infiniteScrollDistance]="distance"
+    [infiniteScrollThrottle]="throttle"
+    (scrolled)="onScroll()"
+  >
+    <div
+      fxFlex="20%"
+      fxFlex.xs="33%"
+      fxFlex.sm="33%"
+      *ngFor="let game of igGames"
+    >
       <app-igdb-game-card [game]="game"></app-igdb-game-card>
     </div>
+    <h2>loading...</h2>
   </div>
-
- 
-
 </div>

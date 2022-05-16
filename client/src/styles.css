@@ -4,6 +4,7 @@ body {
     background-color: rgb(33,37,41);
     font-family: 'Roboto', sans-serif;
     color: #c8c8c8;
+    overflow-y: scroll;
 }
 html, body { height: 100%; }
 
