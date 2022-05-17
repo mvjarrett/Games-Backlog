@@ -3,10 +3,26 @@ const express = require("express");
 const bodyParser = require("body-parser");
 // const unirest = require("unirest");
 const cors = require("cors");
+const fs = require('fs');
 const dotenv = require("dotenv");
+const https = require('https')
+const port = 8080;
 dotenv.config({ path: ".env" });
 
+var key = fs.readFileSync(__dirname + '/certsFiles/selfsigned.key');
+var cert = fs.readFileSync(__dirname + '/certsFiles/selfsigned.crt');
+var options = {
+  key: key,
+  cert: cert
+};
+
 const app = express();
+app.get('/', (req, res) => {
+   res.send('Now using https..');
+});
+
+// var server = https.createServer(options, app);
+
 
 // Define the JSON parser as a default way
 // to consume and produce data through the
@@ -26,6 +42,9 @@ const server = app.listen(8080, function () {
   var port = server.address().port;
   console.log("App now running on port", port);
 });
+
+// server.listen(port, () => {console.log("server started on port : " + port)})
+
 
 app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");

@@ -12,6 +12,10 @@ npm-debug.log
 yarn-error.log
 .env
 client/src/app/server/.env
+.key
+.png
+client/src/app/server/certsFiles/selfsigned.crt
+client/src/app/server/certsFiles/selfsigned.key
 
 # IDEs and editors
 .idea/

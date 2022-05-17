@@ -3,25 +3,16 @@
     <div class="cover col-sm-12">
       <img class="cover" src="{{ getGameCover(igGames) }}" />
       <div class="logButtons">
-        <button [ngClass]="(wishStatus)?'btn-info' : 'btn-outline-primary'"
-          (click)="wish()"
-          type="button"
-          class="btn btn-sm"
-        >
+        <button [ngClass]="(wishStatus)?'btn-info' : 'btn-outline-primary'" (click)="wish()" type="button"
+          class="btn btn-sm">
           Wishlist
         </button>
-        <button [ngClass]="(playingStatus)?'btn-info' : 'btn-outline-primary'"
-          (click)="playing()"
-          type="button"
-          class="btn btn-sm"
-        >
+        <button [ngClass]="(playingStatus)?'btn-info' : 'btn-outline-primary'" (click)="playing()" type="button"
+          class="btn btn-sm">
           Playing
         </button>
-        <button [ngClass]="(playedStatus)?'btn-info' : 'btn-outline-primary'"
-          (click)="played()"
-          type="button"
-          class="btn btn-sm"
-        >
+        <button [ngClass]="(playedStatus)?'btn-info' : 'btn-outline-primary'" (click)="played()" type="button"
+          class="btn btn-sm">
           Played
         </button>
       </div>
@@ -41,10 +32,7 @@
       <h4>Platforms:</h4>
       <p *ngFor="let platform of igGames.platforms">{{ platform.name }}</p>
       <div class="screens">
-        <a
-          *ngFor="let screenshot of igGames.screenshots"
-          (click)="openDialog(screenshot)"
-        >
+        <a *ngFor="let screenshot of igGames.screenshots" (click)="openDialog(screenshot)">
           <img src="{{ screenshot.url }}" />
         </a>
       </div>
