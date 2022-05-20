@@ -1,2 +1,3 @@
 client/src/app/server/certsFiles/selfsigned.crt
 client/src/app/server/certsFiles/selfsigned.key
+client/src/app/components/igdb-results/notes.txt

@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IgdbResultsService } from '../../services/igdbResults.service';
 import { igGame } from '../../models/igGame';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
+import { filter } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-igdb-results',
@@ -10,7 +12,12 @@ import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 })
 export class IgdbResultsComponent implements OnInit {
   infiniteScroll: InfiniteScrollDirective;
-  constructor(private igdbResults: IgdbResultsService) {}
+  term: string | null;
+  constructor(
+    private igdbResults: IgdbResultsService,
+    private _Activatedroute: ActivatedRoute
+  ) {}
+  // searchTerm = '';
   igGames: igGame[] = [];
   throttle = 500;
   distance = 0.5;
@@ -19,26 +26,49 @@ export class IgdbResultsComponent implements OnInit {
   set appScroll(directive: InfiniteScrollDirective) {
     this.infiniteScroll = directive;
   }
+
+  //----------- organizational seperator ----------
+
   ngOnInit(): void {
+    this._Activatedroute.queryParams.subscribe((queryParams:any) => {
+      this.term = queryParams.term;
+     });
+    // this.term = this._Activatedroute.snapshot.queryParamMap.get('term');
+    console.log('term is: ',this.term);
+    if(this.term === undefined){
+      this.allGames()
+    }else{
+      this.searchResult(this.term)
+    }
+  }
+
+  allGames() {
     this.igdbResults.topGames().subscribe((data) => {
       if (data) {
         this.igGames = data;
       }
-      this.infiniteScroll.setup();
-      this.infiniteScroll.ngOnDestroy();
     });
   }
+
   onScroll(): void {
     this.igdbResults.infiniteGames().subscribe((data) => {
       if (data) {
         this.igGames.push(...data);
-        console.log(this.igGames.length)
+        console.log(this.igGames.length);
         this.infiniteScroll.setup();
         this.infiniteScroll.ngOnDestroy();
       }
       (error: any) => {
         console.log(error);
-      }
+      };
     });
   }
+
+searchResult(term: string | null) {
+  this.igdbResults.searchGames(term).subscribe((data) => {
+    if(data) {
+      this.igGames = data
+    }
+  })
+}
 }

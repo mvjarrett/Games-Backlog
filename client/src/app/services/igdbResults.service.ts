@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable, throwError } from 'rxjs';
 import { igGame } from '../models/igGame';
 import { IgdbResultsComponent } from '../components/igdb-results/igdb-results.component';
+import { TreeError } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root',
@@ -17,13 +18,13 @@ export class IgdbResultsService {
     Authorization: 'Bearer lwvrxsjfyx0auv0yvs9hgm81hbkvxl',
   };
   offset = 50;
-  body =
+  topBody =
     'fields name, cover.url; where rating >90; where total_rating_count >900; limit 50;';
 
   constructor(private http: HttpClient) {}
 
   topGames(): Observable<igGame[]> {
-    return this.http.post<igGame[]>('externalgames/games', this.body, {
+    return this.http.post<igGame[]>('externalgames/games', this.topBody, {
       headers: this.headers,
     });
   }
@@ -38,5 +39,14 @@ export class IgdbResultsService {
     return this.http.post<igGame[]>('externalgames/games', infiniteBody, {
       headers: this.headers,
     });
+  }
+
+  searchGames(term: string | null): Observable<igGame[]> {
+    let searchString = 'fields name, cover.url; limit 200; search ' + '"' + term + '";';
+    console.log(searchString);
+    return this.http.post<igGame[]>('/externalgames/games', searchString, {
+      headers: this.headers,
+    });
+
   }
 }

@@ -24,7 +24,7 @@ export class GameDetailsService {
 
   constructor(private http: HttpClient) {}
 
-  getDetails(id: string): Observable<igGame[]> {
+  getDetails(id: number): Observable<igGame[]> {
     let body =
     `fields id, name, cover.url, first_release_date, summary, genres.name, platforms.name, rating, screenshots.url, url; where id = ${id};`
     return this.http.post<igGame[]>('externalgames/games', body, {
@@ -33,7 +33,7 @@ export class GameDetailsService {
    
   }
 
-  getBacklog(id: string): Observable<gameObject[]> {
+  getBacklog(id: number): Observable<gameObject[]> {
     return this.http.get<gameObject[]>('http://localhost:8080/backlog/game/' + id)
   }
   

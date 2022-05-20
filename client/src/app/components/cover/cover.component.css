@@ -24,6 +24,13 @@ body {
   max-width: 42em;
 }
 
+.hero {
+  font-family: 'Libre Bodoni', serif;
+  font-weight: 400;
+  font-size: 70px;
+  
+}
+
 .cover-container:before {
   content: "";
   background: url("https://i.pinimg.com/originals/59/bf/96/59bf96fde108d05bbaa2f096de0934d5.gif");
