@@ -9,12 +9,12 @@ const https = require('https')
 const port = 8080;
 dotenv.config({ path: ".env" });
 
-var key = fs.readFileSync(__dirname + '/certsFiles/selfsigned.key');
-var cert = fs.readFileSync(__dirname + '/certsFiles/selfsigned.crt');
-var options = {
-  key: key,
-  cert: cert
-};
+// var key = fs.readFileSync(__dirname + '/certsFiles/selfsigned.key');
+// var cert = fs.readFileSync(__dirname + '/certsFiles/selfsigned.crt');
+// var options = {
+//   key: key,
+//   cert: cert
+// };
 
 const app = express();
 app.get('/', (req, res) => {

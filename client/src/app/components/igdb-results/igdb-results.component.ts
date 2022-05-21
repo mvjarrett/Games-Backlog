@@ -17,7 +17,6 @@ export class IgdbResultsComponent implements OnInit {
     private igdbResults: IgdbResultsService,
     private _Activatedroute: ActivatedRoute
   ) {}
-  // searchTerm = '';
   igGames: igGame[] = [];
   throttle = 500;
   distance = 0.5;
@@ -30,15 +29,13 @@ export class IgdbResultsComponent implements OnInit {
   //----------- organizational seperator ----------
 
   ngOnInit(): void {
-    this._Activatedroute.queryParams.subscribe((queryParams:any) => {
+    this._Activatedroute.queryParams.subscribe((queryParams: any) => {
       this.term = queryParams.term;
-     });
-    // this.term = this._Activatedroute.snapshot.queryParamMap.get('term');
-    console.log('term is: ',this.term);
-    if(this.term === undefined){
-      this.allGames()
-    }else{
-      this.searchResult(this.term)
+    });
+    if (this.term === undefined) {
+      this.allGames();
+    } else {
+      this.searchResult(this.term);
     }
   }
 
@@ -64,11 +61,11 @@ export class IgdbResultsComponent implements OnInit {
     });
   }
 
-searchResult(term: string | null) {
-  this.igdbResults.searchGames(term).subscribe((data) => {
-    if(data) {
-      this.igGames = data
-    }
-  })
-}
+  searchResult(term: string | null) {
+    this.igdbResults.searchGames(term).subscribe((data) => {
+      if (data) {
+        this.igGames = data;
+      }
+    });
+  }
 }

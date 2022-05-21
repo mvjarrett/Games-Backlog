@@ -28,16 +28,12 @@ export class NavbarComponent implements OnInit {
   onSubmit(): void {
     this.searchTerm = this.searchForm.controls['search'].value;
 
-    
-    this.router.navigate(['/games/search'],
-     {queryParams: { term: this.searchTerm }});
-
-    //     let searchString ='fields name; limit 200; ' + 'search ' + '"' + this.searchForm.controls['search'].value + '";';
-    //     console.log(searchString)
-    //     this.http.post('/externalgames/search', searchString, {
-    //       headers: this.headers}).subscribe((data: any) => {
-    //       console.log(data)
-    //       // this.dialogRef.close(newGame);
-    //     });
+    this.router
+      .navigateByUrl('/games', { skipLocationChange: true })
+      .then(() => {
+        this.router.navigate(['/games/search'], {
+          queryParams: { term: this.searchTerm },
+        });
+      });
   }
 }

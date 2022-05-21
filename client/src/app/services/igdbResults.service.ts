@@ -42,11 +42,10 @@ export class IgdbResultsService {
   }
 
   searchGames(term: string | null): Observable<igGame[]> {
-    let searchString = 'fields name, cover.url; limit 200; search ' + '"' + term + '";';
-    console.log(searchString);
+    let searchString =
+      'fields name, cover.url; limit 200; search ' + '"' + term + '";';
     return this.http.post<igGame[]>('/externalgames/games', searchString, {
       headers: this.headers,
     });
-
   }
 }
