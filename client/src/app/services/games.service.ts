@@ -37,15 +37,3 @@ import { igGame } from '../models/igGame';
 
   }
 
-// 
-// 
-// 
-// 
-// make database call on games-details-component load, check against user id and igdb id
-// if entry exists, check boolean status and display appropriate data, also off of the same checks, 
-// write code to select if adding to what status or toggling it.
-// 
-// 
-// 
-// 
-// 

@@ -19,7 +19,7 @@ export class IgdbResultsService {
   };
   offset = 50;
   topBody =
-    'fields name, cover.url; where rating >90; where total_rating_count >900; limit 50;';
+    'fields name, cover.url; limit 50; where rating >85 & aggregated_rating != null & rating != null; sort total_rating desc; ';
 
   constructor(private http: HttpClient) {}
 
@@ -30,7 +30,7 @@ export class IgdbResultsService {
   }
   infiniteGames(): Observable<igGame[]> {
     let infiniteBody =
-      'fields name, cover.url; sort rating desc; where rating >80; limit 50; offset ' +
+      'fields name, cover.url; limit 50; where rating >85 & total_rating_count >100 & aggregated_rating != null & rating != null;; sort total_rating desc; offset ' +
       this.offset +
       ';';
     this.offset += 50;
@@ -45,6 +45,20 @@ export class IgdbResultsService {
     let searchString =
       'fields name, cover.url; limit 200; search ' + '"' + term + '";';
     return this.http.post<igGame[]>('/externalgames/games', searchString, {
+      headers: this.headers,
+    });
+  }
+  searchPlatforms(platformId: number): Observable<igGame[]> {
+    let filterString =
+      'fields name, cover.url; limit 200; where category = 0 & release_dates.platform = ' + platformId + ' & aggregated_rating != null & rating != null; sort total_rating desc;'
+    return this.http.post<igGame[]>('/externalgames/games', filterString, {
+      headers: this.headers,
+    });
+  }
+  searchGenres(genreId: number): Observable<igGame[]> {
+    let filterString =
+      'fields name, cover.url; limit 200; where category = 0 & genres = ' + genreId + ' & aggregated_rating != null & rating != null; sort total_rating desc;'
+    return this.http.post<igGame[]>('/externalgames/games', filterString, {
       headers: this.headers,
     });
   }

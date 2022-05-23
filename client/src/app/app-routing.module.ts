@@ -7,15 +7,10 @@ import { CoverComponent } from './components/cover/cover.component';
 
 const routes: Routes = [
   { path: '', component: CoverComponent },
-  // {
-  //   path: 'games',
-  //   children: [
-  //     { path: 'all', component: IgdbResultsComponent },
-
-  //   ],
-  // },
   { path: 'backlog', component: GamesListComponent },
   { path: 'games/search', component: IgdbResultsComponent, runGuardsAndResolvers: 'always'},
+  { path: 'games/platforms/:platformId', component: IgdbResultsComponent },
+  { path: 'games/genres/:genreId', component: IgdbResultsComponent },
   { path: 'games/:id', component: GameDetailsComponent },
 ];
 

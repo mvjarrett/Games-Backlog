@@ -30,7 +30,9 @@
       <div *ngIf="playedStatus">You have played this game.</div>
       <div *ngIf="playingStatus">You're currently playing this game.</div>
       <h4>Platforms:</h4>
-      <p *ngFor="let platform of igGames.platforms">{{ platform.name }}</p>
+      <p *ngFor="let platform of igGames.platforms"><a href="/games/platforms/{{platform.id}}">{{ platform.name }}</a></p>
+      <h4>Genres:</h4>
+      <p *ngFor="let genre of igGames.genres"><a href="/games/genres/{{genre.id}}">{{ genre.name }}</a></p>
       <div class="screens">
         <a *ngFor="let screenshot of igGames.screenshots" (click)="openDialog(screenshot)">
           <img src="{{ screenshot.url }}" />

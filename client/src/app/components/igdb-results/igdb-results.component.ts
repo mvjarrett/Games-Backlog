@@ -13,6 +13,8 @@ import { ActivatedRoute } from '@angular/router';
 export class IgdbResultsComponent implements OnInit {
   infiniteScroll: InfiniteScrollDirective;
   term: string | null;
+  platformId: number;
+  genreId: number;
   constructor(
     private igdbResults: IgdbResultsService,
     private _Activatedroute: ActivatedRoute
@@ -31,11 +33,19 @@ export class IgdbResultsComponent implements OnInit {
   ngOnInit(): void {
     this._Activatedroute.queryParams.subscribe((queryParams: any) => {
       this.term = queryParams.term;
+      this.platformId = this._Activatedroute.snapshot.params['platformId']
+      this.genreId = this._Activatedroute.snapshot.params['genreId']
     });
-    if (this.term === undefined) {
-      this.allGames();
-    } else {
-      this.searchResult(this.term);
+
+    if(this.term !=undefined ){
+      this.searchResult(this.term)
+    } else if (this.platformId !=undefined) {
+      this.platformResult(this.platformId) 
+      console.log(this.platformId)
+    } else if (this.genreId !=undefined) {
+      this.genreResult(this.genreId)
+    }else {
+      this.allGames()
     }
   }
 
@@ -67,5 +77,19 @@ export class IgdbResultsComponent implements OnInit {
         this.igGames = data;
       }
     });
+  }
+  platformResult(platformId: number) {
+    this.igdbResults.searchPlatforms(platformId).subscribe((data) => {
+      if(data) {
+        this.igGames = data;
+      }
+    })
+  }
+  genreResult(genreId: number) {
+    this.igdbResults.searchGenres(genreId).subscribe((data) => {
+      if(data) {
+        this.igGames = data;
+      }
+    })
   }
 }
