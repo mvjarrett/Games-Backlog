@@ -1,24 +1,30 @@
 const pool = require("./pool");
+
 const express = require("express");
 const bodyParser = require("body-parser");
-// const unirest = require("unirest");
 const cors = require("cors");
-const fs = require('fs');
 const dotenv = require("dotenv");
-const https = require('https')
-const port = 8080;
+const user = require("./routes/users");
 dotenv.config({ path: ".env" });
+const client = require("./configs/database");
 
-// var key = fs.readFileSync(__dirname + '/certsFiles/selfsigned.key');
-// var cert = fs.readFileSync(__dirname + '/certsFiles/selfsigned.crt');
-// var options = {
-//   key: key,
-//   cert: cert
-// };
+
+
+client.connect((err) => { //Connected Database
+  if (err) {
+    console.log(err);
+  }
+  else {
+    console.log("Data logging initiated!");
+  }
+});
+
+
+
 
 const app = express();
 app.get('/', (req, res) => {
-   res.send('Now using https..');
+  res.send('Now using https..');
 });
 
 // var server = https.createServer(options, app);
@@ -30,7 +36,7 @@ app.get('/', (req, res) => {
 //middleware
 app.use(bodyParser.json());
 app.use(cors());
-
+app.use("/user", user);  //Route for /user endpoint of API
 // Create link to Angular build directory
 // The `ng build` command will save the result
 // under the `dist` folder.
@@ -57,7 +63,7 @@ app.use(function (req, res, next) {
   res.setHeader("Authorization", process.env.AUTH_TOKEN);
   next();
 });
- 
+
 app.get("https://api.igdb.com/v4/games", function (req, res) {
   console.log(res.json);
 });
@@ -159,13 +165,31 @@ app.delete("/backlog/:log_id", async (req, res) => {
 //delete a backlog item by gameId
 app.delete("/backlog/game/:id", async (req, res) => {
   const { id } = req.params;
-  const {user_id} = req.headers;
+  const { user_id } = req.headers;
   try {
     const deleteGame = await pool.query(
-      "DELETE FROM backlog WHERE id = $1 AND user_id = $2", 
-    [id, user_id]);
+      "DELETE FROM backlog WHERE id = $1 AND user_id = $2",
+      [id, user_id]);
     res.json("game was deleted!");
   } catch (err) {
     console.error(err.message);
   }
 });
+
+
+//----auth routes below----
+
+// app.post("/signup", async (req, res) => {
+//   try {
+//     const { user_id } = req.body;
+//     const { password } = req.body;
+//     const newUser = await pool.query(
+//       "INSERT INTO users (user_id, password) VALUES($1, $2)",
+//       [user_id, crypt(password, gen_salt('bf'))]
+//     );
+
+//     res.json("Account Created!");
+//   } catch (err) {
+//     console.error(err.message);
+//   }
+// });

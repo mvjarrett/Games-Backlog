@@ -4,9 +4,13 @@ import { IgdbResultsComponent } from './components/igdb-results/igdb-results.com
 import { GamesListComponent } from './components/games-list/games-list.component';
 import { GameDetailsComponent } from './components/game-details/game-details.component';
 import { CoverComponent } from './components/cover/cover.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 const routes: Routes = [
   { path: '', component: CoverComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'backlog', component: GamesListComponent },
   { path: 'games/search', component: IgdbResultsComponent, runGuardsAndResolvers: 'always'},
   { path: 'games/platforms/:platformId', component: IgdbResultsComponent },

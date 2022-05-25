@@ -3,18 +3,51 @@
     <div class="cover col-sm-12">
       <img class="cover" src="{{ getGameCover(igGames) }}" />
       <div class="logButtons">
-        <button [ngClass]="(wishStatus)?'btn-info' : 'btn-outline-primary'" (click)="wish()" type="button"
-          class="btn btn-sm">
+        <button
+          [ngClass]="wishStatus ? 'btn-info' : 'btn-outline-primary'"
+          (click)="wish()"
+          type="button"
+          class="btn btn-sm"
+        >
           Wishlist
         </button>
-        <button [ngClass]="(playingStatus)?'btn-info' : 'btn-outline-primary'" (click)="playing()" type="button"
-          class="btn btn-sm">
+        <button
+          [ngClass]="playingStatus ? 'btn-info' : 'btn-outline-primary'"
+          (click)="playing()"
+          type="button"
+          class="btn btn-sm"
+        >
           Playing
         </button>
-        <button [ngClass]="(playedStatus)?'btn-info' : 'btn-outline-primary'" (click)="played()" type="button"
-          class="btn btn-sm">
+        <button
+          [ngClass]="playedStatus ? 'btn-info' : 'btn-outline-primary'"
+          (click)="played()"
+          type="button"
+          class="btn btn-sm"
+        >
           Played
         </button>
+      </div>
+
+      <div class="igdb col-sm-12">
+        <p>More Info:</p>
+        <a href="{{ igGames.url }}">IGDB</a>
+      </div>
+
+      <hr />
+      <div class="col" id="platformCol">
+        <p class="typeHeader">Platforms:</p>
+
+        <p class="typeNames" *ngFor="let platform of igGames.platforms">
+          <a href="/games/platforms/{{ platform.id }}">{{ platform.name }}</a>
+        </p>
+        <hr />
+        <div class="col">
+          <p class="typeHeader">Genres:</p>
+          <p class="typeNames" *ngFor="let genre of igGames.genres">
+            <a href="/games/genres/{{ genre.id }}">{{ genre.name }}</a>
+          </p>
+        </div>
       </div>
     </div>
     <div class="content col">
@@ -24,19 +57,17 @@
       </div>
       <h4>Release date: {{ getTimeStamp(igGames) }}</h4>
       <p class="summary">{{ igGames.summary }}</p>
-      <a href="{{ igGames.url }}">{{ igGames.url }}</a>
+
       <p>Rating: {{ igGames.rating }}</p>
-      <div *ngIf="wishStatus">This game is on the wishlist!</div>
-      <div *ngIf="playedStatus">You have played this game.</div>
-      <div *ngIf="playingStatus">You're currently playing this game.</div>
-      <h4>Platforms:</h4>
-      <p *ngFor="let platform of igGames.platforms"><a href="/games/platforms/{{platform.id}}">{{ platform.name }}</a></p>
-      <h4>Genres:</h4>
-      <p *ngFor="let genre of igGames.genres"><a href="/games/genres/{{genre.id}}">{{ genre.name }}</a></p>
-      <div class="screens">
-        <a *ngFor="let screenshot of igGames.screenshots" (click)="openDialog(screenshot)">
-          <img src="{{ screenshot.url }}" />
-        </a>
+      <div class="row">
+        <div class="screens">
+          <a
+            *ngFor="let screenshot of igGames.screenshots"
+            (click)="openDialog(screenshot)"
+          >
+            <img src="{{ screenshot.url }}" />
+          </a>
+        </div>
       </div>
     </div>
   </div>

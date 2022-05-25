@@ -21,7 +21,10 @@ body {
   height: 100%; 
   overflow: visible;
 }
-
+.buttons{
+  flex: content;
+  
+}
 .cover-container {
   max-width: 42em;
  
