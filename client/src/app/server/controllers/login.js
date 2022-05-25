@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 const dotenv = require ('dotenv')
 dotenv.config({ path: '../.env' })
 
-=======
->>>>>>> 8e166169a123eaedd80fecc172dc18d8bf48152d
 const bcrypt = require("bcrypt");
 
 const client = require("../configs/database");
