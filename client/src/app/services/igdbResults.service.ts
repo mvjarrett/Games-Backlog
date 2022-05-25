@@ -1,9 +1,8 @@
-import { Injectable, Input } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, Observable, throwError } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { igGame } from '../models/igGame';
-import { IgdbResultsComponent } from '../components/igdb-results/igdb-results.component';
-import { TreeError } from '@angular/compiler';
+
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +29,7 @@ export class IgdbResultsService {
   }
   infiniteGames(): Observable<igGame[]> {
     let infiniteBody =
-      'fields name, cover.url; limit 50; where rating >85 & total_rating_count >100 & aggregated_rating != null & rating != null;; sort total_rating desc; offset ' +
+      'fields name, cover.url; limit 50; where rating != null & category = 0; sort total_rating desc; offset ' +
       this.offset +
       ';';
     this.offset += 50;
