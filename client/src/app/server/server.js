@@ -4,39 +4,22 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const user = require("./routes/users");
+const cookieParser = require('cookie-parser')
 dotenv.config({ path: ".env" });
-const client = require("./configs/database");
-
-
-
-client.connect((err) => { //Connected Database
-  if (err) {
-    console.log(err);
-  }
-  else {
-    console.log("Data logging initiated!");
-  }
-});
-
-
-
-
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const { verify } = require('./middleware/auth')
 const app = express();
-app.get('/', (req, res) => {
-  res.send('Now using https..');
-});
+var corsOptions = {
+  origin: "*",
+  credentials: true
+};
 
-// var server = https.createServer(options, app);
-
-
-// Define the JSON parser as a default way
-// to consume and produce data through the
-// exposed APIs
 //middleware
+app.use(cookieParser())
 app.use(bodyParser.json());
-app.use(cors());
-app.use("/user", user);  //Route for /user endpoint of API
+app.use(cors(corsOptions));
+// app.use("/user", user);  //Route for /user endpoint of API
 // Create link to Angular build directory
 // The `ng build` command will save the result
 // under the `dist` folder.
@@ -53,7 +36,7 @@ const server = app.listen(8080, function () {
 
 
 app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  // res.setHeader("Access-Control-Allow-Origin", "https://localhost:8080");
   res.setHeader("Access-Control-Allow-Methods", "OPTIONS, GET, POST");
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -64,15 +47,15 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get("https://api.igdb.com/v4/games", function (req, res) {
-  console.log(res.json);
-});
+// app.get("https://api.igdb.com/v4/games", verify, function (req, res) {
+//   console.log(res.json);
+// });
 
 //IGDB API ROUTES ABOVE
 //POSTGRES ROUTES BELOW
 
 //get all backlog items
-app.get("/backlog", async (req, res) => {
+app.get("/backlog", verify, async (req, res) => {
   try {
     const allTitles = await pool.query("SELECT * FROM backlog");
     res.json(allTitles.rows);
@@ -82,7 +65,7 @@ app.get("/backlog", async (req, res) => {
 });
 
 //get a specific backlogged title
-app.get("/backlog/game/:id", async (req, res) => {
+app.get("/backlog/game/:id", verify, async (req, res) => {
   try {
     const { id } = req.params;
     const allTitles = await pool.query("SELECT * FROM backlog WHERE id = $1", [
@@ -97,7 +80,7 @@ app.get("/backlog/game/:id", async (req, res) => {
 
 //post new backlog item
 
-app.post("/backlog", async (req, res) => {
+app.post("/backlog", verify, async (req, res) => {
   try {
     const { user_id } = req.headers;
     const { id } = req.body;
@@ -116,7 +99,7 @@ app.post("/backlog", async (req, res) => {
 });
 
 //update game status
-app.put("/backlog/game/:id", async (req, res) => {
+app.put("/backlog/game/:id", verify, async (req, res) => {
   const { id } = req.params;
   const { user_id } = req.headers;
   const { played } = req.body;
@@ -134,7 +117,7 @@ app.put("/backlog/game/:id", async (req, res) => {
 });
 
 //update a backlogged title
-app.put("/backlog/:log_id", async (req, res) => {
+app.put("/backlog/:log_id", verify, async (req, res) => {
   try {
     const { log_id } = req.params;
     const { title_name } = req.body;
@@ -149,7 +132,7 @@ app.put("/backlog/:log_id", async (req, res) => {
 });
 
 //delete a backlog item
-app.delete("/backlog/:log_id", async (req, res) => {
+app.delete("/backlog/:log_id", verify, async (req, res) => {
   try {
     const { log_id } = req.params;
     const deleteGame = await pool.query(
@@ -163,7 +146,7 @@ app.delete("/backlog/:log_id", async (req, res) => {
 });
 
 //delete a backlog item by gameId
-app.delete("/backlog/game/:id", async (req, res) => {
+app.delete("/backlog/game/:id", verify, async (req, res) => {
   const { id } = req.params;
   const { user_id } = req.headers;
   try {
@@ -178,12 +161,123 @@ app.delete("/backlog/game/:id", async (req, res) => {
 
 
 //----auth routes below----
+app.post("/users/register", async (req, res) => {
+  console.log('route test')
+  try {
+    const { username } = req.body
+    const { password } = req.body
+    const data = await pool.query(`SELECT * FROM users WHERE username = $1;`, [username]); //Checking if user already exists
+    const arr = data.rows;
+    if (arr.length != 0) {
+      return res.status(200).json({
+        message: "username already exists.",
+        exist: 1
+      });
+    }
+    else {
+      bcrypt.hash(password, 10, (err, hash) => {
+        if (err)
+          res.status(err).json({
+            error: "Server error",
+          });
+        const user = {
+          username,
+          password: hash,
+        };
+        var flag = 1; //Declaring a flag
+        //Inserting data into the database
 
+        pool
+          .query(`INSERT INTO users (username,  password) VALUES ($1,$2);`, [user.username, user.password], (err) => {
+
+            if (err) {
+              flag = 0; //If user is not inserted is not inserted to database assigning flag as 0/false.
+              console.error(err);
+              return res.status(500).json({
+                error: "Database error"
+              })
+            }
+            else {
+              flag = 1;
+              return res.status(200).send({ message: 'User added to database, not verified', exist: 0 });
+            }
+          })
+        if (flag) {
+          const token = jwt.sign( //Signing a jwt token
+            {
+              username: user.username
+            },
+            process.env.SECRET_KEY
+          );
+        };
+      });
+    }
+  }
+  catch (err) {
+
+    console.log(err);
+    res.status(500).json({
+      error: "Database error while registring user!", //Database connection error
+    });
+  };
+})
+
+
+app.post("/users/login", async (req, res) => {
+  console.log('route test')
+  const { username, password } = req.body;
+  try {
+    const data = await pool.query(`SELECT * FROM users WHERE username= $1;`, [username]) //Verifying if the user exists in the database
+    const user = data.rows;
+
+    if (user.length === 0) {
+      const id = data.rows[0].id;
+      res.status(200).json({
+        message: "User is not registered, Sign Up first",
+        registered: 0
+      });
+    }
+    else {
+      bcrypt.compare(password, user[0].password, (err, result) => { //Comparing the hashed password
+        if (err) {
+          res.status(500).json({
+            error: "Server error",
+          });
+        } else if (result === true) { //Checking if credentials match
+          let id = data.rows[0].id;
+          let payload = {
+            username: username,
+            id: id
+          }
+          const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: process.env.ACCESS_TOKEN_LIFE });
+          // res.cookie("jwt", token, { secure: false, httpOnly: true })
+          res.status(200).json({
+            message: "User signed in!",
+            token: token
+          });
+          res.send()
+        }
+        else {
+          //Declaring the errors
+          if (result != true)
+            res.status(400).json({
+              error: "Enter correct password!",
+            });
+        }
+      })
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      error: "Database error occurred while signing in!", //Database connection error
+    });
+  };
+});
 // app.post("/signup", async (req, res) => {
 //   try {
-//     const { user_id } = req.body;
-//     const { password } = req.body;
-//     const newUser = await pool.query(
+    // const { user_id } = req.body;
+    // const { password } = req.body;
+    // const newUser = await pool.query(
 //       "INSERT INTO users (user_id, password) VALUES($1, $2)",
 //       [user_id, crypt(password, gen_salt('bf'))]
 //     );

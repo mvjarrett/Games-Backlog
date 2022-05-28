@@ -1,24 +1,46 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
+  signupForm = new FormGroup({
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+  });
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private route: Router) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   onFormSubmit(): void {
     const userData = {
-      user_id: 'testUser',
-      password: 'testpass'
+      username: this.signupForm.controls['username'].value,
+      password: this.signupForm.controls['password'].value,
     };
-    this.http.post('http://localhost:8080/signup', userData).subscribe((newUser) => {
-      console.log('user should be created, check pgADMIN')
-    });
+    this.http
+      .post('http://localhost:8080/users/register', userData)
+      .subscribe((newUser: any) => {
+        if (newUser.exist) {
+          console.log('toast: ', newUser.message);
+        } else {
+          this.route.navigate(['/games']);
+        }
+      });
   }
+
+  // onSubmit(): Observable <{}> {
+  //   let userData = {
+  //     username: this.signupForm.controls['username'].value,
+  //     password: this.signupForm.controls['password'].value
+  //   };
+  //   return this.http.post<{}>('http://localhost:8080/users/register',  {observe: 'response'}, userData).subscribe(res => {
+  //     console.log(res)
+  //   });
+  // }
 }

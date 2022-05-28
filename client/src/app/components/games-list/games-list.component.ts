@@ -25,5 +25,6 @@ export class GamesListComponent implements OnInit {
         });
       }
     });
+    console.log(localStorage)
   }
 }
