@@ -8,7 +8,8 @@ const cookieParser = require('cookie-parser')
 dotenv.config({ path: ".env" });
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const { verify } = require('./middleware/auth')
+const { verify } = require('./middleware/auth');
+// const { addId } = require('./middleware/id-handler')
 const app = express();
 var corsOptions = {
   origin: "*",
@@ -57,7 +58,8 @@ app.use(function (req, res, next) {
 //get all backlog items
 app.get("/backlog", verify, async (req, res) => {
   try {
-    const allTitles = await pool.query("SELECT * FROM backlog");
+    const { user_id } = req.headers;
+    const allTitles = await pool.query("SELECT * FROM backlog WHERE user_id = $1", [user_id]);
     res.json(allTitles.rows);
   } catch (err) {
     console.error(err.message);
@@ -68,8 +70,9 @@ app.get("/backlog", verify, async (req, res) => {
 app.get("/backlog/game/:id", verify, async (req, res) => {
   try {
     const { id } = req.params;
-    const allTitles = await pool.query("SELECT * FROM backlog WHERE id = $1", [
-      id,
+    const { user_id } = req.headers;
+    const allTitles = await pool.query("SELECT * FROM backlog WHERE id = $1 AND user_id = $2", [
+      id, user_id
     ]);
 
     res.json(allTitles.rows);
@@ -250,10 +253,13 @@ app.post("/users/login", async (req, res) => {
             id: id
           }
           const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: process.env.ACCESS_TOKEN_LIFE });
+          const decoded = jwt.verify(token, process.env.SECRET_KEY);
+          var user_id = decoded.id
           // res.cookie("jwt", token, { secure: false, httpOnly: true })
           res.status(200).json({
             message: "User signed in!",
-            token: token
+            token: token,
+            id: id
           });
           res.send()
         }

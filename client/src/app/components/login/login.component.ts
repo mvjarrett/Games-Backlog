@@ -2,6 +2,7 @@ import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { request } from 'http';
 
 @Component({
   selector: 'app-login',
@@ -26,9 +27,10 @@ export class LoginComponent implements OnInit {
       console.log(res);
       if (res['token']) {
         localStorage.setItem('token', res['token']); //token here is stored in a local storage
-        console.log(localStorage)
+        localStorage.setItem('user_id', res['id']); //token here is stored in a local storage
+        console.log('res: ', res)
   
-        return this.http.get('/backlog', {headers: {'jwt': localStorage['token']}} )
+        return this.route.navigate(['/backlog'])
       } console.log('you blew it')
       return null
     },

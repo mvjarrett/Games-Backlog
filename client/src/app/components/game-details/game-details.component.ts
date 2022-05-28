@@ -80,7 +80,7 @@ wish() {
     played: this.playedStatus
   }
   let options = {
-    headers: new HttpHeaders().append('user_id', '1337',),
+    headers: new HttpHeaders().append('null', 'null',),
   };
   if(!this.isBacklogged && !this.wishStatus) {
     this.wishStatus = true;

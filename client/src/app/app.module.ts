@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { GamesListComponent } from './components/games-list/games-list.component';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,15 +21,16 @@ import { CoverComponent } from './components/cover/cover.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
-
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { IdInterceptor } from './interceptors/id.interceptor';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 const appRoutes: Routes = [
-    {path: '', component: IgdbResultsComponent},
-    {path: 'games', component: IgdbResultsComponent},
-    {path: 'backlog', component: GamesListComponent},
-    {path: 'games/:gameid', component: GameDetailsComponent}
-  
-  ];
+  { path: '', component: IgdbResultsComponent },
+  { path: 'games', component: IgdbResultsComponent },
+  { path: 'backlog', component: GamesListComponent },
+  { path: 'games/:gameid', component: GameDetailsComponent },
+];
 
 @NgModule({
   declarations: [
@@ -57,9 +58,23 @@ const appRoutes: Routes = [
     MatToolbarModule,
     FlexLayoutModule,
     MatGridListModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    { provide: HTTP_INTERCEPTORS, 
+      useClass: IdInterceptor, 
+      multi: true 
+    },
+    { provide: HTTP_INTERCEPTORS, 
+      useClass: ErrorInterceptor, 
+      multi: true 
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
