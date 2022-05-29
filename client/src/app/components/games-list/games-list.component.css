@@ -12,3 +12,24 @@ table {
     width: 100%;
     
   }
+
+  .noItems {
+    position: relative;
+    height: 100vh;
+
+    align-items: center;
+  }
+  .header{
+    position: relative;
+    height: 35vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .btnSection{
+margin: auto;
+    width: 40%;
+    
+
+  }
