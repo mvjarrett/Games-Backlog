@@ -25,6 +25,9 @@ app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
 
+const distDir = __dirname + "/dist/";
+app.use(express.static(distDir));
+
 
 // server init
 const server = app.listen(8080, function () {
@@ -43,6 +46,9 @@ app.use(function (req, res, next) {
   res.setHeader("client_id", process.env.AUTH_ID);
   res.setHeader("Authorization", process.env.AUTH_TOKEN);
   next();
+});
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 
 

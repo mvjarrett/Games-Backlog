@@ -69,7 +69,7 @@ exports.register = (async (req, res) => {
 
 
 exports.login = (async (req, res) => {
- console.log('route test')
+
  const { username, password } = req.body;
  try {
   const data = await pool.query(`SELECT * FROM users WHERE username= $1;`, [username]) //Verifying if the user exists in the database
