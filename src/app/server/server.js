@@ -1,12 +1,13 @@
 const path = require ('path')
 const express = require("express");
+const app = express();
 const proxy = require('express-http-proxy');
-const bodyParser = require("body-parser");
+app.use('/externalgames', proxy('https://api.igdb.com/v4/'));
 const cors = require("cors");
 const cookieParser = require('cookie-parser')
-const app = express();
 const backlog = require('./routes/backlogRoutes');
-const users = require('./routes/userRoutes')
+const users = require('./routes/userRoutes');
+const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 dotenv.config({ path: ".env" });
 
@@ -23,7 +24,7 @@ dotenv.config({ path: ".env" });
 app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(cors());
-app.use('/externalgames', proxy('https://api.igdb.com/v4/'));
+
 
 
 
