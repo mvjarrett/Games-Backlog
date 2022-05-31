@@ -10,7 +10,7 @@ exports.verify = function (req, res, next) {
 // console.log('header: ', req.headers.jwt)
 
  if (!token) {
-
+  console.log('there is a token issue')
   return res.status(403).send()
  }
 
