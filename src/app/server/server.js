@@ -33,7 +33,7 @@ app.use(express.static(distDir));
 // server init
 const server = app.listen(process.env.PORT || 8080, function () {
   var port = server.address().port;
-  console.log("Express Server is now running at address: ", server.address + ', port: ', port);
+  console.log("Express Server is now running at port:", port);
 });
 
 
