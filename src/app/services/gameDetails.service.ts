@@ -35,7 +35,7 @@ export class GameDetailsService {
   }
 
   getBacklog(id: number): Observable<gameObject[]> {
-    return this.http.get<gameObject[]>('http://localhost:8080/backlog/game/' + id)
+    return this.http.get<gameObject[]>(this.serverUrl +'/backlog/game/' + id)
   }
   
 }
