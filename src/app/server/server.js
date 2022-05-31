@@ -26,8 +26,15 @@ app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
 
-const distDir = __dirname + "../../../../dist/client/";
-app.use(express.static(distDir));
+
+app.use(express.static('./dist/'));
+
+app.get('/*', (req, res) => {
+  res.sendFile('index.html', { root: '/dist' });
+});
+
+// const distDir = __dirname + "../../../../dist/client/";
+// app.use(express.static(distDir));
 
 
 // server init
