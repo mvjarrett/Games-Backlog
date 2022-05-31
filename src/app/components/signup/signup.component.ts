@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-signup',
@@ -10,6 +11,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
+  serverUrl = environment.serverUrl
   signupForm = new FormGroup({
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
@@ -24,7 +26,7 @@ export class SignupComponent implements OnInit {
       password: this.signupForm.controls['password'].value,
     };
     this.http
-      .post('http://localhost:8080/users/register', userData)
+      .post(this.serverUrl + 'users/register', userData)
       .subscribe((newUser: any) => {
         if (newUser.exist) {
           console.log('toast: ', newUser.message);

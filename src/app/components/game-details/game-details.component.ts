@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import screenshot from 'src/app/models/screenshot';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { gameObject } from 'src/app/models/gameobject';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-game-details',
@@ -14,6 +15,7 @@ import { gameObject } from 'src/app/models/gameobject';
   styleUrls: ['./game-details.component.css'],
 })
 export class GameDetailsComponent implements OnInit {
+  serverUrl = environment.serverUrl
   @Input() game: igGame;
   constructor(
     private http: HttpClient,
@@ -90,7 +92,7 @@ wish() {
     logData.played = false;
     logData.playing = false;
     this.http
-      .post('http://localhost:8080/backlog', logData, options)
+      .post(this.serverUrl + '/backlog', logData, options)
       .subscribe(
         (data) => {
           console.log(data);
@@ -107,7 +109,7 @@ wish() {
     logData.wishlist = true;
     logData.played = false;
     logData.playing = false;
-    this.http.put(`http://localhost:8080/backlog/game/${logData.id}`, logData, options)
+    this.http.put(`${this.serverUrl}/backlog/game/${logData.id}`, logData, options)
     .subscribe(
       (data) => {
         console.log(data);
@@ -118,7 +120,7 @@ wish() {
     );
   } else{
     this.http
-    .delete(`http://localhost:8080/backlog/game/${logData.id}`, options)
+    .delete(`${this.serverUrl}/backlog/game/${logData.id}`, options)
     .subscribe(
       (data) => {
         console.log(data);
@@ -153,7 +155,7 @@ playing() {
     logData.played = false;
     logData.playing = true;
     this.http
-      .post('http://localhost:8080/backlog', logData, options)
+      .post(this.serverUrl + '/backlog', logData, options)
       .subscribe(
         (data) => {
           console.log(data);
@@ -170,7 +172,7 @@ playing() {
     logData.wishlist = false;
     logData.played = false;
     logData.playing = true;
-    this.http.put(`http://localhost:8080/backlog/game/${logData.id}`, logData, options)
+    this.http.put(`${this.serverUrl}/backlog/game/${logData.id}`, logData, options)
     .subscribe(
       (data) => {
         console.log(data);
@@ -181,7 +183,7 @@ playing() {
     );
   } else if(this.isBacklogged && this.playingStatus){
     this.http
-    .delete(`http://localhost:8080/backlog/game/${logData.id}`, options)
+    .delete(`${this.serverUrl}/backlog/game/${logData.id}`, options)
     .subscribe(
       (data) => {
         console.log(data);
@@ -216,7 +218,7 @@ played()  {
     logData.played = true;
     logData.playing = false;
     this.http
-      .post('http://localhost:8080/backlog', logData, options)
+      .post(this.serverUrl + '/backlog', logData, options)
       .subscribe(
         (data) => {
           console.log(data);
@@ -233,7 +235,7 @@ played()  {
     logData.wishlist = false;
     logData.played = true;
     logData.playing = false;
-    this.http.put(`http://localhost:8080/backlog/game/${logData.id}`, logData, options)
+    this.http.put(`${this.serverUrl}/backlog/game/${logData.id}`, logData, options)
     .subscribe(
       (data) => {
         console.log(data);
@@ -245,7 +247,7 @@ played()  {
 
   } else if(this.isBacklogged && this.playedStatus){
     this.http
-    .delete(`http://localhost:8080/backlog/game/${logData.id}`, options)
+    .delete(`${this.serverUrl}/backlog/game/${logData.id}`, options)
     .subscribe(
       (data) => {
         console.log(data);

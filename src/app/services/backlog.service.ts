@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -6,7 +7,8 @@ import { Injectable } from '@angular/core';
   })
   
     export class BacklogService {
-        baseUrl = "http://localhost:8080/backlog"
-        putUrl = "http://localhost:8080/backlog/game/:id"
+      serverUrl = environment.serverUrl
+        baseUrl = this.serverUrl + "/backlog"
+        putUrl = this.serverUrl + "/backlog/game/:id"
     }
 

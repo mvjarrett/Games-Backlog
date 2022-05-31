@@ -2,7 +2,7 @@ import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { request } from 'http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +10,7 @@ import { request } from 'http';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  serverUrl = environment.serverUrl
   loginForm = new FormGroup({
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
       username: this.loginForm.controls['username'].value,
       password: this.loginForm.controls['password'].value
     };
-    this.http.post('http://localhost:8080/users/login', userData).subscribe((res: any) => {
+    this.http.post(this.serverUrl + '/users/login', userData).subscribe((res: any) => {
       console.log(res);
       if (res['token']) {
         localStorage.setItem('token', res['token']); //token here is stored in a local storage

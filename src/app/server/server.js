@@ -1,3 +1,4 @@
+const path = require ('path')
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -25,7 +26,7 @@ app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
 
-const distDir = __dirname + "/dist/";
+const distDir = __dirname + "../../../../dist/client/";
 app.use(express.static(distDir));
 
 
@@ -47,9 +48,9 @@ app.use(function (req, res, next) {
   res.setHeader("Authorization", process.env.AUTH_TOKEN);
   next();
 });
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/dist/index.html'));
-});
+// app.get('/*', function(req, res) {
+//   res.sendFile(path.join(__dirname + '../../../../dist/client/index.html'));
+// });
 
 
 //get all backlog items

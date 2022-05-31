@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { igGame } from '../models/igGame';
 import { gameObject } from '../models/gameobject';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -18,9 +19,9 @@ export class GameDetailsService {
     'Client-id': '7v9kmaf3qgxdnfne5cdxb6ah64fbco',
     Authorization: 'Bearer lwvrxsjfyx0auv0yvs9hgm81hbkvxl',
   };
-
-  logUrl = "http://localhost:8080/backlog"
-  gameLogUrl = 'http://localhost:8080/backlog/game'
+  serverUrl = environment.serverUrl
+  logUrl = this.serverUrl +  "/backlog"
+  gameLogUrl = this.serverUrl +  '/backlog/game'
 
   constructor(private http: HttpClient) {}
 

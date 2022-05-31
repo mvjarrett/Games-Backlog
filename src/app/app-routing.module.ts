@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: 'backlog', component: GamesListComponent },
+  { path: 'games', component: IgdbResultsComponent },
   { path: 'games/search', component: IgdbResultsComponent, runGuardsAndResolvers: 'always'},
   { path: 'games/platforms/:platformId', component: IgdbResultsComponent },
   { path: 'games/genres/:genreId', component: IgdbResultsComponent },

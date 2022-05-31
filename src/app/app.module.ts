@@ -25,12 +25,12 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { IdInterceptor } from './interceptors/id.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 
-const appRoutes: Routes = [
-  { path: '', component: IgdbResultsComponent },
-  { path: 'games', component: IgdbResultsComponent },
-  { path: 'backlog', component: GamesListComponent },
-  { path: 'games/:gameid', component: GameDetailsComponent },
-];
+// const appRoutes: Routes = [
+//   { path: '', component: IgdbResultsComponent },
+//   { path: 'games', component: IgdbResultsComponent },
+//   { path: 'backlog', component: GamesListComponent },
+//   { path: 'games/:gameid', component: GameDetailsComponent },
+// ];
 
 @NgModule({
   declarations: [
@@ -51,7 +51,7 @@ const appRoutes: Routes = [
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes),
+    AppRoutingModule,
     BrowserAnimationsModule,
     MatDialogModule,
     MatCardModule,

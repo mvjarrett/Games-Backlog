@@ -3,13 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { gameObject } from '../models/gameobject';
 import { igGame } from '../models/igGame';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
   })
 
   export class GameService {
-      logUrl = "http://localhost:8080/backlog"
+    serverUrl = environment.serverUrl
+    logUrl = this.serverUrl + "/backlog"
       
       apiUrl = "externalgames/games"
       headers = {
