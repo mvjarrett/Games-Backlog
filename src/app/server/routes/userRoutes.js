@@ -94,7 +94,7 @@ exports.login = (async (req, res) => {
       username: username,
       id: id
      }
-     const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: process.env.ACCESS_TOKEN_LIFE });
+     const token = jwt.sign(payload, process.env.SECRET_KEY);
      const decoded = jwt.verify(token, process.env.SECRET_KEY);
      var user_id = decoded.id
      // res.cookie("jwt", token, { secure: false, httpOnly: true })
