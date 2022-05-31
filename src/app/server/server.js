@@ -88,5 +88,5 @@ app.post('/users/register', users.register)
 app.post("/users/login", users.login)
 
 app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname + '../../../../dist/client/index.html'));
+  res.status(200).sendFile(path.resolve(__dirname + '../../../../dist/client/index.html'));
 });
