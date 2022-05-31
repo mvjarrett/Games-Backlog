@@ -9,10 +9,7 @@ const users = require('./routes/userRoutes')
 const dotenv = require("dotenv");
 dotenv.config({ path: ".env" });
 
-var corsOptions = {
-  origin: "*",
-  credentials: true
-};
+
 // function requireHTTPS(req, res, next) {
 //   // The 'x-forwarded-proto' check is for Heroku
 //   if (!req.secure && req.get('x-forwarded-proto') !== 'https') {
@@ -24,7 +21,7 @@ var corsOptions = {
 //middleware
 app.use(cookieParser())
 app.use(bodyParser.json());
-app.use(cors(corsOptions));
+app.use(cors());
 
 
 
