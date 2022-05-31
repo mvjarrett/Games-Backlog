@@ -30,7 +30,7 @@ app.use(cors(corsOptions));
 app.use(express.static('./dist/'));
 
 app.get('/*', (req, res) => {
-  res.sendFile('index.html', { root: '../../../..//dist/client' });
+  res.sendFile('index.html', { root: '../../../../dist/client' });
 });
 
 // const distDir = __dirname + "../../../../dist/client/";
