@@ -27,14 +27,16 @@ app.use(bodyParser.json());
 app.use(cors(corsOptions));
 
 
-app.use(express.static('./dist/'));
 
-app.get('/*', (req, res) => {
-  res.sendFile('index.html', { root: '../../../../dist/client' });
-});
 
-// const distDir = __dirname + "../../../../dist/client/";
-// app.use(express.static(distDir));
+// app.get('/*', (req, res) => {
+//   res.sendFile('index.html', { root: '../../../../dist/client' });
+// });
+
+// app.use(express.static('./dist/client/'));
+
+const distDir = __dirname + "../../../../dist/client/";
+app.use(express.static(distDir));
 
 
 // server init
