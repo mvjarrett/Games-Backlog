@@ -80,3 +80,4 @@ import { HashLocationStrategy, LocationStrategy  } from '@angular/common';
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+export const APP_ROUTING = RouterModule.forRoot

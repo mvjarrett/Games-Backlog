@@ -57,9 +57,7 @@ app.use(function (req, res, next) {
   res.setHeader("Authorization", process.env.AUTH_TOKEN);
   next();
 });
-// app.get('/*', function(req, res) {
-//   res.sendFile(path.join(__dirname + '../../../../dist/client/index.html'));
-// });
+
 
 
 //get all backlog items
@@ -88,3 +86,7 @@ app.post('/users/register', users.register)
 
 //------login route------
 app.post("/users/login", users.login)
+
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname + '../../../../dist/client/index.html'));
+});
