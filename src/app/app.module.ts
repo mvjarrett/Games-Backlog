@@ -24,6 +24,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { IdInterceptor } from './interceptors/id.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { HashLocationStrategy, LocationStrategy  } from '@angular/common';
 
 // const appRoutes: Routes = [
 //   { path: '', component: IgdbResultsComponent },
@@ -61,6 +62,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     InfiniteScrollModule,
   ],
   providers: [
+    {provide : LocationStrategy , useClass: HashLocationStrategy},
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

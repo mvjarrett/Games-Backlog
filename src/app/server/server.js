@@ -35,7 +35,8 @@ app.use(cors(corsOptions));
 
 // app.use(express.static('./dist/client/'));
 
-
+const distDir = __dirname + "../../../../dist/client/";
+app.use(express.static(distDir));
 
 
 // server init
@@ -87,7 +88,3 @@ app.post('/users/register', users.register)
 
 //------login route------
 app.post("/users/login", users.login)
-
-
-const distDir = __dirname + "../../../../dist/client/";
-app.use(express.static(distDir));
