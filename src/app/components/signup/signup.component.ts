@@ -26,7 +26,7 @@ export class SignupComponent implements OnInit {
       password: this.signupForm.controls['password'].value,
     };
     this.http
-      .post(this.serverUrl + 'users/register', userData)
+      .post(this.serverUrl + '/users/register', userData)
       .subscribe((newUser: any) => {
         if (newUser.exist) {
           console.log('toast: ', newUser.message);
