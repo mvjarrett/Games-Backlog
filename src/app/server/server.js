@@ -1,5 +1,6 @@
 const path = require ('path')
 const express = require("express");
+const proxy = require('express-http-proxy');
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const cookieParser = require('cookie-parser')
@@ -22,7 +23,7 @@ dotenv.config({ path: ".env" });
 app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(cors());
-
+app.use('/externalgames', proxy('https://api.igdb.com/v4/'));
 
 
 
