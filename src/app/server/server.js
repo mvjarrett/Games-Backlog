@@ -1,8 +1,7 @@
 const path = require ('path')
 const express = require("express");
+const { createProxyMiddleware } = require('http-proxy-middleware');
 const app = express();
-const proxy = require('express-http-proxy');
-app.use('/externalgames/*', proxy('https://api.igdb.com/v4/'));
 const cors = require("cors");
 const cookieParser = require('cookie-parser')
 const backlog = require('./routes/backlogRoutes');
@@ -10,7 +9,6 @@ const users = require('./routes/userRoutes');
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 dotenv.config({ path: ".env" });
-
 
 // function requireHTTPS(req, res, next) {
 //   // The 'x-forwarded-proto' check is for Heroku
@@ -24,9 +22,13 @@ dotenv.config({ path: ".env" });
 app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(cors());
-
-
-
+app.use(
+  createProxyMiddleware({
+    target: 'https://api.igdb.com/v4/',
+    changeOrigin: true,
+    pathFilter: '/externalgames',
+  })
+);
 
 // app.get('/*', (req, res) => {
 //   res.sendFile('index.html', { root: '../../../../dist/client' });

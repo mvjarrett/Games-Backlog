@@ -21,7 +21,7 @@ export class IgdbResultsService {
   constructor(private http: HttpClient) {}
 
   topGames(): Observable<igGame[]> {
-    return this.http.post<igGame[]>('externalgames/games', this.topBody, {
+    return this.http.post<igGame[]>('/externalgames/games', this.topBody, {
       headers: this.headers,
     });
   }
@@ -33,7 +33,7 @@ export class IgdbResultsService {
     this.offset += 50;
     console.log('offset is: ', this.offset);
     console.log(infiniteBody);
-    return this.http.post<igGame[]>('externalgames/games', infiniteBody, {
+    return this.http.post<igGame[]>('/externalgames/games', infiniteBody, {
       headers: this.headers,
     });
   }
