@@ -1,6 +1,6 @@
 const pool = require("../pool");
 const dotenv = require("dotenv");
-dotenv.config({ path: ".env" });
+// dotenv.config({ path: ".env" });
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
