@@ -78,7 +78,6 @@ exports.login = (async (req, res) => {
   const user = data.rows;
 
   if (user.length === 0) {
-   const id = data.rows[0].id;
    res.status(200).json({
     message: "User is not registered, Sign Up first",
     registered: 0
@@ -98,8 +97,8 @@ exports.login = (async (req, res) => {
      }
      const token = jwt.sign(payload, process.env.SECRET_KEY);
      const decoded = jwt.verify(token, process.env.SECRET_KEY);
-     var user_id = decoded.id
-     // res.cookie("jwt", token, { secure: false, httpOnly: true })
+     var igdb_id = decoded.igdb_id;
+     var igdb_token = decoded.igdb_token;
      res.status(200).json({
       message: "User signed in!",
       token: token,
