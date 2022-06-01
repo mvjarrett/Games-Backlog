@@ -22,7 +22,6 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { IdInterceptor } from './interceptors/id.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 
@@ -60,11 +59,6 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: IdInterceptor,
       multi: true,
     },
     { provide: HTTP_INTERCEPTORS, 

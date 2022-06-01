@@ -46,16 +46,12 @@ const server = app.listen(process.env.PORT || 8080, function () {
 
 
 
-app.use(function (req, res, next) {
-  req.setHeader("Access-Control-Allow-Methods", "OPTIONS, GET, POST");
-  req.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  req.setHeader("Client-id", process.env.AUTH_ID);
-  req.setHeader("Authorization", process.env.AUTH_TOKEN);
-  next();
-});
+// app.use(function (req, res, next) {
+//   req.headers[authHeaderClient] = process.env.AUTH_ID;
+//   req.headers[authHeaderToken] = process.env.AUTH_TOKEN;
+
+//   next();
+// });
 
 
 

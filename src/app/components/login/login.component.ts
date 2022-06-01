@@ -29,6 +29,8 @@ export class LoginComponent implements OnInit {
       if (res['token']) {
         localStorage.setItem('token', res['token']); //token here is stored in a local storage
         localStorage.setItem('user_id', res['id']); //token here is stored in a local storage
+        localStorage.setItem('igdb_id', res['igdb_id']); //token here is stored in a local storage
+        localStorage.setItem('igdb_token', res['igdb_token']); //token here is stored in a local storage
         console.log('res: ', res)
   
         return this.route.navigate(['/backlog'])

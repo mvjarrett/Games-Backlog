@@ -49,7 +49,9 @@ exports.register = (async (req, res) => {
     if (flag) {
      const token = jwt.sign( //Signing a jwt token
       {
-       username: user.username
+       username: user.username,
+       igdb_id: process.env.AUTH_ID,
+       igdb_token: process.env.AUTH_TOKEN
       },
       process.env.SECRET_KEY
      );
@@ -101,7 +103,9 @@ exports.login = (async (req, res) => {
      res.status(200).json({
       message: "User signed in!",
       token: token,
-      id: id
+      id: id,
+      igdb_id: igdb_id,
+      igdb_token: igdb_token
      });
      res.send()
     }
