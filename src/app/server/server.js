@@ -52,7 +52,7 @@ app.use(function (req, res, next) {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
-  res.setHeader("client_id", process.env.AUTH_ID);
+  res.setHeader("Client-id", process.env.AUTH_ID);
   res.setHeader("Authorization", process.env.AUTH_TOKEN);
   next();
 });
