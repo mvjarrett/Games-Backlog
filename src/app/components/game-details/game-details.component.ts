@@ -144,9 +144,7 @@ playing() {
     playing: this.playingStatus,
     played: this.playedStatus
   }
-  let options = {
-    headers: new HttpHeaders().append('user_id', '1337'),
-  };
+  let options = {  };
   if(!this.isBacklogged && !this.playingStatus) {
     this.wishStatus = false;
     this.playedStatus = false;

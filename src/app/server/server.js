@@ -2,7 +2,7 @@ const path = require ('path')
 const express = require("express");
 const app = express();
 const proxy = require('express-http-proxy');
-app.use('/externalgames', proxy('https://api.igdb.com/v4/'));
+app.use('/externalgames/*', proxy('https://api.igdb.com/v4/'));
 const cors = require("cors");
 const cookieParser = require('cookie-parser')
 const backlog = require('./routes/backlogRoutes');

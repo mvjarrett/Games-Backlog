@@ -6,6 +6,7 @@ import { gameObject } from '../models/gameobject';
 import { environment } from 'src/environments/environment';
 
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -15,7 +16,6 @@ export class GameDetailsService {
     'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
     'Access-Control-Allow-Headers':
       'Origin, X-Requested-With, Content-Type, Accept',
-    'user_id': '1337',
     'Client-id': '7v9kmaf3qgxdnfne5cdxb6ah64fbco',
     Authorization: 'Bearer lwvrxsjfyx0auv0yvs9hgm81hbkvxl',
   };
