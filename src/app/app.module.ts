@@ -24,15 +24,8 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { IdInterceptor } from './interceptors/id.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
-import { CorsInterceptor } from './interceptors/cors.interceptor';
-// import { HashLocationStrategy, LocationStrategy  } from '@angular/common';
+import { TwitchInterceptor } from './interceptors/twitch.interceptor';
 
-// const appRoutes: Routes = [
-//   { path: '', component: IgdbResultsComponent },
-//   { path: 'games', component: IgdbResultsComponent },
-//   { path: 'backlog', component: GamesListComponent },
-//   { path: 'games/:gameid', component: GameDetailsComponent },
-// ];
 
 @NgModule({
   declarations: [
@@ -69,13 +62,13 @@ import { CorsInterceptor } from './interceptors/cors.interceptor';
       useClass: AuthInterceptor,
       multi: true,
     },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: CorsInterceptor,
-    //   multi: true,
-    // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: IdInterceptor,
+      multi: true,
+    },
     { provide: HTTP_INTERCEPTORS, 
-      useClass: IdInterceptor, 
+      useClass: TwitchInterceptor, 
       multi: true 
     },
     { provide: HTTP_INTERCEPTORS, 

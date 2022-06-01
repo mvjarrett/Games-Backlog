@@ -16,8 +16,6 @@ export class GameDetailsService {
     'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
     'Access-Control-Allow-Headers':
       'Origin, X-Requested-With, Content-Type, Accept',
-    'Client-id': '7v9kmaf3qgxdnfne5cdxb6ah64fbco',
-    Authorization: 'Bearer lwvrxsjfyx0auv0yvs9hgm81hbkvxl',
   };
   serverUrl = environment.serverUrl
   logUrl = this.serverUrl +  "/backlog"
