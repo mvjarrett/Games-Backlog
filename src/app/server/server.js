@@ -47,13 +47,13 @@ const server = app.listen(process.env.PORT || 8080, function () {
 
 
 app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Methods", "OPTIONS, GET, POST");
-  res.setHeader(
+  req.setHeader("Access-Control-Allow-Methods", "OPTIONS, GET, POST");
+  req.setHeader(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
-  res.setHeader("Client-id", process.env.AUTH_ID);
-  res.setHeader("Authorization", process.env.AUTH_TOKEN);
+  req.setHeader("Client-id", process.env.AUTH_ID);
+  req.setHeader("Authorization", process.env.AUTH_TOKEN);
   next();
 });
 
