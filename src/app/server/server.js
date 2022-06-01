@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use('/externalgames/games',
   createProxyMiddleware({
-    target: 'https://api.igdb.com/v4/',
+    target: 'https://api.igdb.com/v4/games',
     changeOrigin: true,
   })
 );
