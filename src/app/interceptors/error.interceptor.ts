@@ -34,6 +34,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                         console.log('Not found');
                     }
                     if (error.status === 403) {
+                        console.log(error)
                      this.route.navigate(['/login'])
                     }
                     //etc
