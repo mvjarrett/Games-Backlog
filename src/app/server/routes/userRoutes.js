@@ -105,8 +105,8 @@ exports.login = (async (req, res) => {
             message: "User signed in!",
             token: token,
             id: id,
-            igdb_id: igdb_id,
-            igdb_token: igdb_token
+            igdb_id: decoded.igdb_id,
+            igdb_token: decoded.igdb_token
           });
           res.send()
         }
