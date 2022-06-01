@@ -22,10 +22,12 @@ dotenv.config({ path: ".env" });
 app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(cors());
-app.use('/externalgames/games',
+app.use('/externalgames/*',
   createProxyMiddleware({
     target: 'https://api.igdb.com/v4/games',
     changeOrigin: true,
+    secure: true,
+    pathRewrite: {"^/externalgames/" : ""}
   })
 );
 
