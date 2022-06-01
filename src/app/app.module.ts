@@ -24,7 +24,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { IdInterceptor } from './interceptors/id.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
-import { TwitchInterceptor } from './interceptors/twitch.interceptor';
+
 
 
 @NgModule({
@@ -66,10 +66,6 @@ import { TwitchInterceptor } from './interceptors/twitch.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: IdInterceptor,
       multi: true,
-    },
-    { provide: HTTP_INTERCEPTORS, 
-      useClass: TwitchInterceptor, 
-      multi: true 
     },
     { provide: HTTP_INTERCEPTORS, 
       useClass: ErrorInterceptor, 
