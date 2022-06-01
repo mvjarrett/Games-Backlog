@@ -16,8 +16,8 @@ export class TwitchInterceptor implements HttpInterceptor {
        const idToken = localStorage.getItem("user_id");
        if (idToken) {
            const cloned = req.clone({
-               headers: req.headers.set("Client-id", <string>process.env['AUTH_ID'])
-               .set("Authorization", <string>process.env['AUTH_TOKEN']),
+               headers: req.headers.set("Client-id", `${process.env['AUTH_ID']}`)
+               .set("Authorization", `${process.env['AUTH_TOKEN']}`)
                
                
            })
