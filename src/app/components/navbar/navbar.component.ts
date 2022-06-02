@@ -39,4 +39,8 @@ export class NavbarComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(['/'])
   }
+
+  backlogLink() {
+    return this.router.navigate(['/backlog'])
+  }
 }
