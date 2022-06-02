@@ -22,12 +22,12 @@ dotenv.config({ path: ".env" });
 app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(cors());
-app.use('/externalgames/*',
+app.use('/externalgames',
   createProxyMiddleware({
     target: 'https://games--backlog.herokuapp.com/',
     changeOrigin: true,
     secure: true,
-    pathRewrite: {"^/externalgames/" : "https://api.igdb.com/v4/"}
+    pathRewrite: {"^/externalgames" : "https://api.igdb.com/v4"}
   })
 );
 
