@@ -27,7 +27,7 @@ app.use('/externalgames/*',
     target: 'https://games--backlog.herokuapp.com/',
     changeOrigin: true,
     secure: true,
-    pathRewrite: {"^/externalgames/" : "https://api.igdb.com/v4/games"}
+    pathRewrite: {"^/externalgames/" : "https://api.igdb.com/v4/"}
   })
 );
 
