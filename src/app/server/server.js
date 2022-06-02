@@ -1,6 +1,5 @@
 const path = require ('path')
 const express = require("express");
-const { createProxyMiddleware } = require('http-proxy-middleware');
 const app = express();
 const cors = require("cors");
 const cookieParser = require('cookie-parser')
@@ -19,17 +18,15 @@ dotenv.config({ path: ".env" });
 // }
 
 //middleware
+// var corsOptions = {
+//   origin: 'http://localhost:4200',
+//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//    credentials:true, 
+//   optionsSuccessStatus: 200
+// }
 app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(cors());
-app.use('/externalgames',
-  createProxyMiddleware({
-    target: 'https://games--backlog.herokuapp.com/',
-    changeOrigin: true,
-    secure: true,
-    pathRewrite: {"^/externalgames" : "https://api.igdb.com/v4"}
-  })
-);
 
 // app.get('/*', (req, res) => {
 //   res.sendFile('index.html', { root: '../../../../dist/client' });
