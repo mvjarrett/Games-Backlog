@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const cookieParser = require('cookie-parser')
+const igdbRoutes = require('./routes/igdbRoutes.js');
 const backlog = require('./routes/backlogRoutes');
 const users = require('./routes/userRoutes');
 const bodyParser = require("body-parser");
@@ -56,7 +57,12 @@ const server = app.listen(process.env.PORT || 8080, function () {
 
 
 //get all backlog items
+app.post('/externalgames/games', bodyParser.text({type: '*/*'}), igdbRoutes.topGames)
+
+
 app.get('/backlog', backlog.allBacklog)
+
+
 
 
 //get a specific backlogged title

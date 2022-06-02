@@ -11,7 +11,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "dev": "concurrently --kill-others \"npm run devStart\" \"npm run server\"",
-    "heroku-postbuild": "ng build  --proxy-config proxyconfig.json"
+    "heroku-postbuild": "ng build --aot"
   },
   "private": true,
   "dependencies": {
@@ -32,6 +32,7 @@
     "@forevolve/bootstrap-dark": "^2.1.0",
     "@popperjs/core": "^2.11.5",
     "ajv": "^8.11.0",
+    "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
     "bootstrap": "^5.1.3",
