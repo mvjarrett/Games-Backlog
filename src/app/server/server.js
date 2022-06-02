@@ -24,10 +24,10 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use('/externalgames/*',
   createProxyMiddleware({
-    target: 'https://api.igdb.com/v4/games',
+    target: 'https://games--backlog.herokuapp.com/',
     changeOrigin: true,
     secure: true,
-    pathRewrite: {"^/externalgames/" : ""}
+    pathRewrite: {"^/externalgames/" : "https://api.igdb.com/v4/games"}
   })
 );
 
