@@ -18,7 +18,8 @@ exports.topGames = (verify, async (req, res) => {
   let response = await axios.post('https://api.igdb.com/v4/games/', req.body, authHeaders);
   res.send(response.data);
   } catch (err) {
-    res.send('axios error: ', err)
+    console.log('axios error: ', err)
+    res.send(400)
   }
 })
 
