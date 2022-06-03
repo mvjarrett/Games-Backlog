@@ -5,10 +5,11 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { GamesListComponent } from './components/games-list/games-list.component';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { IgdbResultsComponent } from './components/igdb-results/igdb-results.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -23,8 +24,6 @@ import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
-
-
 
 @NgModule({
   declarations: [
@@ -52,6 +51,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     MatToolbarModule,
     FlexLayoutModule,
     MatGridListModule,
+    MatSnackBarModule,
     InfiniteScrollModule,
   ],
   providers: [
@@ -60,12 +60,9 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
       useClass: AuthInterceptor,
       multi: true,
     },
-    { provide: HTTP_INTERCEPTORS, 
-      useClass: ErrorInterceptor, 
-      multi: true 
-    },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-export const APP_ROUTING = RouterModule.forRoot
+export const APP_ROUTING = RouterModule.forRoot;

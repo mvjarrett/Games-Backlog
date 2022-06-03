@@ -1,23 +1,38 @@
-
 <body class="text-center">
-    
- <main class="form-signin">
-   <form [formGroup]="signupForm">
-     <h1 class="h3 mb-3 fw-normal">Enter a Username and Password to signup!</h1>
-     <div class="form-floating">
-       <input type="email" class="form-control" id="floatingInput" placeholder="Username" formControlName="username">
-       <label for="floatingInput">Username</label>
-     </div>
-     <div class="form-floating">
-       <input type="password" class="form-control" id="floatingPassword" placeholder="Password" formControlName="password">
-       <label for="floatingPassword">Password</label>
-     </div>
-     <button class="w-100 btn btn-lg btn-primary" type="submit" (click)="onFormSubmit()">Sign up</button>
-   </form>
-   <hr>
-   <p>Already signed up? <a href="/login">Login!</a></p>
- </main>
- 
- 
-     
-   </body>
+  <main class="form-signin">
+    <form [formGroup]="signupForm">
+      <h1 class="h3 mb-3 fw-normal">
+        Enter a Username and Password to signup!
+      </h1>
+      <div class="form-floating">
+        <input
+          type="email"
+          class="form-control"
+          id="floatingInput"
+          placeholder="Username"
+          formControlName="username"
+        />
+        <label for="floatingInput">Username</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="password"
+          class="form-control"
+          id="floatingPassword"
+          placeholder="Password"
+          formControlName="password"
+        />
+        <label for="floatingPassword">Password</label>
+      </div>
+      <button
+        class="w-100 btn btn-lg btn-primary"
+        type="submit"
+        (click)="onFormSubmit()"
+      >
+        Sign up
+      </button>
+    </form>
+    <hr />
+    <p>Already signed up? <a href="/login">Login!</a></p>
+  </main>
+</body>

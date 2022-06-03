@@ -2,68 +2,89 @@ import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SnackBarService } from 'src/app/services/snackbar.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  serverUrl = environment.serverUrl
+  serverUrl = environment.serverUrl;
   loginForm = new FormGroup({
     username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
-  })
-  constructor(private http: HttpClient, private route: Router) { }
+    password: new FormControl('', Validators.required),
+  });
+  constructor(
+    private http: HttpClient,
+    private route: Router,
+    private snackBarService: SnackBarService
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   onFormSubmit(): void {
+    if (this.loginForm.valid) {
     const userData = {
       username: this.loginForm.controls['username'].value,
-      password: this.loginForm.controls['password'].value
+      password: this.loginForm.controls['password'].value,
     };
-    this.http.post(this.serverUrl + '/users/login', userData).subscribe((res: any) => {
-      console.log(res);
-      if (res['token']) {
-        localStorage.setItem('token', res['token']); //token here is stored in a local storage
-        localStorage.setItem('user_id', res['id']); //token here is stored in a local storage
-        localStorage.setItem('igdb_id', res['igdb_id']); //token here is stored in a local storage
-        localStorage.setItem('igdb_token', res['igdb_token']); //token here is stored in a local storage
-        console.log('res: ', res)
-  
-        return this.route.navigate(['/backlog'])
-      } console.log('you blew it')
-      return null
-    },
-    (err) => {
-      console.log(err);
-    }
-  );    
+    this.http.post(this.serverUrl + '/users/login', userData).subscribe(
+      (res: any) => {
+        console.log(res);
+        if (res['token']) {
+          localStorage.setItem('token', res['token']); //token here is stored in a local storage
+          localStorage.setItem('user_id', res['id']); //token here is stored in a local storage
+          localStorage.setItem('igdb_id', res['igdb_id']); //token here is stored in a local storage
+          localStorage.setItem('igdb_token', res['igdb_token']); //token here is stored in a local storage
+          console.log('res: ', res);
+
+          return this.route
+            .navigate(['/backlog'])
+            .then((navigated: boolean) => {
+              if (navigated) {
+                this.snackBarService.openSnackBar(
+                  'Logged in successfully!.',
+                  'Close',
+                  4000
+                );
+              }
+            });
+        }
+        console.log('you blew it');
+        return null;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  } else {
+    this.snackBarService.openSnackBar(
+      'Fields cannot be empty!.',
+      'Close',
+      4000
+    );
+  }
 }
-//       // if (newUser.registered = 0) {
-//       //   console.log('toast: ', newUser.message);
-//       // } else {
-//       //   this.route.navigate(['/backlog']);
-//       // }
-//       if (res['jwt']) {
-//         localStorage.setItem('token', res['jwt']);
-//     });
-// }
-    // if(newUser){
-    //   this.route.navigate(['/page']);
-    // }
+  //       // if (newUser.registered = 0) {
+  //       //   console.log('toast: ', newUser.message);
+  //       // } else {
+  //       //   this.route.navigate(['/backlog']);
+  //       // }
+  //       if (res['jwt']) {
+  //         localStorage.setItem('token', res['jwt']);
+  //     });
+  // }
+  // if(newUser){
+  //   this.route.navigate(['/page']);
+  // }
 }
-
-
-
 
 //------------------------NOTES-----------------------
 
-// CURRENTLY not working. i think i need to run an HTTP_INTERCEPTOR or something to take the token from local storage and 
+// CURRENTLY not working. i think i need to run an HTTP_INTERCEPTOR or something to take the token from local storage and
 // pass it as a Header, and then check that header against my backend JWT token. if my thinking is correct, that should
-// intercept all HTTP traffic, unless router.navigate isn't technically HTTP traffic. 
+// intercept all HTTP traffic, unless router.navigate isn't technically HTTP traffic.
 // otherwise, find another solution. currently, backent generates a token and returns it to the front end, and it is in fact
 // stored in local storage. not sure how to proceed yet but will continue pressing forward until issue is resolved.
-// 
+//

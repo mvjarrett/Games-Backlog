@@ -25,6 +25,11 @@ body {
   flex: content;
   
 }
+.buttons>.btn{
+  margin-right: 20px;
+}
+
+
 .cover-container {
   max-width: 42em;
  
