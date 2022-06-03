@@ -10,6 +10,7 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 dotenv.config({ path: ".env" });
 
+
 app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(cors());
@@ -25,7 +26,6 @@ const server = app.listen(process.env.PORT || 8080, function () {
   var port = server.address().port;
   console.log("Express Server is now running at port:", port);
 });
-
 
 
 
@@ -61,6 +61,7 @@ app.post('/users/register', users.register)
 
 //------login route------
 app.post("/users/login", users.login)
+
 
 
 app.get('*', function(req, res) {

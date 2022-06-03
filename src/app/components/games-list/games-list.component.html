@@ -1,4 +1,4 @@
-<ng-template [ngIf]="backlogItems" [ngIfElse]="noItems">
+<div *ngIf="backlogItems">
   <div class="content">
     <div fxLayout="row wrap">
       <div
@@ -11,10 +11,9 @@
       </div>
     </div>
   </div>
-</ng-template>
+</div>
 
-<ng-template #noItems
-  ><div class="noItems">
+<div class="noItems" *ngIf="!backlogItems">
     <div class="row header"><h1 class="display-1">No Games Backlogged?</h1></div>
     <div class="row btnSection">
       <a class="button" routerLink="/games" class="btn btn-light"
@@ -22,4 +21,4 @@
       >
     </div>
   </div>
-</ng-template>
+
