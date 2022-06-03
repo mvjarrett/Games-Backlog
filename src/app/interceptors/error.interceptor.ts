@@ -28,7 +28,8 @@ export class ErrorInterceptor implements HttpInterceptor {
             (error: any) => {
                 if (error instanceof HttpErrorResponse) {
                     if (error.status === 401) {
-                        console.log('error found');
+                        console.log('not Logged In');
+                        this.route.navigate(['/login'])
                     }
                     if (error.status === 404) {
                         console.log('Not found');

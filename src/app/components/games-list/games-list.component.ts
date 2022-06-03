@@ -26,6 +26,5 @@ backlogItems = false;
         });
       }
     });
-    console.log(localStorage)
   }
 }
