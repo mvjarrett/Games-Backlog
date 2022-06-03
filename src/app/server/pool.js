@@ -8,7 +8,7 @@ const pool = new Pool({
 });
 
 
-
+// dotenv.config({ path: ".env" });
 // const pool = new Pool({    
 //     user: process.env.USER_KEY,
 //     password: process.env.PASS_KEY1,

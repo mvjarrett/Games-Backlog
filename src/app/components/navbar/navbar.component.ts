@@ -40,7 +40,4 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/'])
   }
 
-  backlogLink() {
-    return this.router.navigate(['/backlog'])
-  }
 }

@@ -23,7 +23,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
 
 
 @NgModule({
@@ -53,13 +53,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     FlexLayoutModule,
     MatGridListModule,
     InfiniteScrollModule,
-    
   ],
   providers: [
-    {
-      provide:LocationStrategy, 
-      useClass:HashLocationStrategy
-    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
