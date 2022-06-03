@@ -16,7 +16,7 @@ backlogItems = false;
 
   ngOnInit(): void {
     this.gameService.GetGames().subscribe((data) => {
-      if (data) { 
+      if (data.length > 0) { 
         const backlogIds = data.map((x) => x.id);
         this.gameService.backlogInfo(backlogIds).subscribe((info) => {
           if (info) {
