@@ -10,30 +10,11 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 dotenv.config({ path: ".env" });
 
-// function requireHTTPS(req, res, next) {
-//   // The 'x-forwarded-proto' check is for Heroku
-//   if (!req.secure && req.get('x-forwarded-proto') !== 'https') {
-//       return res.redirect('https://' + req.get('host') + req.url);
-//   }
-//   next();
-// }
-
-//middleware
-// var corsOptions = {
-//   origin: 'http://localhost:4200',
-//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//    credentials:true, 
-//   optionsSuccessStatus: 200
-// }
 app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(cors());
 
-// app.get('/*', (req, res) => {
-//   res.sendFile('index.html', { root: '../../../../dist/client' });
-// });
 
-// app.use(express.static('./dist/client/'));
 
 const distDir = __dirname + "../../../../dist/client/";
 app.use(express.static(distDir));
@@ -46,13 +27,6 @@ const server = app.listen(process.env.PORT || 8080, function () {
 });
 
 
-
-// app.use(function (req, res, next) {
-//   req.headers[authHeaderClient] = process.env.AUTH_ID;
-//   req.headers[authHeaderToken] = process.env.AUTH_TOKEN;
-
-//   next();
-// });
 
 
 
@@ -88,6 +62,3 @@ app.post('/users/register', users.register)
 //------login route------
 app.post("/users/login", users.login)
 
-app.get('*', function(req, res) {
-  res.status(200).sendFile(path.resolve(__dirname + '../../../../dist/client/index.html'));
-});
