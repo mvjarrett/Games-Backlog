@@ -16,8 +16,8 @@ app.use(cors());
 
 
 
-const distDir = __dirname + "../../../../dist/client/";
-app.use(express.static(distDir));
+// const distDir = __dirname + "../../../../dist/client/";
+// app.use(express.static(distDir));
 
 
 // server init
@@ -62,3 +62,7 @@ app.post('/users/register', users.register)
 //------login route------
 app.post("/users/login", users.login)
 
+
+app.get('*', function(req, res) {
+  res.status(200).sendFile(path.resolve(__dirname + '../../../../dist/client/index.html'));
+});
