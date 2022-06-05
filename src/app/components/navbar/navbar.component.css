@@ -1,8 +1,10 @@
 .navbar {
   position: fixed;
+  top: 0;
   width: 100%;
   padding-left: 5%;
   padding-right: 5%;
+  margin-bottom: 25px;
 
 }
 /* #topLevel {

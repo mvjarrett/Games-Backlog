@@ -29,6 +29,7 @@ export class GameDetailsComponent implements OnInit {
   wishStatus: boolean = false;
   playedStatus: boolean = false;
   playingStatus: boolean = false;
+  ratingWidth: any;
 
   openDialog(screenshot: screenshot): void {
     let dialogRef = this.dialog.open(ScreenshotModalComponent, {
@@ -41,7 +42,9 @@ export class GameDetailsComponent implements OnInit {
     this.details.getDetails(id).subscribe((data) => {
       if (data) {
         this.igGames = data[0];
-      }
+        this.ratingWidth = Math.trunc(this.igGames.rating) + '%';
+        console.log(this.ratingWidth)
+       }
     });
     this.details.getBacklog(id).subscribe((backlogGame) => {
       if (backlogGame?.length > 0) {

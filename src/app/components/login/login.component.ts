@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
   });
+  registered: number;
   constructor(
     private http: HttpClient,
     private route: Router,
@@ -25,66 +26,51 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
   onFormSubmit(): void {
     if (this.loginForm.valid) {
-    const userData = {
-      username: this.loginForm.controls['username'].value,
-      password: this.loginForm.controls['password'].value,
-    };
-    this.http.post(this.serverUrl + '/users/login', userData).subscribe(
-      (res: any) => {
-        console.log(res);
-        if (res['token']) {
-          localStorage.setItem('token', res['token']); //token here is stored in a local storage
-          localStorage.setItem('user_id', res['id']); //token here is stored in a local storage
-          localStorage.setItem('igdb_id', res['igdb_id']); //token here is stored in a local storage
-          localStorage.setItem('igdb_token', res['igdb_token']); //token here is stored in a local storage
-          console.log('res: ', res);
+      const userData = {
+        username: this.loginForm.controls['username'].value,
+        password: this.loginForm.controls['password'].value,
+      };
+      this.http.post(this.serverUrl + '/users/login', userData).subscribe(
+        (res: any) => {
+          this.registered = res.registered;
+          if (res['token']) {
+            localStorage.setItem('token', res['token']); //token here is stored in a local storage
+            localStorage.setItem('user_id', res['id']); //token here is stored in a local storage
+            localStorage.setItem('igdb_id', res['igdb_id']); //token here is stored in a local storage
+            localStorage.setItem('igdb_token', res['igdb_token']); //token here is stored in a local storage
+            console.log('res: ', res);
 
-          return this.route
-            .navigate(['/backlog'])
-            .then((navigated: boolean) => {
-              if (navigated) {
-                this.snackBarService.openSnackBar(
-                  'Logged in successfully!.',
-                  'Close',
-                  4000
-                );
-              }
-            });
+            return this.route
+              .navigate(['/backlog'])
+              .then((navigated: boolean) => {
+                if (navigated) {
+                  this.snackBarService.openSnackBar(
+                    'Logged in successfully!.',
+                    'Close',
+                    4000
+                  );
+                }
+              });
+          }if(this.registered === 0){
+            this.snackBarService.openSnackBar(
+              'User not registered, please sign up.',
+              'Close',
+              4000
+            );
+          }
+          console.log('you are here')
+          return null;
+        },
+        (err) => {
+          console.log(err);
         }
-        console.log('you blew it');
-        return null;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  } else {
-    this.snackBarService.openSnackBar(
-      'Fields cannot be empty!.',
-      'Close',
-      4000
-    );
+      );
+    } else {
+      this.snackBarService.openSnackBar(
+        'Fields cannot be empty!.',
+        'Close',
+        4000
+      );
+    }
   }
 }
-  //       // if (newUser.registered = 0) {
-  //       //   console.log('toast: ', newUser.message);
-  //       // } else {
-  //       //   this.route.navigate(['/backlog']);
-  //       // }
-  //       if (res['jwt']) {
-  //         localStorage.setItem('token', res['jwt']);
-  //     });
-  // }
-  // if(newUser){
-  //   this.route.navigate(['/page']);
-  // }
-}
-
-//------------------------NOTES-----------------------
-
-// CURRENTLY not working. i think i need to run an HTTP_INTERCEPTOR or something to take the token from local storage and
-// pass it as a Header, and then check that header against my backend JWT token. if my thinking is correct, that should
-// intercept all HTTP traffic, unless router.navigate isn't technically HTTP traffic.
-// otherwise, find another solution. currently, backent generates a token and returns it to the front end, and it is in fact
-// stored in local storage. not sure how to proceed yet but will continue pressing forward until issue is resolved.
-//

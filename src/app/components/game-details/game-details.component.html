@@ -1,8 +1,10 @@
-<div class="detailPage container" *ngIf="igGames">
-  <div class="row">
-    <div class="cover col-sm-12">
-      <img class="cover" src="{{ getGameCover(igGames) }}" />
-      <div class="logButtons">
+<div class="container">
+  <div class="row top-row">
+    <div class="col-2 container-fluid" id="left-column">
+      <div class="col-12 cover-img">
+        <img class="cover" src="{{ getGameCover(igGames) }}" />
+      </div>
+      <div class="col-1 logButtons">
         <button
           [ngClass]="wishStatus ? 'btn-info' : 'btn-outline-primary'"
           (click)="wish()"
@@ -28,47 +30,71 @@
           Played
         </button>
       </div>
+      <div class="row stats">
+        <p class="rating">Rating: {{ igGames.rating | number: "1.0-0" }}/100</p>
+        <div class="col-12 progress">
+          <div
+            class="progress-bar progress-bar-striped bg-success progress-bar-animated"
+            role="progressbar"
+            aria-valuenow="75"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            [ngStyle]="{ width: ratingWidth }"
+            id="ratingBar"
+          ></div>
+        </div>
+        <div class="row types">
+          <div class="col-6 genres">
+            <p class="typeHeader">Genres:</p>
+            <p class="typeNames" *ngFor="let genre of igGames.genres">
+              <a class="typeLinks" href="/games/genres/{{ genre.id }}">{{
+                genre.name
+              }}</a>
+            </p>
+          </div>
+          <div class="col-6 platforms">
+            <p class="typeHeader">Platforms:</p>
 
-      <div class="igdb col-sm-12">
-        <p>More Info:</p>
-        <a href="{{ igGames.url }}">IGDB</a>
-      </div>
-
-      <hr />
-      <div class="col" id="platformCol">
-        <p class="typeHeader">Platforms:</p>
-
-        <p class="typeNames" *ngFor="let platform of igGames.platforms">
-          <a href="/games/platforms/{{ platform.id }}">{{ platform.name }}</a>
-        </p>
-        <hr />
-        <div class="col">
-          <p class="typeHeader">Genres:</p>
-          <p class="typeNames" *ngFor="let genre of igGames.genres">
-            <a href="/games/genres/{{ genre.id }}">{{ genre.name }}</a>
-          </p>
+            <p class="typeNames" *ngFor="let platform of igGames.platforms">
+              <a class="typeLinks" href="/games/platforms/{{ platform.id }}">{{
+                platform.name
+              }}</a>
+            </p>
+          </div>
         </div>
       </div>
     </div>
-    <div class="content col">
-      <div class="jumbotron">
-        <h1 class="display-4">{{ igGames.name }}</h1>
-        <hr class="my-4" />
-      </div>
-      <h4>Release date: {{ getTimeStamp(igGames) }}</h4>
-      <p class="summary">{{ igGames.summary }}</p>
+    <div class="col-8 container-fluid" id="right-column">
+      <div class="col-10 offset-1 name">
+        <div class="jumbotron">
+          <h1 class="display-5">{{ igGames.name }}</h1>
+          <h4>Release date: {{ getTimeStamp(igGames) }}</h4>
 
-      <p>Rating: {{ igGames.rating }}</p>
-      <div class="row">
-        <div class="screens">
-          <a
-            *ngFor="let screenshot of igGames.screenshots"
-            (click)="openDialog(screenshot)"
-          >
-            <img src="{{ screenshot.url }}" />
-          </a>
+          <hr class="my-4" />
+          <div class="row">
+            <div class="col-10 offset-1">
+              <p class="summary" >{{ igGames.summary }}</p>
+              <p>More info: <a href="{{ igGames.url }}">IGDB</a></p>
+              
+              <hr />
+              <div class="col-10  screenCol">
+                <div class="screens">
+                  <a
+                    *ngFor="let screenshot of igGames.screenshots"
+                    (click)="openDialog(screenshot)"
+                  >
+                    <img src="{{ screenshot.url }}" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+
+<!-- (igGames.summary.length>256)? (igGames.summary | slice: 0:256)+'..':(igGames.summary) -->

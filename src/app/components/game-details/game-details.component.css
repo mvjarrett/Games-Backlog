@@ -1,63 +1,198 @@
-.detailPage {
+#right-column {
   display: flex;
-  padding-top: 50px;
+  justify-content: center;
 }
 
 .cover {
   max-height: 300px;
   border-radius: 10px;
   width: auto;
-  @media (min-width: 767px) {
-    width: 100%;
-  }
 }
-
-.content {
+.jumbotron {
+  width: 100%;
+}
+.cover-img {
+  display: flex;
+  justify-content: center;
+  max-height: 300px;
+}
+.name {
+  display: flex;
+  justify-content: space-between;
   text-align: center;
-  margin-top: 10%;
-  margin-left: 5%;
-  margin-right: 10%;
-  @media (min-width: 576px) {
-    margin-top: 20%;
-  }
 }
-
-/* .igdb{
-
-} */
-
-.screens img {
-  margin-left: 20px;
-  margin-bottom: 20px;
-  transition: 0.5s ease;
-  -webkit-filter: brightness(50%);
+.summary {
+  text-align: center;
 }
-
-.screens img:hover {
-  box-shadow: 1px 1px #373737, 2px 2px #373737, 3px 3px #373737, 4px 4px #373737,
-    5px 5px #373737, 6px 6px #373737;
-  -webkit-transform: translateX(-3px);
-  transform: translateX(-3px);
-  transition: 0.5s ease;
-  -webkit-filter: brightness(100%);
-}
-
 .logButtons {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   padding-top: 5px;
-  padding-bottom: 100px;
+  width: auto;
+}
+.types {
+  padding-top: 10px;
+  padding: 0%;
+  width: 100%;
+}
+
+.rating {
+  width: 100%;
+  padding-left: 10px;
+  padding-top: 20px;
+  margin-bottom: 10px;
+}
+.progress {
+  padding: 0%;
+  height: 10px;
+  margin-left: -10px;
+}
+
+.genres {
+  /* text-align: center; */
+  border-top: 1px solid rgb(70, 70, 70);
+  border-right: 1px solid rgb(70, 70, 70);
+  padding: 0%;
+}
+.platforms {
+  /* text-align: block; */
+  border-top: 1px solid rgb(70, 70, 70);
+}
+.stats {
+  margin: 0%;
+  padding-left: 10px;
 }
 
 .typeNames {
   font-size: 12px;
   margin: 0px;
+  line-height: 1.1em;
+  padding-bottom: 5px;
 }
 .typeHeader {
   font-size: 18px;
   margin-bottom: 4px;
 }
+.typeLinks {
+  text-decoration: none;
+  font-weight: bold;
+  color: rgb(141, 138, 176);
+}
+.typeLinks:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
 
-/* #platformCol {
+.screens img {
+  align-items: center;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  transition: 0.5s ease;
+  filter: brightness(50%);
+  display: inline-block;
+}
 
-} */
+.screens img:hover {
+  box-shadow: 1px 1px #373737, 2px 2px #373737, 3px 3px #373737, 4px 4px #373737,
+    5px 5px #373737, 6px 6px #373737;
+  transform: translateX(-3px);
+  transform: translateX(-3px);
+  transition: 0.5s ease;
+  filter: brightness(100%);
+}
+.screenCol {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+@media only screen and (max-width: 991px) {
+  .cover {
+    max-height: 200px;
+    border-radius: 10px;
+    width: auto;
+    /* margin-left: 30px; */
+  }
+  .logButtons > .btn {
+    font-size: x-small;
+    width: 100%;
+  }
+  .logButtons {
+    display: inline-block;
+    align-items: center;
+    width: 130px;
+    margin-left: -11%;
+  }
+  .jumbotron {
+    text-align: center;
+  }
+  .progress {
+    width: 80%;
+    margin-bottom: 10px;
+  }
+  #right-column {
+    padding: 0%;
+    margin: 0%;
+  }
+  .summary {
+    font-size: 70%;
+  }
+  p {
+    font-size: 70%;
+  }
+  .typeHeader {
+    font-size: 70%;
+  }
+  .typeLinks {
+    font-size: 70%;
+  }
+  .typeNames {
+    line-height: 1em;
+    padding-bottom: 5px;
+  }
+
+  .stats {
+    width: 150px;
+    margin-left: -30px;
+  }
+  .screens img {
+    max-width: 40px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  p {
+    font-size: 90%;
+  }
+  .cover {
+    max-height: 180px;
+    border-radius: 10px;
+    width: auto;
+    /* margin-left: 30px; */
+  }
+  .logButtons {
+    display: inline-block;
+    align-items: center;
+    width: 130px;
+    margin-left: -30px;
+  }
+
+  @media only screen and (max-width: 500px) {
+    .cover {
+      max-height: 140px;
+      border-radius: 10px;
+      width: auto;
+      /* margin-left: 30px; */
+    }
+    .logButtons {
+      display: inline-block;
+      align-items: center;
+      width: 100px;
+      margin-left: -30px;
+    }
+
+    p {
+      font-size: 70%;
+    }
+  }
+}

@@ -12,7 +12,7 @@ export interface igGame {
   first_release_date?: number;
   genres?: genre[];
   platforms?: platform[];
-  rating?: number;
+  rating: number;
   screenshots?: screenshot[];
   url?: string;
 
