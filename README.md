@@ -1,6 +1,6 @@
 # Games Backlog
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.2.
+A PEAN-stack CRUD app designed to allow users to track and backlog a library of videogames.
 
 ## Live Example:
 
