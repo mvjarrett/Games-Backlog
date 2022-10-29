@@ -24,6 +24,11 @@ import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+import {
+  SocialLoginModule,
+  SocialAuthServiceConfig,
+} from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 
 @NgModule({
   declarations: [
@@ -53,6 +58,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     MatGridListModule,
     MatSnackBarModule,
     InfiniteScrollModule,
+    SocialLoginModule,
   ],
   providers: [
     {
@@ -61,6 +67,23 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
       multi: true,
     },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '540271258342-88l1r5tkp7fh3sqjce93epkndui8ua99.apps.googleusercontent.com'
+            ),
+          },
+        ],
+        onError: (err) => {
+          console.error(err);
+        },
+      } as SocialAuthServiceConfig,
+    },
   ],
   bootstrap: [AppComponent],
 })

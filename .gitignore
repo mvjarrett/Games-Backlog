@@ -53,3 +53,4 @@ src/app/components/igdb-results/notes.txt
 .DS_Store
 Thumbs.db
 
+src/app/server/pool.js
