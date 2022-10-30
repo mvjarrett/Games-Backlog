@@ -1,5 +1,5 @@
 import { Component, OnInit, ɵɵsetComponentScope } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   searchTerm: string;
-  searchForm = new FormGroup({
-    search: new FormControl('', Validators.required),
+  searchForm = new UntypedFormGroup({
+    search: new UntypedFormControl('', Validators.required),
   });
   headers = {
     'Access-Control-Allow-Origin': '*',

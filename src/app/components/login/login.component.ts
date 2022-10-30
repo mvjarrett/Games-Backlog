@@ -1,6 +1,6 @@
 import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SnackBarService } from 'src/app/services/snackbar.service';
 import { environment } from 'src/environments/environment';
@@ -12,9 +12,9 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginComponent implements OnInit {
   serverUrl = environment.serverUrl;
-  loginForm = new FormGroup({
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
+  loginForm = new UntypedFormGroup({
+    username: new UntypedFormControl('', Validators.required),
+    password: new UntypedFormControl('', Validators.required),
   });
   registered: number;
   constructor(
