@@ -30,7 +30,7 @@ import { environment } from 'src/environments/environment';
      
       }
       backlogInfo(backlogIds: number[]): Observable<igGame[]>{
-        let logBody = 'fields id, name, cover.url; where id = (' + backlogIds.join() + ');'
+        let logBody = 'fields id, name, cover.url; limit 500; where id = (' + backlogIds.join() + ');'
           return this.http.post<igGame[]>(this.apiUrl, logBody, {
             headers: this.headers})
       }
