@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit {
               4000
             );
           }
-          console.log('you are here')
           return null;
         },
         (err) => {

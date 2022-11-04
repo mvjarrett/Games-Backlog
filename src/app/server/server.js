@@ -59,9 +59,11 @@ app.delete("/backlog/game/:id", backlog.deleteBacklog)
 //-----register route-----
 app.post('/users/register', users.register)
 
-//------login route------
+//------login route-------
 app.post("/users/login", users.login)
 
+//------GSI route---------
+app.post("/users/gsi", users.gsi)
 
 
 app.get('/*', function(req, res) {

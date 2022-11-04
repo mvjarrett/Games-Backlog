@@ -30,6 +30,7 @@ import {
 } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +67,7 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
       useClass: AuthInterceptor,
       multi: true,
     },
+
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     {
       provide: 'SocialAuthServiceConfig',

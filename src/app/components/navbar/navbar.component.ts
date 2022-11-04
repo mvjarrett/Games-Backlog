@@ -1,8 +1,13 @@
 import { Component, OnInit, ɵɵsetComponentScope } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-navbar',
@@ -20,7 +25,11 @@ export class NavbarComponent implements OnInit {
     'Access-Control-Allow-Headers':
       'Origin, X-Requested-With, Content-Type, Accept',
   };
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private authService: SocialAuthService
+  ) {}
 
   ngOnInit(): void {}
   onSubmit(): void {
@@ -37,7 +46,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     localStorage.clear();
-    this.router.navigate(['/'])
+    this.authService.signOut();
+    this.router.navigate(['']);
   }
-
 }

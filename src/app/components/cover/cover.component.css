@@ -9,6 +9,11 @@
   color: #333;
   text-shadow: none; /* Prevent inheritance from `body` */
 }
+.gbutton{
+  width: 64px;
+  margin-left: 47%;
+
+}
 
 /*
  * Base structure
@@ -21,12 +26,17 @@ body {
   height: 100%; 
   overflow: visible;
 }
+
+
 .buttons{
-  flex: content;
+ width: 140px;
+ margin: 0  auto;
+  
   
 }
 .buttons>.btn{
-  margin-right: 20px;
+  margin:0 auto;
+  margin-bottom: 2%;
 }
 
 

@@ -10,6 +10,7 @@ export class AppComponent {
   title = 'Games in Backlog';
   constructor(public router: Router) { }
 
+
   ngOnInit() { }
 };
 
