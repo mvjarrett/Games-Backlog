@@ -3,7 +3,6 @@ import { GameService } from '../../services/games.service';
 import { MatDialog } from '@angular/material/dialog';
 import { igGame } from 'src/app/models/igGame';
 import { FormControl } from '@angular/forms';
-import { MatTabsModule } from '@angular/material/tabs';
 import { gameObject } from 'src/app/models/gameobject';
 
 @Component({
@@ -36,7 +35,6 @@ export class GamesListComponent implements OnInit {
         this.gameService.backlogInfo(wishIds).subscribe((wishlist) => {
           if (wishlist) {
             this.wish = wishlist;
-            console.log('wishlist = ', wishlist);
           }
         });
 
@@ -44,7 +42,6 @@ export class GamesListComponent implements OnInit {
         this.gameService.backlogInfo(playingIds).subscribe((playinglist) => {
           if (playinglist) {
             this.playing = playinglist;
-            console.log('playinglist = ', playinglist);
           }
         });
 
@@ -52,7 +49,6 @@ export class GamesListComponent implements OnInit {
         this.gameService.backlogInfo(playedIds).subscribe((playedlist) => {
           if (playedlist) {
             this.played = playedlist;
-            console.log('playedlist = ', playedlist);
           }
         });
       }
@@ -68,14 +64,4 @@ export class GamesListComponent implements OnInit {
       return memo;
     }, {});
   }
-
-  // isCategoryOne() {
-  // for (let i = 0; i < this.logGames.length; i++){
-  // console.log(this.logGames.map(({category}) =>  === 1))
-  // }
-  // return this.logGames.map(({category}) => category === 1)
-  // console.log(this.logGames)
-  // }
 }
-
-//logitems --- the actual data from IGDB. it only sends back what is needed because the ID of each game is being passed into the backloginfo function
