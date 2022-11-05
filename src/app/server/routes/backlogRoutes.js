@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 dotenv.config({ path: ".env" });
 
 const { verify } = require('../middleware/auth');
+const { query } = require("express");
 
 
 exports.allBacklog = (verify, async (req, res) => {
@@ -36,12 +37,10 @@ exports.addBacklog = (verify, async (req, res) => {
  try {
   const { user_id } = req.headers;
   const { id } = req.body;
-  const { played } = req.body;
-  const { playing } = req.body;
-  const { wishlist } = req.body;
+  const { category } = req.body
   const newGame = await pool.query(
-   "INSERT INTO backlog ( user_id, id, played, playing, wishlist) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-   [user_id, id, played, playing, wishlist]
+   "INSERT INTO backlog ( user_id, id, category) VALUES ($1, $2, $3) RETURNING *",
+   [user_id, id, category]
   );
 
   res.json(newGame.rows[0]);
@@ -53,15 +52,13 @@ exports.addBacklog = (verify, async (req, res) => {
 exports.updateBacklog = (verify, async (req, res) => {
  const { id } = req.params;
  const { user_id } = req.headers;
- const { played } = req.body;
- const { playing } = req.body;
- const { wishlist } = req.body;
+ const { category } = req.body
  try {
   const { updateStatus } = await pool.query(
-   "UPDATE backlog SET played = $1, playing = $2, wishlist = $3 WHERE user_id = $4 AND id = $5",
-   [played, playing, wishlist, user_id, id]
+   "UPDATE backlog SET category = $1 WHERE user_id = $2 AND id = $3",
+   [category, user_id, id]
   );
-  res.json(updateStatus)
+  res.json(category)
  } catch (err) {
   console.error(err.message);
  }

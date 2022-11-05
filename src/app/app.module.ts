@@ -12,6 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { IgdbResultsComponent } from './components/igdb-results/igdb-results.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { IgdbGameCardComponent } from './components/igdb-game-card/igdb-game-card.component';
@@ -29,6 +30,7 @@ import {
   SocialAuthServiceConfig,
 } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -49,10 +51,12 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
+    CommonModule,
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    MatButtonToggleModule,
     MatCardModule,
     MatToolbarModule,
     FlexLayoutModule,

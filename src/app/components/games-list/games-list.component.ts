@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { GameService } from '../../services/games.service';
 import { MatDialog } from '@angular/material/dialog';
 import { igGame } from 'src/app/models/igGame';
-import { gameObject } from 'src/app/models/gameobject';
+
 
 @Component({
   selector: 'app-games-list',
@@ -14,6 +14,10 @@ export class GamesListComponent implements OnInit {
 backlogItems = false;
   constructor(private gameService: GameService, public dialog: MatDialog) {}
 
+
+  buttonCheck(category: number){
+    console.log(category)
+  }
   ngOnInit(): void {
     this.gameService.GetGames().subscribe((data) => {
       if (data.length > 0) { 
@@ -22,6 +26,7 @@ backlogItems = false;
           if (info) {
             this.logItems = info;
             this.backlogItems = true;
+            console.log(data)
           }
         });
       }

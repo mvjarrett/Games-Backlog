@@ -6,24 +6,24 @@
       </div>
       <div class="col-1 logButtons">
         <button
-          [ngClass]="wishStatus ? 'btn-info' : 'btn-outline-primary'"
-          (click)="wish()"
+          [ngClass]="wish ? 'btn-info' : 'btn-outline-primary'"
+          (click)="wishlistToggle(id)"
           type="button"
           class="btn btn-sm"
         >
           Wishlist
         </button>
         <button
-          [ngClass]="playingStatus ? 'btn-info' : 'btn-outline-primary'"
-          (click)="playing()"
+          [ngClass]="playing ? 'btn-info' : 'btn-outline-primary'"
+          (click)="playingToggle(id)"
           type="button"
           class="btn btn-sm"
         >
           Playing
         </button>
         <button
-          [ngClass]="playedStatus ? 'btn-info' : 'btn-outline-primary'"
-          (click)="played()"
+          [ngClass]="played ? 'btn-info' : 'btn-outline-primary'"
+          (click)="playedToggle(id)"
           type="button"
           class="btn btn-sm"
         >

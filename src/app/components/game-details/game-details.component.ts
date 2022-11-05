@@ -5,9 +5,9 @@ import { ActivatedRoute } from '@angular/router';
 import { ScreenshotModalComponent } from '../screenshot-modal/screenshot-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import screenshot from 'src/app/models/screenshot';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { gameObject } from 'src/app/models/gameobject';
 import { environment } from 'src/environments/environment';
+import { gameObject } from 'src/app/models/gameobject';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-game-details',
@@ -15,20 +15,22 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./game-details.component.css'],
 })
 export class GameDetailsComponent implements OnInit {
-  serverUrl = environment.serverUrl
-  @Input() game: igGame;
   constructor(
     private http: HttpClient,
     private details: GameDetailsService,
     private route: ActivatedRoute,
     public dialog: MatDialog
   ) {}
+
+  serverUrl = environment.serverUrl;
+  @Input() game: igGame;
+  category: number = 0;
   igGames: igGame;
+  wish: boolean;
+  playing: boolean;
+  played: boolean;
+  id: number;
   isBacklogged: boolean = false;
-  backlogStatus: any
-  wishStatus: boolean = false;
-  playedStatus: boolean = false;
-  playingStatus: boolean = false;
   ratingWidth: any;
 
   openDialog(screenshot: screenshot): void {
@@ -38,25 +40,42 @@ export class GameDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let id = this.route.snapshot.params['id'];
-    this.details.getDetails(id).subscribe((data) => {
+    this.id = this.route.snapshot.params['id'];
+    this.details.getDetails(this.id).subscribe((data) => {
       if (data) {
         this.igGames = data[0];
         this.ratingWidth = Math.trunc(this.igGames.rating) + '%';
-        console.log(this.ratingWidth)
-       }
+      }
     });
-    this.details.getBacklog(id).subscribe((backlogGame) => {
+    this.details.getBacklog(this.id).subscribe((backlogGame) => {
       if (backlogGame?.length > 0) {
         this.isBacklogged = true;
-        this.wishStatus = backlogGame[0].wishlist;
-        this.playedStatus = backlogGame[0].played;
-        this.playingStatus = backlogGame[0].playing;
+        this.category = backlogGame[0].category;
+        switch (this.category) {
+          case 1:
+            this.wish = true;
+            this.playing = false;
+            this.played = false;
+            break;
+          case 2:
+            this.wish = false;
+            this.playing = true;
+            this.played = false;
+            break;
+          case 3:
+            this.wish = false;
+            this.playing = false;
+            this.played = true;
+            break;
+          default:
+            console.log('update switch broke');
+        }
+      } else {
+        this.isBacklogged = false;
+        this.category = 0;
       }
     });
   }
-
-
 
   getGameCover(game: igGame): string {
     if (game.cover != null) {
@@ -76,26 +95,152 @@ export class GameDetailsComponent implements OnInit {
     }
   }
 
-
-wish() {
-  let logData: gameObject ={
-    id: this.igGames.id,
-    wishlist: this.wishStatus,
-    playing: this.playingStatus,
-    played: this.playedStatus
+  wishlistToggle(id: any) {
+    this.wish = !this.wish;
+    let logData: gameObject = {
+      id: id,
+      category: this.category,
+    };
+    switch (this.category) {
+      case 0:
+        this.category = 1;
+        logData.category = 1;
+        this.backlogAdd(logData);
+        break;
+      case 1:
+        this.category = 0;
+        logData.category = 0;
+        this.backlogRemove(logData);
+        break;
+      case 2:
+        this.category = 1;
+        logData.category = 1;
+        this.backlogUpdate(logData);
+        break;
+      case 3:
+        this.category = 1;
+        logData.category = 1;
+        this.backlogUpdate(logData);
+        break;
+      default:
+        console.log('hit default case, check for error. ' + console.error);
+    }
+    console.log(this.category);
   }
-  let options = {
-    headers: new HttpHeaders().append('null', 'null',),
-  };
-  if(!this.isBacklogged && !this.wishStatus) {
-    this.wishStatus = true;
-    this.playedStatus = false;
-    this.playingStatus = false;
-    logData.wishlist = true;
-    logData.played = false;
-    logData.playing = false;
+
+  playingToggle(id: any) {
+    this.playing = !this.playing
+    let logData: gameObject = {
+      id: id,
+      category: this.category,
+    };
+    switch (this.category) {
+      case 0:
+        this.category = 2;
+        logData.category = 2;
+        this.backlogAdd(logData);
+        break;
+      case 1:
+        this.category = 2;
+        logData.category = 2;
+        this.backlogUpdate(logData);
+        break;
+      case 2:
+        this.category = 0;
+        logData.category = 0;
+        this.backlogRemove(logData);
+        break;
+      case 3:
+        this.category = 2;
+        logData.category = 2;
+        this.backlogUpdate(logData);
+        break;
+      default:
+        console.log('hit default case, check for error. ' + console.error);
+    }
+  }
+
+  playedToggle(id: any) {
+    this.played = !this.played
+    let logData: gameObject = {
+      id: id,
+      category: this.category,
+    };
+    switch (this.category) {
+      case 0:
+        this.category = 3;
+        logData.category = 3;
+        this.backlogAdd(logData);
+        break;
+      case 1:
+        this.category = 3;
+        logData.category = 3;
+        this.backlogUpdate(logData);
+        break;
+      case 2:
+        this.category = 3;
+        logData.category = 3;
+        this.backlogUpdate(logData);
+        break;
+      case 3:
+        this.category = 0;
+        logData.category = 0;
+        this.backlogRemove(logData);
+        break;
+      default:
+        console.log('hit default case, check for error. ' + console.error);
+    }
+  }
+
+  backlogAdd(logData: gameObject) {
+    let options = {};
+    this.http.post(this.serverUrl + '/backlog', logData, options).subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  backlogUpdate(logData: gameObject) {
+    let options = {};
     this.http
-      .post(this.serverUrl + '/backlog', logData, options)
+      .put(`${this.serverUrl}/backlog/game/${logData.id}`, logData, options)
+      .subscribe(
+        (res) => {
+          res = this.category;
+          switch (this.category) {
+            case 1:
+              this.wish = true;
+              this.playing = false;
+              this.played = false;
+              break;
+            case 2:
+              this.wish = false;
+              this.playing = true;
+              this.played = false;
+              break;
+            case 3:
+              this.wish = false;
+              this.playing = false;
+              this.played = true;
+              break;
+            default:
+              console.log('update switch broke');
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
+
+  backlogRemove(logData: gameObject) {
+    let options = {};
+    this.http
+      .delete(`${this.serverUrl}/backlog/game/${logData.id}`, options)
       .subscribe(
         (data) => {
           console.log(data);
@@ -104,165 +249,5 @@ wish() {
           console.log(error);
         }
       );
-    this.isBacklogged = true;
-  } else if(this.isBacklogged && !this.wishStatus){
-    this.wishStatus = true;
-    this.playedStatus = false;
-    this.playingStatus = false;
-    logData.wishlist = true;
-    logData.played = false;
-    logData.playing = false;
-    this.http.put(`${this.serverUrl}/backlog/game/${logData.id}`, logData, options)
-    .subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  } else{
-    this.http
-    .delete(`${this.serverUrl}/backlog/game/${logData.id}`, options)
-    .subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    this.wishStatus = false;
-    this.playedStatus = false;
-    this.playingStatus = false;
-    this.isBacklogged = false;
   }
-
-}
-
-playing() {
-  let logData: gameObject ={
-    id: this.igGames.id,
-    wishlist: this.wishStatus,
-    playing: this.playingStatus,
-    played: this.playedStatus
-  }
-  let options = {  };
-  if(!this.isBacklogged && !this.playingStatus) {
-    this.wishStatus = false;
-    this.playedStatus = false;
-    this.playingStatus = true;
-    logData.wishlist = false;
-    logData.played = false;
-    logData.playing = true;
-    this.http
-      .post(this.serverUrl + '/backlog', logData, options)
-      .subscribe(
-        (data) => {
-          console.log(data);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    this.isBacklogged = true;
-  } else if(this.isBacklogged && !this.playingStatus){
-    this.wishStatus = false;
-    this.playedStatus = false;
-    this.playingStatus = true;
-    logData.wishlist = false;
-    logData.played = false;
-    logData.playing = true;
-    this.http.put(`${this.serverUrl}/backlog/game/${logData.id}`, logData, options)
-    .subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  } else if(this.isBacklogged && this.playingStatus){
-    this.http
-    .delete(`${this.serverUrl}/backlog/game/${logData.id}`, options)
-    .subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    this.wishStatus = false;
-    this.playedStatus = false;
-    this.playingStatus = false;
-    this.isBacklogged = false;
-  }
-
-}
-
-played()  {
-  let logData: gameObject ={
-    id: this.igGames.id,
-    wishlist: this.wishStatus,
-    playing: this.playingStatus,
-    played: this.playedStatus
-  }
-  let options = {
-    headers: new HttpHeaders().append('user_id', '1337'),
-  };
-  if(!this.isBacklogged && !this.playedStatus) {
-    this.wishStatus = false;
-    this.playedStatus = true;
-    this.playingStatus = false;
-    logData.wishlist = false;
-    logData.played = true;
-    logData.playing = false;
-    this.http
-      .post(this.serverUrl + '/backlog', logData, options)
-      .subscribe(
-        (data) => {
-          console.log(data);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    this.isBacklogged = true;
-  } else if(this.isBacklogged && !this.playedStatus){
-    this.wishStatus = false;
-    this.playedStatus = true;
-    this.playingStatus = false;
-    logData.wishlist = false;
-    logData.played = true;
-    logData.playing = false;
-    this.http.put(`${this.serverUrl}/backlog/game/${logData.id}`, logData, options)
-    .subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-
-  } else if(this.isBacklogged && this.playedStatus){
-    this.http
-    .delete(`${this.serverUrl}/backlog/game/${logData.id}`, options)
-    .subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    this.wishStatus = false;
-    this.playedStatus = false;
-    this.playingStatus = false;
-    this.isBacklogged = false;
-  }
-
-}
-
 }

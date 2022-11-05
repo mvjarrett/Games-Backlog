@@ -8,7 +8,7 @@ export interface igGame {
   id: number;
   name?: string;
   summary?: string;
-  cover?: cover;
+  cover: cover;
   first_release_date?: number;
   genres?: genre[];
   platforms?: platform[];

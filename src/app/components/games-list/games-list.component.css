@@ -12,7 +12,10 @@ table {
     width: 100%;
     
   }
-
+.categories{
+  margin-top: 10px;
+  border: solid 2px red;
+}
   .noItems {
     position: relative;
     height: 100vh;
