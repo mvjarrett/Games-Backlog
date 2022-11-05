@@ -1,25 +1,56 @@
 <div class="container-fluid categories">
-  <h5>Select Category</h5>
-<mat-button-toggle-group name="category" aria-label="Backlog Category">
-  <mat-button-toggle (change)="buttonCheck($event.value)" [value]="2">Played</mat-button-toggle>
-  <mat-button-toggle (change)="buttonCheck($event.value)" [value]="1">Playing</mat-button-toggle>
-  <mat-button-toggle (change)="buttonCheck($event.value)" [value]="0">Wishlist</mat-button-toggle>
-</mat-button-toggle-group>
   <div *ngIf="backlogItems">
-    <div class="content">
-      <div fxLayout="row wrap">
-        <div
-          fxFlex="20%"
-          fxFlex.xs="33%"
-          fxFlex.sm="33%"
-          *ngFor="let logItem of logItems"
-        >
-          <app-igdb-game-card [game]="logItem"></app-igdb-game-card>
+    <mat-tab-group>
+      <mat-tab label="Wishlist">
+        <div class="content">
+          <div fxLayout="row wrap">
+            <div
+              fxFlex="20%"
+              fxFlex.xs="33%"
+              fxFlex.sm="33%"
+              *ngFor="let wish of wish"
+            >
+              <app-igdb-game-card [game]="wish"></app-igdb-game-card>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </mat-tab>
+
+      <mat-tab label="Playing">
+        <div class="content">
+          <div fxLayout="row wrap">
+            <div
+              fxFlex="20%"
+              fxFlex.xs="33%"
+              fxFlex.sm="33%"
+              *ngFor="let playing of playing"
+            >
+              <app-igdb-game-card [game]="playing"></app-igdb-game-card>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Played">
+        <div class="content">
+          <div fxLayout="row wrap">
+            <div
+              fxFlex="20%"
+              fxFlex.xs="33%"
+              fxFlex.sm="33%"
+              *ngFor="let played of played"
+            >
+              <app-igdb-game-card [game]="played"></app-igdb-game-card>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </div>
+
+//-------------catch in case of no backlogged items
+
 <div class="noItems" *ngIf="!backlogItems">
   <div class="row header"><h1 class="display-1">No Games Backlogged?</h1></div>
   <div class="row btnSection">

@@ -15,6 +15,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatGridListModule } from '@angular/material/grid-list';
+import {MatTabsModule} from '@angular/material/tabs';
 import { IgdbGameCardComponent } from './components/igdb-game-card/igdb-game-card.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { GameDetailsComponent } from './components/game-details/game-details.component';
@@ -58,6 +59,7 @@ import { CommonModule } from '@angular/common';
     MatDialogModule,
     MatButtonToggleModule,
     MatCardModule,
+    MatTabsModule,
     MatToolbarModule,
     FlexLayoutModule,
     MatGridListModule,

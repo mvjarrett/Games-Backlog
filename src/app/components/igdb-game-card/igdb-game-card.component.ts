@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IgdbResultsService } from '../../services/igdbResults.service';
 import { igGame } from '../../models/igGame';
+import { gameObject } from 'src/app/models/gameobject';
 
 @Component({
   selector: 'app-igdb-game-card',

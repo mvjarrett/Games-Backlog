@@ -27,6 +27,7 @@ import { environment } from 'src/environments/environment';
 
       GetGames(): Observable<gameObject[]> {
           return this.http.get<gameObject[]>(this.logUrl)
+          
      
       }
       backlogInfo(backlogIds: number[]): Observable<igGame[]>{
