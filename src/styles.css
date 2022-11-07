@@ -1,15 +1,102 @@
 @import "../node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css";
+
+
 body {
     margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
-    background-color: rgb(33,37,41);
     font-family: 'Roboto', sans-serif;
-    color: #c8c8c8;
-    overflow-y: scroll;
-    padding-top: 70px;
+    overflow-y: visible;
 }
-html, body { height: 100%; }
+
 
 mat-dialog-container#mat-dialog-0{
     padding: 10px;
    }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========color variables below============== */
+
+:root{
+
+    /* =====dark-mode palette===== */
+    --bg-dark: #1E2022;
+    --fg-dark: #394d65;
+    --ac-dark: #313b43;
+    --txt-dark: #F0F5F9;
+    --tac-dark: #E91E63;
+
+
+    /* =====light-mode palette===== */
+    --bg-light: #f7f7f7;
+    --fg-light: #eeeeee;
+    --ac-light: #929aab;
+    --txt-light: #393e46;
+    --tac-light: #C2185B;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+body {
+    background-color: var(--bg-light);
+    color: var(--txt-light);
+}
+nav{
+    background: var(--fg-light);
+
+}
+a.nav-link, a.nav-link:visited{
+    color: var(--txt-light);
+}
+a.nav-link:hover{
+    color: var(--tac-light);
+}
+a.navbar-brand{
+    color: var(--txt-light)
+}
+.categories{
+    background:  var(--ac-light);
+}
+
+   @media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--bg-dark);
+        color: var(--txt-dark);
+    }
+    nav{
+        background: var(--fg-dark);
+    }
+    a.nav-link, a.nav-link:visited{
+        color: var(--txt-dark);
+    }
+    a.nav-link:hover{
+        color: var(--tac-dark);
+    }
+    
+    a.navbar-brand{
+        color: var(--txt-dark)
+    }
+    .categories{
+        background:  var(--ac-dark);
+    }
+} 

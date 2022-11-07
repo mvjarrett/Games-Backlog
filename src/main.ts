@@ -7,9 +7,6 @@ import { environment } from './environments/environment';
 if (environment.production) {
   enableProdMode();
 }
-function handleCredentialResponse(){
-  alert('peepee')
-};
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));

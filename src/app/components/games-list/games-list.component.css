@@ -17,8 +17,10 @@ table {
 .categories{
   margin-top: 10px;
   border-radius: 10px;
-  background-color: rgb(48, 52, 56);
   box-shadow: 0 5px 10px rgb(0 0 0 / 0.6);
+}
+.mat-tab-label, .mat-tab-link{
+  color: black;
 }
   .noItems {
     position: relative;

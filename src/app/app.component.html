@@ -1,3 +1,4 @@
-<app-navbar *ngIf="router.url != '/' && router.url !='/login' && router.url !='/signup'"></app-navbar>
+<app-navbar class="logo-container" *ngIf="router.url != '/' && router.url !='/login' && router.url !='/signup'"></app-navbar>
+<div class="main">
 <router-outlet></router-outlet>
-
+</div>
