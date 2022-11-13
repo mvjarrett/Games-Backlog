@@ -10,7 +10,7 @@ const { verify } = require('../middleware/auth');
 exports.topGames = (verify, async (req, res) => {
   const authHeaders = {
     headers: {
-      'Client-id': process.env.AUTH_ID,
+      'Client-ID': process.env.AUTH_ID,
       'Authorization': process.env.AUTH_TOKEN
     }
   }

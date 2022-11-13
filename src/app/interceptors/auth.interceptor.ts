@@ -23,7 +23,7 @@ export class AuthInterceptor implements HttpInterceptor {
         headers: req.headers
           .set('jwt', jwt)
           .set('user_id', idToken)
-          .set('Client-id', igdb_id)
+          .set('Client-ID', igdb_id)
           .set('Authorization', igdb_token)
           .set('Access-Control-Allow-Origin', '*')
       });
