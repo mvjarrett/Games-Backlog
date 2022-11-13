@@ -90,7 +90,7 @@ exports.login = (async (req, res) => {
             error: "Server error",
           });
         } else if (result === true) { //Checking if credentials match
-          let id = data.rows[0].id;
+          let id = data.rows[0].user_id;
 
           let payload = {
             username: username,
@@ -152,7 +152,7 @@ exports.gsi = (async (req, res) => {
             error: "Server error",
           });
         } else if (result === true) { //Checking if credentials match
-          let id = data.rows[0].id;
+          let id = data.rows[0].user_id;
 
           let payload = {
             username: username,

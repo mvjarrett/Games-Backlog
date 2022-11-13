@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { GamesListComponent } from './components/games-list/games-list.component';
@@ -13,10 +12,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { IgdbResultsComponent } from './components/igdb-results/igdb-results.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatTabsModule } from '@angular/material/tabs';
+import {MatTabsModule} from '@angular/material/tabs';
 import { IgdbGameCardComponent } from './components/igdb-game-card/igdb-game-card.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { GameDetailsComponent } from './components/game-details/game-details.component';
@@ -33,6 +32,7 @@ import {
 } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { CommonModule } from '@angular/common';
+
 
 @NgModule({
   declarations: [
@@ -68,7 +68,6 @@ import { CommonModule } from '@angular/common';
     SocialLoginModule,
   ],
   providers: [
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
@@ -79,6 +78,7 @@ import { CommonModule } from '@angular/common';
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
+        oneTapEnabled: false,
         autoLogin: false,
         providers: [
           {
