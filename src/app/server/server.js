@@ -10,7 +10,6 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 dotenv.config({ path: ".env" });
 
-
 app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(cors());
@@ -67,5 +66,5 @@ app.post("/users/gsi", users.gsi)
 
 
 app.get('/*', function(req, res) {
-  res.status(200).sendFile(path.resolve(__dirname + '../../../../dist/client/index.html'));
+  res.status(200).sendFile(path.resolve(__dirname + '../../../dist/client/index.html'));
 });
