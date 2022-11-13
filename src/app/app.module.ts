@@ -83,7 +83,7 @@ import { CommonModule } from '@angular/common';
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '540271258342-88l1r5tkp7fh3sqjce93epkndui8ua99.apps.googleusercontent.com'
+              '425474227114-9m0v1jme2o7bpju345un47no358mpm2e.apps.googleusercontent.com'
             ),
           },
         ],
