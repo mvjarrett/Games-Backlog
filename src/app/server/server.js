@@ -16,7 +16,7 @@ app.use(cors());
 
 
 
-const distDir = __dirname + "../../../../dist/client/";
+const distDir = __dirname + "../../../dist/client/";
 app.use(express.static(distDir));
 
 
