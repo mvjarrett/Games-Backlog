@@ -13,12 +13,12 @@ import { gameObject } from 'src/app/models/gameobject';
 export class GamesListComponent implements OnInit {
   tabs = ['Wishlist', 'Playing', 'Played'];
   selected = new FormControl(0);
-  logItems: igGame[] = [];
+
   logGames: gameObject[];
   wish: igGame[];
   playing: igGame[];
   played: igGame[];
-  backlogItems = false;
+  backlogItems?: boolean;
 
   constructor(private gameService: GameService, public dialog: MatDialog) {}
 
