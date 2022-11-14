@@ -9,7 +9,6 @@ const users = require('./routes/userRoutes');
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 dotenv.config({ path: ".env" });
-// const path = require('../../../dist/client')
 
 
 app.use(cookieParser())
@@ -67,6 +66,6 @@ app.post("/users/login", users.login)
 app.post("/users/gsi", users.gsi)
 
 
-app.get('*', function(req, res) {
+app.get('/*', function(req, res) {
   res.status(200).sendFile(path.resolve(__dirname + '../../../../dist/client/index.html'));
 });
