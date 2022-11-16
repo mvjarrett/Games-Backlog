@@ -26,6 +26,8 @@ import { environment } from 'src/environments/environment';
       constructor(private http: HttpClient) { }
 
       GetGames(): Observable<gameObject[]> {
+
+        //change to this.http.post
           return this.http.get<gameObject[]>(this.logUrl)
           
      
