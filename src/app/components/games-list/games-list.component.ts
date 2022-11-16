@@ -19,14 +19,13 @@ export class GamesListComponent implements OnInit {
   playing: igGame[];
   played: igGame[];
   backlogItems?: boolean;
-  subscriptions: any;
 
   constructor(private gameService: GameService, public dialog: MatDialog) {}
 
 
 
-ngOnInit(): void {
-  this.subscriptions.add(
+
+  ngOnInit(): void {
     this.gameService.GetGames().subscribe((data) => {
       if (data.length > 0) {
         this.backlogItems = true;
@@ -56,13 +55,8 @@ ngOnInit(): void {
           }
         });
       }
-    })
-  );
-}
-
-ngOnDestroy() {
-  this.subscriptions.unsubscribe();
-}
+    });
+  }
 
   groupBy(arr: any[], property: any) {
     return arr.reduce(function (memo, x) {
