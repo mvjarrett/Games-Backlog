@@ -17,7 +17,8 @@ app.use(cors());
 
 
 
-const distDir = __dirname + "../../../dist/client/";
+
+const distDir = __dirname + "../../../../dist/client/";
 app.use(express.static(distDir));
 
 
@@ -67,5 +68,5 @@ app.post("/users/gsi", users.gsi)
 
 
 app.get('/*', function(req, res) {
-  res.status(200).sendFile(path.join(__dirname + '../../../dist/client/index.html'));
+  res.status(200).sendFile(path.join(__dirname + '../../../../dist/client/index.html'));
 });
