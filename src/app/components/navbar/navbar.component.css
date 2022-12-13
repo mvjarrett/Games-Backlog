@@ -9,6 +9,11 @@ nav {
   font-size: 2vh;
   color: var(--txt-dark);
   text-decoration: none;
+  
+}
+
+.dropdown-menu.show > li > a:hover{
+  color: var(--tac-dark);
 }
 
 .dropdown-menu.show{
