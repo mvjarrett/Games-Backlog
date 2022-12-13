@@ -5,4 +5,30 @@ nav {
   z-index: 2;
 }
 
+.dropdown-menu.show > li > a{
+  font-size: 2vh;
+  color: var(--txt-dark);
+  text-decoration: none;
+}
 
+.dropdown-menu.show{
+
+  max-height: 20vh;
+  max-width:  10vh;
+  text-align: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: var(--bg-dark);
+  
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.dropdown-menu.show::-webkit-scrollbar {
+  display: none;
+}
+
+
+.panel.panel-primary{
+  max-height: 60vh;
+  overflow-y: auto;
+}
