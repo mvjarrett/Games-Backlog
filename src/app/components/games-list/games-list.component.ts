@@ -54,7 +54,7 @@ export class GamesListComponent implements OnInit {
             this.played = playedlist;
           }
         });
-      }
+      } else {this.backlogItems = false}
     });
   }
 

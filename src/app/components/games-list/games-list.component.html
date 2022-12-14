@@ -47,15 +47,16 @@
       </mat-tab>
     </mat-tab-group>
   </div>
+  <div class="noItems" *ngIf="!backlogItems">
+    <div class="row header">
+      <h1 class="display-1">No Games Backlogged?</h1>
+    </div>
+    <div class="row btnSection">
+      <a class="button" routerLink="/games" class="btn btn-light"
+        >Click here to find a game and add it to your backlog!</a
+      >
+    </div>
+  </div>
 </div>
 
 <!-- catch in case of no backlogged items -->
-
-<div class="noItems" *ngIf="!backlogItems">
-  <div class="row header"><h1 class="display-1">No Games Backlogged?</h1></div>
-  <div class="row btnSection">
-    <a class="button" routerLink="/games" class="btn btn-light"
-      >Click here to find a game and add it to your backlog!</a
-    >
-  </div>
-</div>
