@@ -27,7 +27,7 @@ export class GameDetailsService {
     let body =
     `fields id, name, cover.url, first_release_date, summary, genres.name, platforms.name, rating, screenshots.url, url; where id = ${id};`
     return this.http.post<igGame[]>('externalgames/games', body, {
-      headers: this.headers
+      headers: environment.headers
     });
    
   }

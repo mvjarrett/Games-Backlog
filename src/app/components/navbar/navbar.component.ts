@@ -12,6 +12,7 @@ import genre from 'src/app/models/genre';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import platform from 'src/app/models/platform';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
   selector: 'app-navbar',
@@ -25,9 +26,9 @@ export class NavbarComponent implements OnInit {
   searchForm = new UntypedFormGroup({
     search: new UntypedFormControl('', Validators.required),
   });
-  glist: any[]
-  genreUrl = "externalgames/genres"
-  platformUrl = "externalgames/platforms"
+  glist: any[];
+  
+  
   headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
@@ -37,14 +38,13 @@ export class NavbarComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private authService: SocialAuthService
+    private authService: SocialAuthService,
+    private navbarService: NavbarService
   ) {}
 
   ngOnInit(): void {
-this.getGenres().subscribe((res: genre[]) => this.genres = res)
-this.getPlatforms().subscribe((res: platform[]) => this.platforms = res)
-
-
+    this.navbarService.getGenres().subscribe((res: genre[]) => (this.genres = res));
+    this.navbarService.getPlatforms().subscribe((res: platform[]) => (this.platforms = res));
   }
   onSubmit(): void {
     this.searchTerm = this.searchForm.controls['search'].value;
@@ -58,31 +58,13 @@ this.getPlatforms().subscribe((res: platform[]) => this.platforms = res)
       });
   }
 
+ 
 
-  getGenres(): Observable<genre[]>{
-    let genreBody = 'fields name; limit 200;'
-  return this.http.post<genre[]>(this.genreUrl, genreBody, {
-    headers: this.headers
-     
-    }).pipe(map((response:genre[]) => response as genre[]));
-  }
-
-  getPlatforms(): Observable<platform[]>{
-    let platformBody = 'fields name; limit 200; sort id :asc;'
-  return this.http.post<platform[]>(this.platformUrl, platformBody, {
-    headers: this.headers
-     
-    }).pipe(map((response:genre[]) => response as genre[]));
-  }
-
+  
 
   logout() {
     localStorage.clear();
     this.authService.signOut();
     this.router.navigate(['']);
   }
-
-  
 }
-
-
