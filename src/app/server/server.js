@@ -37,7 +37,11 @@ app.post('/externalgames/games', bodyParser.text({type: '*/*'}), igdbRoutes.topG
 app.get('/backlog', backlog.allBacklog)
 
 
+//get genres for navbar
+app.post('/externalgames/genres', bodyParser.text({type: '*/*'}), igdbRoutes.getGenres)
 
+//get platforms for navbar
+app.post('/externalgames/platforms', bodyParser.text({type: '*/*'}), igdbRoutes.getPlatforms)
 
 //get a specific backlogged title
 app.get('/backlog/game/:id', backlog.backlogGame)
