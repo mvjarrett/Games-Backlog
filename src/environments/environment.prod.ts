@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  // serverUrl: "https://games-backlog-pydwe.ondigitalocean.app",
+  serverUrl: 'http://localhost:8080',
   headers : {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',

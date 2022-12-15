@@ -12,16 +12,7 @@ import { environment } from 'src/environments/environment';
   export class GameService {
     serverUrl = environment.serverUrl
     logUrl = this.serverUrl + "/backlog"
-      
-      apiUrl = "externalgames/games"
-      headers = {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
-        'Access-Control-Allow-Headers':
-          'Origin, X-Requested-With, Content-Type, Accept',
-      };
-
-     
+      apiUrl = "externalgames/games"     
     
       constructor(private http: HttpClient) { }
 

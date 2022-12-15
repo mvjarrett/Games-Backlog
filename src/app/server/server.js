@@ -30,10 +30,10 @@ const server = app.listen(process.env.PORT || 8080, function () {
 
 
 
-//get all backlog items
+
 app.post('/externalgames/games', bodyParser.text({type: '*/*'}), igdbRoutes.topGames)
 
-
+//get all backlog items
 app.get('/backlog', backlog.allBacklog)
 
 
