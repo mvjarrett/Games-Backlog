@@ -29,7 +29,17 @@ export class GamesListComponent implements OnInit {
     this.gameService.GetGames().subscribe((data) => {
       if (data.length > 0) {
         this.backlogItems = true;
-        var logs = this.groupBy(data, 'category');
+        this.logGames = data
+        this.logSorting()
+      } else {this.backlogItems = false}
+    });
+  }
+
+
+  
+
+  logSorting() {
+    var logs = this.groupBy(this.logGames, 'category');
         this.wish = logs[1];
         this.playing = logs[2];
         this.played = logs[3];
@@ -54,17 +64,15 @@ export class GamesListComponent implements OnInit {
             this.played = playedlist;
           }
         });
-      } else {this.backlogItems = false}
-    });
   }
 
   groupBy(arr: any[], property: any) {
-    return arr.reduce(function (memo, x) {
-      if (!memo[x[property]]) {
-        memo[x[property]] = [];
+    return arr.reduce(function (data, x) {
+      if (!data[x[property]]) {
+        data[x[property]] = [];
       }
-      memo[x[property]].push(x);
-      return memo;
+      data[x[property]].push(x);
+      return data;
     }, {});
   }
 }
