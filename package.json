@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "cd ./src/app/server && node server.js",
+    "start": "cd src/app/server && node server.js",
     "devStart": "ng serve --open",
     "server": "cd ./src/app/server && nodemon server.js",
     "hostStart": "ng serve --host 192.168.0.160",
