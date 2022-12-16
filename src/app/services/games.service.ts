@@ -5,6 +5,13 @@ import { gameObject } from '../models/gameobject';
 import { igGame } from '../models/igGame';
 import { environment } from 'src/environments/environment';
 
+
+const user = localStorage.user_id
+const userIdHeader = {'user_id': user}
+const requestOptions : Object = {                                                                                                                                                                                 
+  headers: new Headers(userIdHeader), 
+};
+
 @Injectable({
     providedIn: 'root'
   })
@@ -17,9 +24,9 @@ import { environment } from 'src/environments/environment';
       constructor(private http: HttpClient) { }
 
       GetGames(): Observable<gameObject[]> {
-
+        console.log('firing getGames()')
         //change to this.http.post
-          return this.http.get<gameObject[]>(this.logUrl)
+          return this.http.get<gameObject[]>(this.logUrl, requestOptions)
           
      
       }
