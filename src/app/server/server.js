@@ -17,15 +17,15 @@ app.use(cors());
 
 
 
-const distDir = __dirname + "../../../../dist/client/";
+const distDir = __dirname + "../../../dist/client/";
 app.use(express.static(distDir));
 
 
 // server init
-const server = app.listen(process.env.PORT || 8080, function () {
-  var port = server.address().port;
-  console.log("Express Server is now running at port:", port);
-});
+// const server = app.listen(process.env.PORT || 8080, function () {
+//   var port = server.address().port;
+//   console.log("Express Server is now running at port:", port);
+// });
 
 
 
@@ -71,5 +71,10 @@ app.post("/users/gsi", users.gsi)
 
 
 app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname + '../../../../dist/client/index.html'));
+  res.sendFile(path.join(__dirname + '../../../dist/client/index.html'));
+});
+
+const server = app.listen(process.env.PORT || 8080, function () {
+  var port = server.address().port;
+  console.log("Express Server is now running at port:", port);
 });
