@@ -8,7 +8,7 @@ const { verify } = require('../middleware/auth');
 const { query } = require("express");
 
 
-exports.allBacklog = (verify, async (req, res) => {
+exports.allBacklog = ( async (req, res) => {
  try {
   const { user_id } = req.headers;
   const allTitles = await pool.query("SELECT * FROM backlog WHERE user_id = $1", [user_id]);
@@ -18,7 +18,7 @@ exports.allBacklog = (verify, async (req, res) => {
  }
 });
 
-exports.backlogGame = (verify, async (req, res) => {
+exports.backlogGame = ( async (req, res) => {
  try {
   const { id } = req.params;
   const { user_id } = req.headers;
@@ -33,7 +33,7 @@ exports.backlogGame = (verify, async (req, res) => {
 });
 
 
-exports.addBacklog = (verify, async (req, res) => {
+exports.addBacklog = ( async (req, res) => {
  try {
   const { user_id } = req.headers;
   const { id } = req.body;
@@ -49,7 +49,7 @@ exports.addBacklog = (verify, async (req, res) => {
  }
 });
 
-exports.updateBacklog = (verify, async (req, res) => {
+exports.updateBacklog = ( async (req, res) => {
  const { id } = req.params;
  const { user_id } = req.headers;
  const { category } = req.body
@@ -64,7 +64,7 @@ exports.updateBacklog = (verify, async (req, res) => {
  }
 });
 
-exports.deleteBacklog = (verify, async (req, res) => {
+exports.deleteBacklog = ( async (req, res) => {
  const { id } = req.params;
  const { user_id } = req.headers;
  try {

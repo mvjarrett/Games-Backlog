@@ -7,7 +7,7 @@ const { verify } = require('../middleware/auth');
 
 
 
-exports.topGames = (verify, async (req, res) => {
+exports.topGames = ( async (req, res) => {
   const authHeaders = {
     headers: {
       'Client-ID': process.env.AUTH_ID,
@@ -23,7 +23,7 @@ exports.topGames = (verify, async (req, res) => {
   }
 })
 
-exports.getGenres = (verify, async (req, res) => {
+exports.getGenres = ( async (req, res) => {
   const authHeaders = {
     headers: {
       'Client-ID': process.env.AUTH_ID,
@@ -39,7 +39,7 @@ exports.getGenres = (verify, async (req, res) => {
   }
 })
 
-exports.getPlatforms = (verify, async (req, res) => {
+exports.getPlatforms = ( async (req, res) => {
   const authHeaders = {
     headers: {
       'Client-ID': process.env.AUTH_ID,
