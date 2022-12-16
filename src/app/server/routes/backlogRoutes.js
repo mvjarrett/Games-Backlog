@@ -13,6 +13,7 @@ exports.allBacklog = ( async (req, res) => {
   const { user_id } = req.headers;
   const allTitles = await pool.query("SELECT * FROM backlog WHERE user_id = $1", [user_id]);
   res.json(allTitles.rows);
+  console.log('allBacklog response: ', allTitles.rows)
  } catch (err) {
   console.error(err.message);
  }
