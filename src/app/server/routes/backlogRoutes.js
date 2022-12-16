@@ -15,7 +15,7 @@ exports.allBacklog = ( async (req, res) => {
   res.json(allTitles.rows);
   console.log('allBacklog response: ', allTitles.rows)
  } catch (err) {
-  console.error(err.message);
+  console.log('no user ID header detected!');
  }
 });
 
