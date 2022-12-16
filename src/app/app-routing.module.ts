@@ -6,13 +6,14 @@ import { GameDetailsComponent } from './components/game-details/game-details.com
 import { CoverComponent } from './components/cover/cover.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 
 const routes: Routes = [
   { path: '', component: CoverComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'backlog', component: GamesListComponent, runGuardsAndResolvers: 'always' },
+  { path: 'backlog', component: GamesListComponent, canActivate:[AuthInterceptor] },
   { path: 'games', component: IgdbResultsComponent },
   { path: 'games/search', component: IgdbResultsComponent, runGuardsAndResolvers: 'always'},
   { path: 'games/platforms/:platformId', component: IgdbResultsComponent },
