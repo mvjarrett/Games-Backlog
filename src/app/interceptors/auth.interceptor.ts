@@ -26,9 +26,11 @@ export class AuthInterceptor implements HttpInterceptor {
           .set('Client-ID', igdb_id)
           .set('Authorization', igdb_token)
           .set('Access-Control-Allow-Origin', '*')
-      });
+      })
+      console.log('headers set by auth int.');
       return next.handle(cloned);
     } else {
+      console.log('auth.int if statement returned false')
       return next.handle(req);
     }
 
