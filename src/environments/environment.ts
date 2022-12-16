@@ -1,12 +1,11 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-const dotenv = require("dotenv");
-dotenv.config({ path: ".env" });
+
 export const environment = {
   
   production: false,
-  serverUrl: 'http://localhost:' + process.env.PORT,
+  serverUrl: 'http://localhost:8081',
   clientUrl: 'http://localhost:4200',
   headers : {
     'Access-Control-Allow-Origin': '*',
