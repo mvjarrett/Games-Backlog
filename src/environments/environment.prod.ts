@@ -1,9 +1,8 @@
-const dotenv = require("dotenv");
-dotenv.config({ path: ".env" });
+
 
 export const environment = {
   production: true,
-  serverUrl: 'http://localhost:' + process.env.PORT,
+  serverUrl: 'https://games--backlog.herokuapp.com',
   headers : {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
