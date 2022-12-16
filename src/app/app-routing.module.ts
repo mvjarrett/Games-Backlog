@@ -6,10 +6,9 @@ import { GameDetailsComponent } from './components/game-details/game-details.com
 import { CoverComponent } from './components/cover/cover.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { TesterComponent } from './tester/tester.component';
 
 const routes: Routes = [
-  { path: '', component: TesterComponent },
+  { path: '', component: CoverComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: 'backlog', component: GamesListComponent },

@@ -24,7 +24,6 @@ import { CoverComponent } from './components/cover/cover.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
-import { TesterComponent } from './tester/tester.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import {
@@ -47,7 +46,6 @@ import { CommonModule } from '@angular/common';
     CoverComponent,
     SignupComponent,
     LoginComponent,
-    TesterComponent
   ],
   imports: [
     BrowserModule,

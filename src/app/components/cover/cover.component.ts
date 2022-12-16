@@ -28,8 +28,8 @@ export class CoverComponent implements OnInit {
 
 
   ngOnInit(): void {
-    localStorage.clear();
-    this.authService.signOut();
+    // localStorage.clear();
+    // this.authService.signOut();
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = user != null; 
