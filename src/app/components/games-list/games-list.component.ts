@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { igGame } from 'src/app/models/igGame';
 import { FormControl } from '@angular/forms';
 import { gameObject } from 'src/app/models/gameobject';
-import { map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-games-list',
