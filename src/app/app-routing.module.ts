@@ -7,6 +7,7 @@ import { CoverComponent } from './components/cover/cover.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 
+
 const routes: Routes = [
   { path: '', component: CoverComponent },
   { path: 'signup', component: SignupComponent },
@@ -20,7 +21,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
