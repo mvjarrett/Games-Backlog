@@ -16,16 +16,18 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-
-const distDir = __dirname + "../../../../dist/client/";
-// app.use(express.static(distDir));
-
-
-
 const server = app.listen(process.env.PORT || 8080, function () {
   var port = server.address().port;
   console.log("Express Server is now running at port:", port);
 });
+
+
+const distDir = __dirname + "../../../../dist/client/";
+app.use(express.static(distDir));
+
+
+
+
 
 
 
@@ -68,7 +70,7 @@ app.post("/users/login", users.login)
 app.post("/users/gsi", users.gsi)
 
 
-app.get('*', function(req, res) {
+app.get('/*', function(req, res) {
   res.sendFile(path.join(distDir + 'index.html'));
 });
 
