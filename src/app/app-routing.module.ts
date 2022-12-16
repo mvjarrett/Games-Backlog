@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: '', component: CoverComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'backlog', component: GamesListComponent, canActivate:[AuthInterceptor] },
+  { path: 'backlog', component: GamesListComponent, pathMatch:'full' },
   { path: 'games', component: IgdbResultsComponent },
   { path: 'games/search', component: IgdbResultsComponent, runGuardsAndResolvers: 'always'},
   { path: 'games/platforms/:platformId', component: IgdbResultsComponent },
