@@ -26,11 +26,11 @@ import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
-import {
-  SocialLoginModule,
-  SocialAuthServiceConfig,
-} from '@abacritt/angularx-social-login';
-import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+// import {
+//   SocialLoginModule,
+//   SocialAuthServiceConfig,
+// } from '@abacritt/angularx-social-login';
+// import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { CommonModule } from '@angular/common';
 
 
@@ -65,7 +65,7 @@ import { CommonModule } from '@angular/common';
     MatGridListModule,
     MatSnackBarModule,
     InfiniteScrollModule,
-    SocialLoginModule,
+    // SocialLoginModule,
   ],
   providers: [
     {
@@ -75,24 +75,24 @@ import { CommonModule } from '@angular/common';
     },
 
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        oneTapEnabled: false,
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              '425474227114-9m0v1jme2o7bpju345un47no358mpm2e.apps.googleusercontent.com'
-            ),
-          },
-        ],
-        onError: (err) => {
-          console.error(err);
-        },
-      } as SocialAuthServiceConfig,
-    },
+    // {
+    //   provide: 'SocialAuthServiceConfig',
+    //   useValue: {
+    //     oneTapEnabled: false,
+    //     autoLogin: false,
+    //     providers: [
+    //       {
+    //         id: GoogleLoginProvider.PROVIDER_ID,
+    //         provider: new GoogleLoginProvider(
+    //           '425474227114-9m0v1jme2o7bpju345un47no358mpm2e.apps.googleusercontent.com'
+    //         ),
+    //       },
+    //     ],
+    //     onError: (err) => {
+    //       console.error(err);
+    //     },
+    //   } as SocialAuthServiceConfig,
+    // },
   ],
   bootstrap: [AppComponent],
 })

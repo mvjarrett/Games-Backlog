@@ -38,7 +38,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private authService: SocialAuthService,
+    // private authService: SocialAuthService,
     private navbarService: NavbarService
   ) {}
 
@@ -64,7 +64,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     localStorage.clear();
-    this.authService.signOut();
+    // this.authService.signOut();
     this.router.navigate(['']);
   }
 }

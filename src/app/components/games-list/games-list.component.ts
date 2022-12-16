@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { igGame } from 'src/app/models/igGame';
 import { FormControl } from '@angular/forms';
 import { gameObject } from 'src/app/models/gameobject';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-games-list',
@@ -44,21 +45,21 @@ export class GamesListComponent implements OnInit {
         this.playing = logs[2];
         this.played = logs[3];
 
-        const wishIds = logs[1].map((x: { id: any }) => x.id);
+        const wishIds = logs[1]?.map((x: { id: any }) => x.id);
         this.gameService.backlogInfo(wishIds).subscribe((wishlist) => {
           if (wishlist) {
             this.wish = wishlist;
           }
         });
 
-        const playingIds = logs[2].map((x: { id: any }) => x.id);
+        const playingIds = logs[2]?.map((x: { id: any }) => x.id);
         this.gameService.backlogInfo(playingIds).subscribe((playinglist) => {
           if (playinglist) {
             this.playing = playinglist;
           }
         });
 
-        const playedIds = logs[3].map((x: { id: any }) => x.id);
+        const playedIds = logs[3]?.map((x: { id: any }) => x.id);
         this.gameService.backlogInfo(playedIds).subscribe((playedlist) => {
           if (playedlist) {
             this.played = playedlist;
