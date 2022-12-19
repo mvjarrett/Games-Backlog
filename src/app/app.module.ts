@@ -32,6 +32,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
 // } from '@abacritt/angularx-social-login';
 // import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { CommonModule } from '@angular/common';
+import { MissingComponent } from './components/missing/missing.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { CommonModule } from '@angular/common';
     CoverComponent,
     SignupComponent,
     LoginComponent,
+    MissingComponent,
   ],
   imports: [
     BrowserModule,
