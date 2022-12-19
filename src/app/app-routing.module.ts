@@ -11,6 +11,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 const routes: Routes = [
   { path: '', component: CoverComponent },
+  { path: '**', component: GamesListComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: 'backlog', component: GamesListComponent, pathMatch:'full' },
