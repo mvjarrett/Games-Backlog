@@ -74,6 +74,6 @@ app.post("/users/gsi", users.gsi)
 //   res.sendFile(path.join(distDir + 'index.html'));
 // });
 
-app.get('*', function(req, res) {
+app.get('/*', function(req, res) {
   res.status(200).sendFile(path.resolve(__dirname + '../../../../dist/client/index.html'));
 });
