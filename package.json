@@ -11,7 +11,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "dev": "concurrently --kill-others \"npm run devStart\" \"npm run server\"",
-    "heroku-postbuild": "ng build --aot -prod"
+    "heroku-postbuild": "ng build --aot  --configuration production"
   },
   "private": true,
   "dependencies": {
