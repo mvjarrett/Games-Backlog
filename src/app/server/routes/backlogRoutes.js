@@ -10,7 +10,7 @@ const { query } = require("express");
 
 exports.allBacklog = ( async (req, res) => {
  try {
-  const { user_id } = req.headers;
+  const { user_id } = 3;
   const allTitles = await pool.query("SELECT * FROM backlog WHERE user_id = $1", [user_id]);
   res.json(allTitles.rows);
   console.log('allBacklog response: ', allTitles.rows)
