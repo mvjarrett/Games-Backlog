@@ -17,7 +17,6 @@ export class AuthInterceptor implements HttpInterceptor {
     const idToken = localStorage.getItem('user_id');
     const igdb_id = localStorage.getItem('igdb_id');
     const igdb_token = localStorage.getItem('igdb_token');
-    // const addId = payload.id
     if (jwt && idToken && igdb_id && igdb_token) {
       const cloned = req.clone({
         headers: req.headers
@@ -25,15 +24,12 @@ export class AuthInterceptor implements HttpInterceptor {
           .set('user_id', idToken)
           .set('Client-ID', igdb_id)
           .set('Authorization', igdb_token)
-          .set('Access-Control-Allow-Origin', '*')
-      })
-      console.log('headers set by auth int.');
+          .set('Access-Control-Allow-Origin', '*'),
+      });
       return next.handle(cloned);
     } else {
-      console.log('auth.int if statement returned false')
+      console.error('auth.int if statement returned false');
       return next.handle(req);
     }
-
-    
   }
 }

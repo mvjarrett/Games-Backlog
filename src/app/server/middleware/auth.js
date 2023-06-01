@@ -6,21 +6,16 @@ dotenv.config({ path: ".env" });
 
 exports.verify = function (req, res, next) {
  let token = req.headers["jwt"]
-// console.log('token: ', token)
-// console.log('header: ', req.headers.jwt)
+
 
  if (!token) {
-  console.log('there is a token issue')
+  console.error('there is a token issue')
   return res.status(403).send()
  }
 
 let payload
  try {
   payload = jwt.verify(token, process.env.SECRET_KEY),
-console.log('payload is: ', payload)
-
-  // req.userId = data.id;
-  // return next()
   next()
  }
  catch (e) {

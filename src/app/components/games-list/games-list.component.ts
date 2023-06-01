@@ -24,10 +24,8 @@ export class GamesListComponent implements OnInit {
 
   ngOnInit(): void {
     this.gameService.GetGames().subscribe((data) => {
-      console.log('firing games-list oninit');
       if (data.length > 0) {
         this.backlogItems = true;
-        console.log('backlogItems: ', this.backlogItems);
         this.logGames = data;
         this.logSorting();
       } else {
@@ -74,31 +72,3 @@ export class GamesListComponent implements OnInit {
     }, {});
   }
 }
-
-// logSorting() {
-//   var logs = this.groupBy(this.logGames, 'category');
-//       this.wish = logs[1];
-//       this.playing = logs[2];
-//       this.played = logs[3];
-
-//       const wishIds = logs[1]?.map((x: { id: any }) => x.id);
-//       this.gameService.backlogInfo(wishIds).subscribe((wishlist) => {
-//         if (wishlist) {
-//           this.wish = wishlist;
-//         }
-//       });
-
-//       const playingIds = logs[2]?.map((x: { id: any }) => x.id);
-//       this.gameService.backlogInfo(playingIds).subscribe((playinglist) => {
-//         if (playinglist) {
-//           this.playing = playinglist;
-//         }
-//       });
-
-//       const playedIds = logs[3]?.map((x: { id: any }) => x.id);
-//       this.gameService.backlogInfo(playedIds).subscribe((playedlist) => {
-//         if (playedlist) {
-//           this.played = playedlist;
-//         }
-//       });
-// }

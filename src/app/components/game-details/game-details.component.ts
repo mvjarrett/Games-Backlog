@@ -68,7 +68,7 @@ export class GameDetailsComponent implements OnInit {
             this.played = true;
             break;
           default:
-            console.log('update switch broke');
+            console.error('update switch broke');
         }
       } else {
         this.isBacklogged = false;
@@ -123,13 +123,12 @@ export class GameDetailsComponent implements OnInit {
         this.backlogUpdate(logData);
         break;
       default:
-        console.log('hit default case, check for error. ' + console.error);
+        console.error('hit default case, check for error.');
     }
-    console.log(this.category);
   }
 
   playingToggle(id: any) {
-    this.playing = !this.playing
+    this.playing = !this.playing;
     let logData: gameObject = {
       id: id,
       category: this.category,
@@ -156,12 +155,12 @@ export class GameDetailsComponent implements OnInit {
         this.backlogUpdate(logData);
         break;
       default:
-        console.log('hit default case, check for error. ' + console.error);
+        console.error('hit default case, check for error.');
     }
   }
 
   playedToggle(id: any) {
-    this.played = !this.played
+    this.played = !this.played;
     let logData: gameObject = {
       id: id,
       category: this.category,
@@ -188,18 +187,16 @@ export class GameDetailsComponent implements OnInit {
         this.backlogRemove(logData);
         break;
       default:
-        console.log('hit default case, check for error. ' + console.error);
+        console.error('hit default case, check for error.');
     }
   }
 
   backlogAdd(logData: gameObject) {
     let options = {};
     this.http.post(this.serverUrl + '/backlog', logData, options).subscribe(
-      (data) => {
-        console.log(data);
-      },
+
       (error) => {
-        console.log(error);
+        console.error(error);
       }
     );
   }
@@ -228,11 +225,11 @@ export class GameDetailsComponent implements OnInit {
               this.played = true;
               break;
             default:
-              console.log('update switch broke');
+              console.error('update switch broke');
           }
         },
         (error) => {
-          console.log(error);
+          console.error(error);
         }
       );
   }
@@ -242,11 +239,8 @@ export class GameDetailsComponent implements OnInit {
     this.http
       .delete(`${this.serverUrl}/backlog/game/${logData.id}`, options)
       .subscribe(
-        (data) => {
-          console.log(data);
-        },
         (error) => {
-          console.log(error);
+          console.error(error);
         }
       );
   }

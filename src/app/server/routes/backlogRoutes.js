@@ -8,18 +8,17 @@ const { verify } = require('../middleware/auth');
 const { query } = require("express");
 
 
-exports.allBacklog = ( async (req, res) => {
+exports.allBacklog = (async (req, res) => {
  try {
-  const { user_id } = 3;
+  const { user_id } = req.headers;
   const allTitles = await pool.query("SELECT * FROM backlog WHERE user_id = $1", [user_id]);
   res.json(allTitles.rows);
-  console.log('allBacklog response: ', allTitles.rows)
  } catch (err) {
-  console.log('no user ID header detected!');
+  console.error('no user ID header detected!');
  }
 });
 
-exports.backlogGame = ( async (req, res) => {
+exports.backlogGame = (async (req, res) => {
  try {
   const { id } = req.params;
   const { user_id } = req.headers;
@@ -34,7 +33,7 @@ exports.backlogGame = ( async (req, res) => {
 });
 
 
-exports.addBacklog = ( async (req, res) => {
+exports.addBacklog = (async (req, res) => {
  try {
   const { user_id } = req.headers;
   const { id } = req.body;
@@ -50,7 +49,7 @@ exports.addBacklog = ( async (req, res) => {
  }
 });
 
-exports.updateBacklog = ( async (req, res) => {
+exports.updateBacklog = (async (req, res) => {
  const { id } = req.params;
  const { user_id } = req.headers;
  const { category } = req.body
@@ -65,7 +64,7 @@ exports.updateBacklog = ( async (req, res) => {
  }
 });
 
-exports.deleteBacklog = ( async (req, res) => {
+exports.deleteBacklog = (async (req, res) => {
  const { id } = req.params;
  const { user_id } = req.headers;
  try {

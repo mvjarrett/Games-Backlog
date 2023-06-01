@@ -7,50 +7,50 @@ const { verify } = require('../middleware/auth');
 
 
 
-exports.topGames = ( async (req, res) => {
+exports.topGames = (async (req, res) => {
   const authHeaders = {
     headers: {
       'Client-ID': process.env.AUTH_ID,
       'Authorization': process.env.AUTH_TOKEN
     }
   }
-  try{
-  let response = await axios.post('https://api.igdb.com/v4/games/', req.body, authHeaders);
-  res.send(response.data);
+  try {
+    let response = await axios.post('https://api.igdb.com/v4/games/', req.body, authHeaders);
+    res.send(response.data);
   } catch (err) {
-    console.log('axios error: ', err)
+    console.error('axios error: ', err)
     res.send(400)
   }
 })
 
-exports.getGenres = ( async (req, res) => {
+exports.getGenres = (async (req, res) => {
   const authHeaders = {
     headers: {
       'Client-ID': process.env.AUTH_ID,
       'Authorization': process.env.AUTH_TOKEN
     }
   }
-  try{
-  let response = await axios.post('https://api.igdb.com/v4/genres/', req.body, authHeaders);
-  res.send(response.data);
+  try {
+    let response = await axios.post('https://api.igdb.com/v4/genres/', req.body, authHeaders);
+    res.send(response.data);
   } catch (err) {
-    console.log('axios error: ', err)
+    console.error('axios error: ', err)
     res.send(400)
   }
 })
 
-exports.getPlatforms = ( async (req, res) => {
+exports.getPlatforms = (async (req, res) => {
   const authHeaders = {
     headers: {
       'Client-ID': process.env.AUTH_ID,
       'Authorization': process.env.AUTH_TOKEN
     }
   }
-  try{
-  let response = await axios.post('https://api.igdb.com/v4/platforms/', req.body, authHeaders);
-  res.send(response.data);
+  try {
+    let response = await axios.post('https://api.igdb.com/v4/platforms/', req.body, authHeaders);
+    res.send(response.data);
   } catch (err) {
-    console.log('axios error: ', err)
+    console.error('axios error: ', err)
     res.send(400)
   }
 })

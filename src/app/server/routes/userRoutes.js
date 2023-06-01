@@ -61,7 +61,7 @@ exports.register = (async (req, res) => {
   }
   catch (err) {
 
-    console.log(err);
+    console.error(err);
     res.status(500).json({
       error: "Database error while registring user!", //Database connection error
     });
@@ -120,7 +120,7 @@ exports.login = (async (req, res) => {
       })
     }
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json({
       error: "Database error occurred while signing in!", //Database connection error
     });
@@ -134,7 +134,6 @@ exports.gsi = (async (req, res) => {
   const data = await pool.query(`SELECT * FROM users WHERE username = $1;`, [username]); //Checking if user already exists
   const arr = data.rows;
   if (arr.length != 0) {
-   console.log('user exists, logging in')
    try {
     const data = await pool.query(`SELECT * FROM users WHERE username= $1;`, [username]) //Verifying if the user exists in the database
     const user = data.rows;
@@ -182,7 +181,7 @@ exports.gsi = (async (req, res) => {
       })
     }
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json({
       error: "Database error occurred while signing in!", //Database connection error
     });

@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IgdbResultsService } from '../../services/igdbResults.service';
 import { igGame } from '../../models/igGame';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
-import { filter } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -33,19 +32,18 @@ export class IgdbResultsComponent implements OnInit {
   ngOnInit(): void {
     this._Activatedroute.queryParams.subscribe((queryParams: any) => {
       this.term = queryParams.term;
-      this.platformId = this._Activatedroute.snapshot.params['platformId']
-      this.genreId = this._Activatedroute.snapshot.params['genreId']
+      this.platformId = this._Activatedroute.snapshot.params['platformId'];
+      this.genreId = this._Activatedroute.snapshot.params['genreId'];
     });
 
-    if(this.term !=undefined ){
-      this.searchResult(this.term)
-    } else if (this.platformId !=undefined) {
-      this.platformResult(this.platformId) 
-      console.log(this.platformId)
-    } else if (this.genreId !=undefined) {
-      this.genreResult(this.genreId)
-    }else {
-      this.allGames()
+    if (this.term != undefined) {
+      this.searchResult(this.term);
+    } else if (this.platformId != undefined) {
+      this.platformResult(this.platformId);
+    } else if (this.genreId != undefined) {
+      this.genreResult(this.genreId);
+    } else {
+      this.allGames();
     }
   }
 
@@ -61,12 +59,11 @@ export class IgdbResultsComponent implements OnInit {
     this.igdbResults.infiniteGames().subscribe((data) => {
       if (data) {
         this.igGames.push(...data);
-        console.log(this.igGames.length);
         this.infiniteScroll.setup();
         this.infiniteScroll.ngOnDestroy();
       }
       (error: any) => {
-        console.log(error);
+        console.error(error);
       };
     });
   }
@@ -80,16 +77,16 @@ export class IgdbResultsComponent implements OnInit {
   }
   platformResult(platformId: number) {
     this.igdbResults.searchPlatforms(platformId).subscribe((data) => {
-      if(data) {
+      if (data) {
         this.igGames = data;
       }
-    })
+    });
   }
   genreResult(genreId: number) {
     this.igdbResults.searchGenres(genreId).subscribe((data) => {
-      if(data) {
+      if (data) {
         this.igGames = data;
       }
-    })
+    });
   }
 }

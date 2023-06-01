@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('user_id', res['id']); //token here is stored in a local storage
             localStorage.setItem('igdb_id', res['igdb_id']); //token here is stored in a local storage
             localStorage.setItem('igdb_token', res['igdb_token']); //token here is stored in a local storage
-            console.log('res: ', res);
 
             return this.route
               .navigate(['/backlog'])
@@ -61,7 +60,7 @@ export class LoginComponent implements OnInit {
           return null;
         },
         (err) => {
-          console.log(err);
+          console.error(err);
         }
       );
     } else {

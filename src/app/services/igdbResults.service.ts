@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { filter, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { igGame } from '../models/igGame';
 import { environment } from 'src/environments/environment';
 
@@ -36,21 +36,26 @@ export class IgdbResultsService {
 
   constructor(private http: HttpClient) {}
 
+//list the top rated games for easy backlog adding
+
   topGames(): Observable<igGame[]> {
     this.body = searchStrings.topBody
     return this.http.post<igGame[]>('/externalgames/games', searchStrings.topBody, {
       headers: environment.headers,
     });
   }
+
+//infinite scrolling function 
+
   infiniteGames(): Observable<igGame[]> {
     let infiniteBody = this.body + ' offset ' + this.offset + ';';
     this.offset += 50;
-    console.log('offset is: ', this.offset);
-    console.log(infiniteBody);
     return this.http.post<igGame[]>('/externalgames/games', infiniteBody, {
       headers: environment.headers,
     });
   }
+
+//search function by game
 
   searchGames(term: string | null): Observable<igGame[]> {
     let filterString =
@@ -59,6 +64,9 @@ export class IgdbResultsService {
       headers: environment.headers,
     });
   }
+
+//search function by platform
+
   searchPlatforms(platformId: number): Observable<igGame[]> {
     let filterString = searchStrings.platformString1 + platformId + searchStrings.platformString2;
     this.body = filterString;
@@ -66,6 +74,9 @@ export class IgdbResultsService {
       headers: environment.headers,
     });
   }
+
+  //search function by genre
+
   searchGenres(genreId: number): Observable<igGame[]> {
     let filterString = searchStrings.genreString1 + genreId + searchStrings.genreString2;
     this.body = filterString;
